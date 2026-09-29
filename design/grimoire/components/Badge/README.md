@@ -1,5 +1,5 @@
-Étiquette de statut ou de récompense : toujours un glyphe **et** un mot, jamais la couleur seule.
+Status or reward tag: always a glyph **and** a word, never colour alone.
 
-- `tone` : `active` (◆ `arcane`), `completed` (✓ `forest`), `failed` (✕ `crimson`), `rumor` (? `ink-muted`, bordure pointillée), `urgent` (! `ember`), `reward` (✦ `gold-ink`, bordure `gold`, chiffres tabulaires).
-- `children` remplace le libellé par défaut (« En cours », « Accomplie »…). Pour `reward`, passer le montant : « 250 po ».
-- Un seul badge de statut par quête ; `reward` et `urgent` peuvent s'y ajouter.
+- `tone`: `active` (◆ `arcane`), `completed` (✓ `forest`), `failed` (✕ `crimson`), `rumor` (? `ink-muted`, dotted border), `urgent` (! `ember`), `reward` (✦ `gold-ink`, `gold` border, tabular figures).
+- `children` replaces the default label (« En cours », « Accomplie »…). For `reward`, pass the amount: « 250 po ».
+- One status badge per quest; `reward` and `urgent` may be added next to it.

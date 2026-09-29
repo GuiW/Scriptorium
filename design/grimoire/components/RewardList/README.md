@@ -1,10 +1,10 @@
-Liste des récompenses d'une quête : pièces, XP, objets, réputation, autre ; chaque ligne a son glyphe, et un objet porte sa rareté PF2e.
+List of a quest's rewards: coins, XP, items, reputation, other; each line has its glyph, and an item carries its PF2e rarity.
 
-- `rewards` : `[{kind, label, rarity?, note?, to?, claimed?, visibility?}]`.
-  - `kind` : `coin` (◎, montant en `gold-ink`), `xp` (✦), `item` (◈), `reputation` (▲ `arcane`, par ex. « Chevaliers de Lastwall +1 »), `other` (❧ : un titre, une faveur, un terrain).
-  - `rarity` (objets) : `common` (rien d'affiché), `uncommon` « Peu courant » `ember`, `rare` « Rare » `arcane`, `unique` « Unique » `gold-ink` cerclé de `gold`. Le mot porte la rareté, la couleur la renforce.
-  - `note` : précision en italique (« niveau 3 », « au choix du groupe ») ; `to` : le personnage qui l'a reçue (« → Kyra ») ; `claimed` : barré en `ink-muted` une fois remis.
-  - `visibility` : une récompense peut être cachée (Secret MJ) ou promise à certains joueurs, comme un objectif.
-- `title` : « Récompenses » par défaut, `false` pour le retirer.
-- Ordre conseillé : pièces, XP, objets (du plus rare au plus courant), réputation, autre.
-- Dans `QuestCard`, le pied de carte n'en montre qu'un **résumé** : pièces et XP en valeurs, les objets comptés (« 2 objets », dans la couleur de l'objet le plus rare, liste au survol), le reste en « +1 ». La liste complète s'affiche avec `showRewards` (vue détaillée).
+- `rewards`: `[{kind, label, rarity?, note?, to?, claimed?, visibility?}]`.
+  - `kind`: `coin` (◎, amount in `gold-ink`), `xp` (✦), `item` (◈), `reputation` (▲ `arcane`, for example « Chevaliers de Lastwall +1 »), `other` (❧: a title, a favour, a piece of land).
+  - `rarity` (items): `common` (nothing shown), `uncommon` « Peu courant » `ember`, `rare` « Rare » `arcane`, `unique` « Unique » `gold-ink` circled in `gold`. The word carries the rarity, the colour reinforces it.
+  - `note`: an italic detail (« niveau 3 », « au choix du groupe »); `to`: the character who received it (« → Kyra »); `claimed`: struck through in `ink-muted` once handed out.
+  - `visibility`: a reward can be hidden (Secret MJ) or promised to some players, like an objective.
+- `title`: « Récompenses » by default, `false` to remove it.
+- Recommended order: coins, XP, items (rarest to most common), reputation, other.
+- In `QuestCard`, the card foot only shows a **summary**: coins and XP as values, items counted (« 2 objets », in the colour of the rarest item, list on hover), the rest as « +1 ». The full list shows with `showRewards` (detailed view).

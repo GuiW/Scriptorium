@@ -1,26 +1,33 @@
-# Écarts design system — page Quêtes
+# Design system gaps — Quêtes page
 
-Ce que le système ne couvre pas encore, ou couvre mal. On n'invente pas de style : chaque ligne attend une décision.
+What the system does not cover yet, or covers poorly. No style is invented: every line waits for a decision.
 
-## Résolus (dans le design system, version 24)
+## Resolved (in the design system, version 24)
 
-| Besoin | Résolution |
+| Need | Resolution |
 |---|---|
-| Filtre par statut (En cours / Accomplies / Échouées / Rumeurs) | Composant `Tabs` ajouté, 4 onglets, distinct des signets de navigation |
-| Message « Choisis au moins un joueur » du `VisibilityPicker` | Affiché en `crimson` gras avec ✕ quand aucun joueur n'est coché ; l'écran doit désactiver « Créer » (voir l'écran « visibilité incomplète » du canvas) |
-| Ombres des signets en thème Donjon (`BookmarkNav`, `BookmarkTabs`) | Variante `[data-theme="donjon"]` dans `bundle.css` (noir plutôt que brun) |
-| Rose `secret` trop vif en Donjon (lu comme un état sélectionné) | `#d9a3cb` → `#c4a5bd` ; hachures alignées |
+| Filter by status (En cours / Accomplies / Échouées / Rumeurs) | `Tabs` component added, 4 tabs, distinct from the navigation bookmarks |
+| `VisibilityPicker` message « Choisis au moins un joueur » | Shown in bold `crimson` with ✕ when no player is ticked; the screen must disable « Créer » (see the canvas's "incomplete visibility" screen) |
+| Bookmark shadows in the Dungeon theme (`BookmarkNav`, `BookmarkTabs`) | `[data-theme="dungeon"]` variant in `bundle.css` (black rather than brown) |
+| `secret` pink too bright in Dungeon (read as a selected state) | `#d9a3cb` → `#c4a5bd`; hatching aligned |
 
-## Ouverts
+## Open
 
-| Besoin | Où | Piste, sans nouveau style |
+| Need | Where | Lead, with no new style |
 |---|---|---|
-| Ajout d'une quête sur mobile : aucun composant « feuille modale » | Écran « Nouvelle quête » | Page plein écran (barre Annuler / Créer, titre `title-lg`, champs `TextField`, `VisibilityPicker`) ; à valider avant de créer un composant `Sheet` |
-| Onglets et cartes non interactifs dans les maquettes | Toute la page | Comportement à spécifier : le filtre par onglet filtre la grille, la sélection d'une carte ouvre le panneau (bureau) ou la page (tablette, mobile) |
-| Le nombre d'onglets `Tabs` sur petit écran (4 onglets à 390px) | Mobile | À tester en vrai ; si cela déborde, défilement horizontal ou passage à 3 onglets + « Autres » |
-| Onglet « Rumeurs » : les rumeurs peuvent-elles être promues en quête ? | Produit | Décision produit avant le code |
-| Bouton `sm` dans les barres d'outils desktop (« Fermer » du panneau) | Bureau | Acceptable à la souris ; à revoir si l'app est utilisée au doigt sur grand écran |
+| Adding a quest on mobile: no "modal sheet" component | « Nouvelle quête » screen | Full-screen page (Annuler / Créer bar, `title-lg` title, `TextField` fields, `VisibilityPicker`); to be approved before creating a `Sheet` component |
+| Tabs and cards are not interactive in the mockups | Whole page | Behaviour to specify: the tab filter filters the grid, selecting a card opens the panel (desktop) or the page (tablet, mobile) |
+| Number of `Tabs` on a small screen (4 tabs at 390px) | Mobile | To test for real; if it overflows, horizontal scrolling or 3 tabs + « Autres » |
+| « Rumeurs » tab: can rumours be promoted to quests? | Product | Product decision before the code |
+| `sm` button in desktop toolbars (the panel's « Fermer ») | Desktop | Acceptable with a mouse; to revisit if the app is used by touch on a large screen |
 
-## Règle d'usage
+## Found during the "theme foundations" slice
 
-Tout nouvel écart découvert pendant l'implémentation s'ajoute ici avec : l'écran concerné, ce qui manque, la solution qui n'utilise que l'existant, et la décision attendue.
+| Need | Where | Finding | Lead, with no new style | Status |
+|---|---|---|---|---|
+| 44px touch targets | All buttons, tablet and mobile | CLAUDE.md requires 44px for `Button` at its default size; `.gr-btn` had `min-height: 40px`. | `min-height: 44px` in `bundle.css`, text and padding unchanged; measured at 44px in both themes. | **Fixed** in `bundle.css`. |
+| Generic components with no Grimoire style: dropdown, modal, side panel, toast, settings checkbox | First screen that needs one | The design system only covers `Button`, `TextField` and `Badge`. PrimeNG was dropped: no style is provided for the rest. The modal backdrop has no token either. | Behaviour from `@angular/aria` or `@angular/cdk`; visuals to design in the design system with the existing tokens (`surface-raised`, `hairline`, `shadow-lifted`, `radius-lg`), plus a backdrop token. | **Decision pending** before the first need (already the case for the mobile modal sheet, above). |
+
+## How to use
+
+Any new gap found during implementation is added here with: the screen concerned, what is missing, the solution that only uses what exists, and the decision expected.

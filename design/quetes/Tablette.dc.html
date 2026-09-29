@@ -48,7 +48,7 @@ body { margin: 0; }
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;parchemin&quot;,&quot;donjon&quot;],&quot;default&quot;:&quot;parchemin&quot;},&quot;$preview&quot;:{&quot;width&quot;:1024,&quot;height&quot;:1100}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;parchment&quot;,&quot;dungeon&quot;],&quot;default&quot;:&quot;parchment&quot;},&quot;$preview&quot;:{&quot;width&quot;:1024,&quot;height&quot;:1100}}">
 class Component extends DCLogic {
   renderVals() {
     var G = window.Grimoire || {};
@@ -88,7 +88,7 @@ class Component extends DCLogic {
       secretNote: "Le médaillon est un faux : le vrai est resté dans le coffre de la prêtresse. Wrin le sait et se tait."
     };
 
-    return { theme: this.props.theme || "parchemin", noop: noop, navItems: navItems, panel: panel };
+    return { theme: this.props.theme || "parchment", noop: noop, navItems: navItems, panel: panel };
   }
 }
 </script>

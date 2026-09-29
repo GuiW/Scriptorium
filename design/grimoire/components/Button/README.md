@@ -1,7 +1,7 @@
-Bouton d'action ; une seule variante `primary` (aplat `crimson`, texte `on-crimson`) par écran.
+Action button; a single `primary` variant (`crimson` fill, `on-crimson` text) per screen.
 
-- `variant` : `primary` pour l'action qui fait avancer la partie (« Nouvelle quête », « Clore la session »), `secondary` pour les actions voisines, `ghost` (texte `arcane`) pour les actions tertiaires dans une carte.
-- `size="sm"` dans les barres d'outils et les cartes.
-- `icon` : un glyphe ou une icône au trait, à gauche du libellé.
-- Libellé = un verbe à l'infinitif, casse de phrase. Jamais « OK » ni « Valider » seul.
-- À éviter : deux boutons `primary` côte à côte ; un bouton `primary` pour une suppression (utiliser `secondary` + confirmation).
+- `variant`: `primary` for the action that moves the game forward (« Nouvelle quête », « Clore la session »), `secondary` for neighbouring actions, `ghost` (`arcane` text) for tertiary actions inside a card.
+- `size="sm"` in toolbars and cards.
+- `icon`: a glyph or a line icon, left of the label.
+- Label = a verb in the infinitive, sentence case. Never « OK » or « Valider » on its own.
+- Avoid: two `primary` buttons side by side; a `primary` button for a deletion (use `secondary` + confirmation).

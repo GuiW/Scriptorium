@@ -1,6 +1,6 @@
-Champ libellé pour saisir un titre de quête, un nom de PNJ ou une note de session.
+Labelled field to enter a quest title, an NPC name or a session note.
 
-- `label` obligatoire, affiché en `label-caps` au-dessus du champ.
-- `multiline` pour les notes et résumés (texte en `body`, Alegreya).
-- `hint` sous le champ en `ui-sm` ; `error` le remplace, passe la bordure en `crimson` 2px et pose `aria-invalid`.
-- Placeholder en italique `ink-muted`, formulé comme un exemple (« La crypte sous Otari »), jamais comme une consigne.
+- `label` required, shown in `label-caps` above the field.
+- `multiline` for notes and summaries (text in `body`, Alegreya).
+- `hint` below the field in `ui-sm`; `error` replaces it, turns the border to 2px `crimson` and sets `aria-invalid`.
+- Placeholder in italic `ink-muted`, written as an example (« La crypte sous Otari »), never as an instruction.

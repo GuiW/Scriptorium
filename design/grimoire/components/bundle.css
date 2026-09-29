@@ -14,7 +14,7 @@ body { background: var(--surface); color: var(--ink); font-family: var(--font-se
 .gr-btn {
   display: inline-flex; align-items: center; gap: var(--space-2);
   font: 500 15px/22px var(--font-sans); letter-spacing: .01em;
-  padding: var(--space-2) var(--space-4); min-height: 40px;
+  padding: var(--space-2) var(--space-4); min-height: 44px; /* minimum touch target */
   border-radius: var(--radius-md); border: 1px solid transparent; cursor: pointer;
   transition: background-color .12s, border-color .12s, color .12s;
 }
@@ -351,6 +351,6 @@ button.gr-contact:focus-visible { outline: 2px solid var(--focus); outline-offse
 /* mobile tabs: icons sit inside a 32px ribbon — 16px keeps 8px of air each side */
 .gr-btabs__icon .gr-icon { width: 16px; height: 16px; }
 
-/* Thème Donjon : ombres des signets, noires plutôt que brunes (invisibles sur fond sombre). */
-[data-theme="donjon"] .gr-bnav__item { filter: drop-shadow(0 1px 1px rgba(0,0,0,.45)); }
-[data-theme="donjon"] .gr-btabs { box-shadow: 0 -2px 10px rgba(0,0,0,.45); }
+/* Dungeon theme: bookmark shadows in black rather than brown (invisible on a dark background). */
+[data-theme="dungeon"] .gr-bnav__item { filter: drop-shadow(0 1px 1px rgba(0,0,0,.45)); }
+[data-theme="dungeon"] .gr-btabs { box-shadow: 0 -2px 10px rgba(0,0,0,.45); }

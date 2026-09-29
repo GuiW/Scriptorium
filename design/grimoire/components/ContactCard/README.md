@@ -1,7 +1,7 @@
-Fiche courte d'un PNJ ou d'une faction : qui c'est, où il en est avec le groupe, quelles quêtes il a données. Volontairement pas une fiche de personnage.
+Short card for an NPC or a faction: who they are, where they stand with the party, which quests they gave. Deliberately not a character sheet.
 
-- Fournir `name`, `kind` et une ligne de `role` (« Astrologue, Otari »). Médaillon : `image` (portrait carré) sinon l'initiale.
-- `reputation` (0–4) + `trend` affichent la `Reputation` ; c'est l'information principale de la fiche.
-- `note` : une ou deux phrases au plus (coupées à 2 lignes) — ce que le groupe doit se rappeler, pas une biographie.
-- `quests` : `{active, completed, failed}` en badges ; clic sur la fiche (`onClick`) pour filtrer le journal sur ce contact.
-- Ne pas ajouter de caractéristiques, PV, inventaire ou arbre généalogique : hors du propos de l'app. Grille : 280–320px de large, `space-4` d'écart.
+- Provide `name`, `kind` and one line of `role` (« Astrologue, Otari »). Medallion: `image` (square portrait), otherwise the initial.
+- `reputation` (0–4) + `trend` show the `Reputation`; it is the main information on the card.
+- `note`: one or two sentences at most (clamped to 2 lines) — what the party should remember, not a biography.
+- `quests`: `{active, completed, failed}` as badges; clicking the card (`onClick`) filters the journal on this contact.
+- Do not add stats, HP, inventory or family tree: out of the app's scope. Grid: 280–320px wide, `space-4` gap.

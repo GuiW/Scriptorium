@@ -1,10 +1,10 @@
-# Dossier design
+# Design folder
 
-- `grimoire/` : le design system (tokens, fiches de composants, CSS et JS de référence, preset PrimeNG). `tokens.json` est la source de vérité des couleurs, polices, espacements, rayons et ombres.
-- `quetes/` : les sources des maquettes de la page Quêtes (bureau, tablette, mobile, ajout de quête, état d'erreur). Ce sont des fichiers du format canvas, à lire pour la structure et les données de démo, pas à ouvrir tels quels dans un navigateur.
-- `GAPS.md` : ce que le système ne couvre pas encore.
+- `grimoire/`: the design system (tokens, component READMEs, reference CSS and JS). `tokens.json` is the source of truth for colours, fonts, spacing, radii and shadows.
+- `quetes/`: the sources of the Quêtes page mockups (desktop, tablet, mobile, adding a quest, error state). They are canvas-format files, to read for the structure and the demo data, not to open as-is in a browser.
+- `GAPS.md`: what the system does not cover yet.
 
-Notes :
-- Il n'y a pas de `tokens.css` ici : il se génère depuis `tokens.json` (première tâche d'intégration).
-- Les 22 icônes sont des icônes Lucide ; le mapping vers les noms Lucide est dans `grimoire/assets/Icons/README.md`.
-- `grimoire/components/bundle.js` est l'implémentation React de référence (comportement, classes `gr-*`), pas du code à livrer.
+Notes:
+- There is no `tokens.css` here: it is generated from `tokens.json` (`npm run tokens`).
+- The 22 icons are Lucide icons; the mapping to Lucide names is in `grimoire/assets/Icons/README.md`.
+- `grimoire/components/bundle.js` is the React reference implementation (behaviour, `gr-*` classes), not code to ship.

@@ -1,6 +1,6 @@
-Marqueur de visibilité restreinte : « Secret MJ » (sceau brisé, filet tireté) ou « Pour toi et Kyra » (visages des joueurs, filet pointillé). Couleur `secret` sur hachures `secret-hatch`, toujours avec un glyphe et un mot.
+Restricted-visibility marker: « Secret MJ » (broken seal, dashed rule) or « Pour toi et Kyra » (player faces, dotted rule). `secret` colour on `secret-hatch` hatching, always with a glyph and a word.
 
-- `level` : `table` (défaut, rien n'est affiché — le public est la norme), `gm` ou `players`.
-- `players` : `[{name, you?}]`. Avec `you: true`, le libellé devient « Pour toi et… » : c'est ce que voit un joueur concerné. Au-delà de trois noms : « Pour Ezren, Kyra et +2 », la liste complète au survol.
-- `compact` retire le « Pour » (dans une ligne d'objectif). `showPublic` affiche exceptionnellement « Toute la table » (dans un formulaire).
-- Le MJ voit tous les marqueurs ; un joueur ne voit jamais un contenu `gm`, et ne voit un contenu `players` que s'il est dans la liste — l'app filtre, le badge ne cache rien.
+- `level`: `table` (default, nothing is shown — public is the norm), `gm` or `players`.
+- `players`: `[{name, you?}]`. With `you: true`, the label becomes « Pour toi et… »: this is what a player it concerns sees. Beyond three names: « Pour Ezren, Kyra et +2 », with the full list on hover.
+- `compact` drops the « Pour » (in an objective line). `showPublic` exceptionally shows « Toute la table » (in a form).
+- The GM sees every marker; a player never sees `gm` content, and only sees `players` content when listed — the app filters, the badge hides nothing.

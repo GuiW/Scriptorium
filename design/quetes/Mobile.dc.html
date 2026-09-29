@@ -31,7 +31,7 @@ body { margin: 0; }
   <x-import component-from-global-scope="Grimoire.BookmarkTabs" items="{{tabItems}}" value="quests" onChange="{{noop}}"></x-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["parchemin","donjon"],"default":"parchemin"},"$preview":{"width":390,"height":1700}}'>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["parchment","dungeon"],"default":"parchment"},"$preview":{"width":390,"height":1700}}'>
 class Component extends DCLogic {
   renderVals() {
     var G = window.Grimoire || {};
@@ -125,7 +125,7 @@ class Component extends DCLogic {
       }
     ];
 
-    return { theme: this.props.theme || "parchemin", noop: noop, tabItems: tabItems, quests: quests, addIcon: icon("ajouter", 20) };
+    return { theme: this.props.theme || "parchment", noop: noop, tabItems: tabItems, quests: quests, addIcon: icon("ajouter", 20) };
   }
 }
 </script>

@@ -1,6 +1,6 @@
-Référence en ligne à un PNJ ou une faction, sous forme de petite étiquette (fond `surface-sunk`, filet `hairline`) qui tient ensemble le médaillon, le nom et l'attitude ; à utiliser comme `giver` d'une `QuestCard` ou dans le texte.
+Inline reference to an NPC or a faction, as a small tag (`surface-sunk` background, `hairline` rule) holding the medallion, the name and the attitude together; use it as the `giver` of a `QuestCard` or in running text.
 
-- `kind` : `npc` (sceau rond) ou `faction` (écu). La forme distingue les deux, sans couleur.
-- `reputation` ajoute un petit losange dans la couleur de l'attitude ; le mot est lu par les lecteurs d'écran et apparaît au survol.
-- `onClick` en fait un lien vers la fiche contact (filet `gold` au survol).
-- Pas d'autre information dans la puce : le détail vit dans `ContactCard`.
+- `kind`: `npc` (round seal) or `faction` (shield). The shape tells them apart, without colour.
+- `reputation` adds a small diamond in the attitude's colour; the word is read by screen readers and appears on hover.
+- `onClick` turns it into a link to the contact card (`gold` rule on hover).
+- No other information in the chip: the details live in `ContactCard`.

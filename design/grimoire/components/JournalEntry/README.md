@@ -1,6 +1,6 @@
-Entrée du journal de session : surtitre, titre, récit avec lettrine `crimson`, ornement et signature.
+Session journal entry: kicker, title, narrative with a `crimson` drop cap, ornament and signature.
 
-- `session` en chiffres romains (« XIV »), `date` en clair (« 12 septembre »).
-- `children` : des `<p>` en `body-lg` ; les paroles de PNJ en `<blockquote>` (italique, `ink-muted`). La lettrine s'applique au premier paragraphe.
-- `author` ajoute l'ornement doré et « Consigné par … ».
-- Largeur max 640px (≈ 70 caractères). Une entrée par session, pas de sous-titres internes.
+- `session` in Roman numerals (« XIV »), `date` spelled out (« 12 septembre »).
+- `children`: `<p>` elements in `body-lg`; NPC speech in `<blockquote>` (italic, `ink-muted`). The drop cap applies to the first paragraph.
+- `author` adds the gold ornament and « Consigné par … ».
+- Max width 640px (≈ 70 characters). One entry per session, no inner subheadings.

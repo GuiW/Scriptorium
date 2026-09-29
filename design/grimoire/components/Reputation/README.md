@@ -1,7 +1,7 @@
-Position d'un PNJ ou d'une faction envers le groupe, sur une échelle de 5 crans : un losange plein marque le cran actuel, le mot l'accompagne toujours.
+Where an NPC or a faction stands toward the party, on a 5-step scale: a filled diamond marks the current step, and the word always goes with it.
 
-- `kind="npc"` (défaut) : Hostile, Inamical, Indifférent, Amical, Serviable — les attitudes de PF2e. `kind="faction"` : Haï, Méfiant, Ignoré, Apprécié, Vénéré.
-- `value` : indice 0–4 (défaut : le cran central). `labels` permet une autre échelle (par ex. les 7 crans de réputation de faction de PF2e) ; les couleurs se répartissent sur la longueur.
-- Couleurs : `rep-hostile` → `rep-cold` → `rep-neutral` → `rep-warm` → `rep-ally`, plus soutenues que les couleurs de statut (≥ 7:1 sur toute surface). Le mot, en étiquette pleine, porte le sens ; la couleur le renforce.
-- `trend` : ▲ / ▼ discret pour signaler un changement depuis la dernière session.
-- C'est une position, pas une jauge : ne jamais l'afficher en pourcentage ni en barre remplie.
+- `kind="npc"` (default): Hostile, Inamical, Indifférent, Amical, Serviable — the PF2e attitudes. `kind="faction"`: Haï, Méfiant, Ignoré, Apprécié, Vénéré.
+- `value`: 0–4 index (default: the middle step). `labels` allows another scale (for example the 7-step PF2e faction reputation); colours are spread along its length.
+- Colours: `rep-hostile` → `rep-cold` → `rep-neutral` → `rep-warm` → `rep-ally`, stronger than the status colours (≥ 7:1 on every surface). The word, as a filled label, carries the meaning; the colour reinforces it.
+- `trend`: a discreet ▲ / ▼ to signal a change since the last session.
+- It is a position, not a gauge: never show it as a percentage or a filled bar.
