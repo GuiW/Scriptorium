@@ -1,31 +1,33 @@
-# Interface — design system Grimoire
+# Interface — Grimoire design system
 
-Source de vérité visuelle : `design/grimoire/` (tokens.json, README.md, fiches de composants, integration/primeng.md, grimoire-preset.ts, bundle.css).
-Maquettes de référence : `design/quetes/` (canvas exporté, captures Parchemin et Donjon).
+Visual source of truth: `design/grimoire/` (tokens.json, README.md, component READMEs, bundle.css).
+Reference mockups: `design/quetes/` (exported canvas, Parchment and Dungeon screenshots).
 
-## Règles
+## Rules
 
-- Angular 22, composants standalone, état en signals, Nx : les composants Grimoire vont dans une lib dédiée (`ui-grimoire`), la page Quêtes dans la lib de la feature.
-- Aucune couleur, taille de police, espacement, rayon ou ombre en dur : uniquement les variables CSS de `tokens.css` (`var(--surface)`, `var(--space-4)`…). Ce fichier est généré depuis `design/grimoire/tokens.json` : ne jamais l'éditer à la main, relancer le script de génération.
-- Thèmes : Parchemin (défaut) et Donjon, via l'attribut `data-theme="donjon"` sur un ancêtre. Tout composant doit être vérifié dans les deux.
-- Composants génériques (champs, boutons, listes, overlays) : PrimeNG 22 avec `GrimoirePreset`. Composants métier (QuestCard, Objective, Reputation, Visibility, SecretBlock, VisibilityPicker, RewardList, Tabs, BookmarkNav, BookmarkTabs) : réécrits en Angular, mêmes classes `gr-*` que `bundle.css`, mêmes noms de props que `index.d.ts`.
-- Un besoin non couvert par un composant ou un token : ne pas inventer de style. L'ajouter à `design/GAPS.md`, proposer une solution avec l'existant, et attendre une décision.
+- Angular 22 (Node 24), standalone components, state in signals, Angular CLI workspace (`projects/`): Grimoire components go in a dedicated library (`ui-grimoire`), the Quêtes page in the feature's library.
+- No hard-coded colour, font size, spacing, radius or shadow: only the CSS variables from `tokens.css` (`var(--surface)`, `var(--space-4)`…). That file is generated from `design/grimoire/tokens.json`: never edit it by hand, rerun the generator.
+- Themes: Parchment (default) and Dungeon, through the `data-theme="dungeon"` attribute on an ancestor. Every component must be checked in both.
+- No styled component library (no PrimeNG, no Material…): we would spend our time fighting its styles. Every component, generic (Button, TextField, Badge) or business (QuestCard, Objective, Reputation, Visibility, SecretBlock, VisibilityPicker, RewardList, Tabs, BookmarkNav, BookmarkTabs), is written in Angular in `ui-grimoire`, with the same `gr-*` classes as `bundle.css` and the same prop names as `index.d.ts`.
+- Behaviour (keyboard, focus, ARIA): start from `@angular/aria` or `@angular/cdk`, which bring no styles, when they cover the need; otherwise a custom component.
+- A need not covered by a component or a token: do not invent a style. Add it to `design/GAPS.md`, propose a solution using what exists, and wait for a decision.
 
-## Accessibilité (non négociable)
+## Accessibility (non-negotiable)
 
-- Un statut ou une visibilité = un glyphe ET un mot, jamais la couleur seule (◆ En cours, ✓ Accomplie, ✕ Échouée, ? Rumeur ; Secret MJ / « Pour toi »).
-- Anneau de focus `var(--focus)`, 2px, décalé de 2px, sur tout élément interactif.
-- Cibles tactiles ≥ 44px sur tablette et mobile : `Button` en taille par défaut, jamais `sm`.
-- Navigation entre pages : BookmarkNav / BookmarkTabs. Filtre par statut dans une liste : `Tabs`. Ne pas les intervertir.
+- A status or a visibility = a glyph AND a word, never colour alone (◆ En cours, ✓ Accomplie, ✕ Échouée, ? Rumeur; Secret MJ / « Pour toi »).
+- Focus ring `var(--focus)`, 2px, offset by 2px, on every interactive element.
+- Touch targets ≥ 44px on tablet and mobile: `Button` at its default size, never `sm`.
+- Navigation between pages: BookmarkNav / BookmarkTabs. Filtering a list by status: `Tabs`. Never swap them.
 
-## Langue et ton
+## Language and tone
 
-- Interface en français, casse de phrase, libellés d'action à l'infinitif (« Ajouter un objectif »). Pas d'emoji, pas de « OK » ni de « Valider » seul.
-- Vocabulaire de table : quête, objectif, session, donneur, récompense.
-- Statuts : En cours, Accomplie, Échouée, Rumeur.
+- Code, comments, test names, commit messages and documentation (design system included) are in English.
+- The interface is in French, sentence case, action labels in the infinitive (« Ajouter un objectif »). No emoji, no « OK » and no « Valider » on its own.
+- Table vocabulary: quête, objectif, session, donneur, récompense.
+- Statuses: En cours, Accomplie, Échouée, Rumeur.
 
-## Méthode
+## Method
 
-- Travailler par tranche : tokens et thème, puis composants un par un (feuilles avant composés), puis navigation, puis la page.
-- Pour chaque tranche : plan validé avant le code, un test de rendu par composant (tous les statuts, thème sombre), un commit séparé.
-- Données de démo : reprendre celles du canvas (6 quêtes, dont une Secret MJ et une partagée avec Kyra).
+- Work in slices: tokens and theme, then components one by one (leaves before composites), then navigation, then the page.
+- For each slice: an approved plan before the code, one rendering test per component (every status, dark theme), a separate commit.
+- Demo data: reuse the canvas's (6 quests, one of them Secret MJ and one shared with Kyra).

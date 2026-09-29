@@ -1,0 +1,100 @@
+/* tokens.css variables only. Border widths (1px) are not tokens. */
+:host {
+  display: block;
+  min-height: 100vh;
+  padding: var(--space-12);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.test {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  max-width: calc(var(--space-12) * 24);
+  margin: 0 auto;
+}
+
+.test__kicker,
+.test__label {
+  margin: 0;
+  font: var(--type-label-caps);
+  letter-spacing: var(--type-label-caps-tracking);
+  color: var(--ink-muted);
+}
+
+.test__title {
+  margin: var(--space-1) 0 var(--space-2);
+  font: var(--type-title-lg);
+}
+
+.test__lead {
+  margin: 0;
+  font: var(--type-body);
+}
+
+.test__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.test__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.test__display {
+  margin: 0;
+  font: var(--type-display);
+  letter-spacing: var(--type-display-tracking);
+}
+
+.test__body {
+  margin: 0;
+  font: var(--type-body-lg);
+}
+
+.test__ui {
+  margin: 0;
+  font: var(--type-ui);
+  color: var(--ink-muted);
+}
+
+.test__swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc(var(--space-12) * 5), 1fr));
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-card);
+}
+
+.swatch__chip {
+  display: block;
+  height: var(--space-12);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.swatch__name {
+  font: var(--type-numeral);
+  color: var(--ink);
+}
+
+.swatch__usage {
+  font: var(--type-ui-sm);
+  color: var(--ink-muted);
+}

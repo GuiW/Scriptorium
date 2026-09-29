@@ -1,0 +1,44 @@
+<main class="test">
+  <header class="test__header">
+    <p class="test__kicker">Temporary page</p>
+    <h1 class="test__title">Theme foundations</h1>
+    <p class="test__lead">
+      Current theme: <strong>{{ themeService.info().name }}</strong>. Each swatch reads the CSS
+      variable it is named after; switch themes to check both sets of values.
+    </p>
+  </header>
+
+  <section class="test__section" aria-labelledby="test-buttons">
+    <h2 id="test-buttons" class="test__label">Buttons (gr-btn classes from bundle.css)</h2>
+    <div class="test__row">
+      <button type="button" class="gr-btn gr-btn--secondary" (click)="themeService.toggle()">
+        Switch to the {{ themeService.next().name }} theme
+      </button>
+      <button type="button" class="gr-btn gr-btn--primary">Primary</button>
+      <button type="button" class="gr-btn gr-btn--secondary">Secondary</button>
+      <button type="button" class="gr-btn gr-btn--ghost">Ghost</button>
+      <button type="button" class="gr-btn gr-btn--primary" disabled>Disabled</button>
+    </div>
+  </section>
+
+  <!-- Font samples stay in French: they check the fonts render the interface's accents. -->
+  <section class="test__section" aria-labelledby="test-fonts">
+    <h2 id="test-fonts" class="test__label">Fonts</h2>
+    <p class="test__display">Le Joyau d'Absalom</p>
+    <p class="test__body">La brume se leva sur les marais quand la cloche sonna.</p>
+    <p class="test__ui">Donnée par Wrin Sivinxi · Otari</p>
+  </section>
+
+  <section class="test__section" aria-labelledby="test-colours">
+    <h2 id="test-colours" class="test__label">Colours</h2>
+    <ul class="test__swatches">
+      @for (color of colors; track color.name) {
+        <li class="swatch">
+          <span class="swatch__chip" [style.background]="'var(--' + color.name + ')'"></span>
+          <code class="swatch__name">--{{ color.name }}</code>
+          <span class="swatch__usage">{{ color.usage }}</span>
+        </li>
+      }
+    </ul>
+  </section>
+</main>
