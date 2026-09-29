@@ -1,0 +1,12 @@
+<!-- @dsCard group="Quêtes" height=136 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Objective</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var G = window.Grimoire, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('ul',{className:'gr-objs',style:{padding:16}},h(G.Objective,{done:true},'Interroger le forgeron d\u2019Otari'),h(G.Objective,{done:true},'Trouver l\u2019entr\u00E9e de la crypte'),h(G.Objective,null,'Retrouver le m\u00E9daillon de la pr\u00EAtresse'),h(G.Objective,{optional:true},'\u00C9pargner le gardien squelette')));
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<!-- @dsCard group="Saisie" height=200 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>TextField</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var G = window.Grimoire, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div',{className:'gr-stack'},h(G.TextField,{label:'Titre de la qu\u00EAte',placeholder:'La crypte sous Otari',hint:'Visible par toute la table.'}),h(G.TextField,{label:'Donneur',defaultValue:'',error:'Indiquez qui a confi\u00E9 la qu\u00EAte.'})));
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!-- @dsCard group="Navigation" height=300 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>BookmarkTabs</title>
+<style>html,body{margin:0}#root{display:flex;justify-content:center;padding:16px}.phone{width:375px;height:260px;display:flex;flex-direction:column;border:1px solid var(--hairline);border-radius:var(--radius-lg);overflow:hidden;background:var(--surface)}.phone header{padding:16px 20px 0}.phone .k{font:700 11px/14px var(--font-display);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted)}.phone h1{margin:2px 0 0;font:600 22px/28px var(--font-display);color:var(--ink)}.phone main{flex:1;padding:8px 20px;font:400 15px/22px var(--font-serif);color:var(--ink-muted)}</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  var G = window.Grimoire, h = React.createElement;
+  var items = [
+    {id:'quests', label:'Qu\u00EAtes', icon:h(G.Icon,{name:'quete'}), count:4},
+    {id:'journal', label:'Journal', icon:h(G.Icon,{name:'journal'})},
+    {id:'contacts', label:'Contacts', icon:h(G.Icon,{name:'joueurs'}), count:1},
+    {id:'loot', label:'Butin', icon:h(G.Icon,{name:'butin'})},
+    {id:'more', label:'Plus', icon:h(G.Icon,{name:'plus'})}
+  ];
+  function App() {
+    var s = React.useState('quests'), v = s[0], set = s[1];
+    var cur = items.filter(function(i){return i.id===v})[0];
+    return h('div', {className:'phone'},
+      h('header', null, h('div', {className:'k'}, 'L\u2019\u00C2ge des Cendres'), h('h1', null, cur.label)),
+      h('main', null, 'Contenu de la page.'),
+      h(G.BookmarkTabs, {items:items, value:v, onChange:set}));
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(h(App));
+</script>
+</body>
+</html>

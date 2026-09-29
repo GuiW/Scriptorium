@@ -1,0 +1,66 @@
+{
+  "v": 3,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-09-28T14:00:00Z"
+  },
+  "title": "Grimoire — Page Quêtes",
+  "launch": {
+    "view": "canvas"
+  },
+  "pages": [],
+  "boards": {
+    "Main.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 1300,
+      "title": "Bureau — 1440px"
+    },
+    "Tablette.dc.html": {
+      "x": 1520,
+      "y": 0,
+      "w": 1024,
+      "h": 1100,
+      "title": "Tablette — 1024px"
+    },
+    "Mobile.dc.html": {
+      "x": 2624,
+      "y": 0,
+      "w": 390,
+      "h": 1700,
+      "title": "Mobile — 390px"
+    },
+    "MobileAjoutQuete.dc.html": {
+      "x": 3094,
+      "y": 0,
+      "w": 390,
+      "h": 1000,
+      "title": "Mobile — Nouvelle quête"
+    },
+    "MobileAjoutQueteErreur.dc.html": {
+      "x": 3564,
+      "y": 0,
+      "w": 390,
+      "h": 1000,
+      "title": "Mobile — Nouvelle quête (visibilité incomplète)"
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Tablette.dc.html",
+    "Mobile.dc.html",
+    "MobileAjoutQuete.dc.html",
+    "MobileAjoutQueteErreur.dc.html"
+  ],
+  "notes": {},
+  "designSystems": [
+    {
+      "title": "Grimoire",
+      "namespace": "grimoire",
+      "artifact": "https://claude.ai/artifact/FMHetCGBVA1inCuFKz34PB",
+      "version": "1790627040-581f",
+      "copiedAt": "2026-09-28T17:45:00Z"
+    }
+  ]
+}

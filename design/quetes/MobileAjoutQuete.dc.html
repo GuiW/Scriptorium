@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Mobile — Nouvelle quête</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/grimoire/tokens.css">
+<link rel="stylesheet" href="ds/grimoire/components/bundle.css">
+<script src="ds/grimoire/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body { margin: 0; }
+</style>
+</helmet>
+<div data-theme="{{theme}}" style="width: 390px; height: 1000px; box-sizing: border-box; display: flex; flex-direction: column; background: var(--surface); font-family: var(--font-serif); color: var(--ink);">
+  <header style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; box-sizing: border-box; border-bottom: 1px solid var(--hairline);">
+    <x-import component-from-global-scope="Grimoire.Button" variant="ghost" onClick="{{noop}}">Annuler</x-import>
+    <x-import component-from-global-scope="Grimoire.Button" variant="primary"  onClick="{{noop}}">Créer</x-import>
+  </header>
+  <main style="flex: 1; padding: 24px 20px 40px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px;">
+    <h1 style="margin: 0; font: 600 30px/36px var(--font-display); color: var(--ink);">Nouvelle quête</h1>
+    <x-import component-from-global-scope="Grimoire.TextField" label="Titre de la quête" placeholder="La crypte sous Otari" hint="Visible par toute la table, sauf indication contraire." onChange="{{noop}}"></x-import>
+    <x-import component-from-global-scope="Grimoire.TextField" label="Donneur (optionnel)" placeholder="Wrin Sivinxi" hint="Nom du PNJ ou de la faction." onChange="{{noop}}"></x-import>
+    <div style="display: flex; gap: 12px;">
+      <div style="flex: 1;">
+      <x-import component-from-global-scope="Grimoire.TextField" label="Lieu" placeholder="Otari" onChange="{{noop}}"></x-import>
+      </div>
+      <div style="width: 96px;">
+      <x-import component-from-global-scope="Grimoire.TextField" label="Niveau" placeholder="2" onChange="{{noop}}"></x-import>
+      </div>
+    </div>
+    <x-import component-from-global-scope="Grimoire.TextField" label="Résumé" multiline="{{true}}" placeholder="Un marin ivre jure avoir vu une lanterne s'allumer sous les flots." onChange="{{noop}}"></x-import>
+    <div>
+      <div style="font: 700 12px/16px var(--font-display); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 12px;">Visibilité</div>
+      <x-import component-from-global-scope="Grimoire.VisibilityPicker" level="table" players="{{emptyPlayers}}" onChange="{{noop}}" roster="{{roster}}"></x-import>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["parchemin","donjon"],"default":"parchemin"},"$preview":{"width":390,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var noop = function () {};
+    var roster = [
+      { id: "ezren", name: "Ezren", character: "Magicien" },
+      { id: "kyra", name: "Kyra", character: "Prêtresse" },
+      { id: "merisiel", name: "Merisiel", character: "Roublarde" },
+      { id: "valeros", name: "Valeros", character: "Guerrier" }
+    ];
+    return { theme: this.props.theme || "parchemin", noop: noop, roster: roster, emptyPlayers: [] };
+  }
+}
+</script>
+</body>
+</html>

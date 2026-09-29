@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Tablette — Quête ouverte</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/grimoire/tokens.css">
+<link rel="stylesheet" href="ds/grimoire/components/bundle.css">
+<script src="ds/grimoire/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body { margin: 0; }
+</style>
+</helmet>
+<div data-theme="{{theme}}" style="width: 1024px; height: 1100px; box-sizing: border-box; display: flex; align-items: stretch; background: var(--surface); font-family: var(--font-serif); color: var(--ink);">
+  <x-import component-from-global-scope="Grimoire.BookmarkNav" variant="rail" kicker="Campagne" title="L'Âge des Cendres" items="{{navItems}}" value="quests" onChange="{{noop}}"></x-import>
+  <div style="flex: 1; min-width: 0; padding: 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px;">
+    <div>
+      <x-import component-from-global-scope="Grimoire.Button" variant="ghost" onClick="{{noop}}">‹ Retour aux quêtes</x-import>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; max-width: 720px;">
+      <div>
+        <h1 style="margin: 0; font: 600 30px/36px var(--font-display); color: var(--ink);">{{panel.title}}</h1>
+        <div class="gr-quest__meta">Donnée par {{panel.giver}} · {{panel.location}} · Niv. {{panel.level}}</div>
+      </div>
+      <x-import component-from-global-scope="Grimoire.Badge" tone="active"></x-import>
+    </div>
+    <p style="max-width: 680px; margin: 0; font: 400 19px/30px var(--font-serif); color: var(--ink);">{{panel.summary}}</p>
+    <div style="max-width: 680px;">
+      <div style="font: 700 12px/16px var(--font-display); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 12px;">Objectifs</div>
+      <ul class="gr-objs">
+        <sc-for list="{{panel.objectives}}" as="o" hint-placeholder-count="4">
+          <x-import component-from-global-scope="Grimoire.Objective" done="{{o.done}}" optional="{{o.optional}}" visibility="{{o.visibility}}" onToggle="{{noop}}">{{o.label}}</x-import>
+        </sc-for>
+      </ul>
+    </div>
+    <div style="max-width: 440px;">
+      <x-import component-from-global-scope="Grimoire.RewardList" rewards="{{panel.rewards}}"></x-import>
+    </div>
+    <div style="max-width: 680px;">
+      <x-import component-from-global-scope="Grimoire.SecretBlock" level="gm">
+        <p style="margin: 0;">{{panel.secretNote}}</p>
+      </x-import>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;parchemin&quot;,&quot;donjon&quot;],&quot;default&quot;:&quot;parchemin&quot;},&quot;$preview&quot;:{&quot;width&quot;:1024,&quot;height&quot;:1100}}">
+class Component extends DCLogic {
+  renderVals() {
+    var G = window.Grimoire || {};
+    var h = React.createElement;
+    var noop = function () {};
+    function icon(name, size) { return h(G.Icon, { name: name, size: size || 20 }); }
+    function chip(name, kind, rep) { return h(G.ContactChip, { name: name, kind: kind, reputation: rep }); }
+
+    var navItems = [
+      { id: "quests", label: "Quêtes", icon: icon("quete"), count: 3 },
+      { id: "journal", label: "Journal", icon: icon("journal") },
+      { id: "contacts", label: "Contacts", icon: icon("joueurs") },
+      { id: "places", label: "Lieux", icon: icon("carte") },
+      { id: "loot", label: "Butin", icon: icon("butin") },
+      { divider: true, id: "d1" },
+      { id: "settings", label: "Réglages", icon: icon("reglages") }
+    ];
+
+    var panel = {
+      title: "La crypte sous Otari",
+      giver: chip("Wrin Sivinxi", "npc", 3),
+      location: "Otari",
+      level: 2,
+      summary: "Des lueurs ont été vues sous la vieille chapelle. Wrin paiera bien qui découvrira leur source.",
+      objectives: [
+        { label: "Interroger le forgeron d'Otari", done: true },
+        { label: "Trouver l'entrée de la crypte", done: true },
+        { label: "Retrouver le médaillon de la prêtresse" },
+        { label: "Épargner le gardien squelette", optional: true, visibility: { level: "players", players: [{ name: "Kyra" }] } }
+      ],
+      rewards: [
+        { kind: "coin", label: "250 po" },
+        { kind: "xp", label: "80 XP" },
+        { kind: "item", label: "Lame de lune", rarity: "rare", note: "épée longue +1", to: "Valeros" },
+        { kind: "item", label: "Potion de guérison moyenne", rarity: "uncommon" }
+      ],
+      secretNote: "Le médaillon est un faux : le vrai est resté dans le coffre de la prêtresse. Wrin le sait et se tait."
+    };
+
+    return { theme: this.props.theme || "parchemin", noop: noop, navItems: navItems, panel: panel };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!-- @dsCard group="Quêtes" height=260 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>RewardList</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var G = window.Grimoire, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div',{style:{padding:16,maxWidth:440}},h(G.RewardList,{rewards:[
+    {kind:'coin',label:'250 po'},
+    {kind:'xp',label:'80 XP'},
+    {kind:'item',label:'Lame de lune',rarity:'rare',note:'\u00E9p\u00E9e longue +1',to:'Valeros'},
+    {kind:'item',label:'Potion de gu\u00E9rison moyenne',rarity:'uncommon'},
+    {kind:'item',label:'Carte des \u00E9toiles de Wrin',claimed:true},
+    {kind:'reputation',label:'Chevaliers de Lastwall +1'},
+    {kind:'other',label:'Une faveur de la pr\u00EAtresse',visibility:{level:'gm'}}
+  ]})));
+</script>
+</body>
+</html>

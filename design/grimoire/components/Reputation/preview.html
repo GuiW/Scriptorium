@@ -1,0 +1,12 @@
+<!-- @dsCard group="Contacts" height=150 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Reputation</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var G = window.Grimoire, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div',{className:'gr-stack'},h(G.Reputation,{value:0}),h(G.Reputation,{value:2}),h(G.Reputation,{value:3,trend:'up'}),h(G.Reputation,{kind:'faction',value:1,trend:'down'}),h(G.Reputation,{kind:'faction',value:4})));
+</script>
+</body>
+</html>

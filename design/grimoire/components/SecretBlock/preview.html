@@ -1,0 +1,12 @@
+<!-- @dsCard group="Visibilité" height=330 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>SecretBlock</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var G = window.Grimoire, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div',{className:'gr-stack',style:{paddingTop:24,gap:32}},h(G.SecretBlock,{level:'gm'},h('p',null,'Le m\u00E9daillon est un faux : le vrai est rest\u00E9 dans le coffre de la pr\u00EAtresse. Wrin le sait et se tait.')),h(G.SecretBlock,{level:'players',players:[{name:'Kyra'}]},h('p',null,'Dans la crypte, ton symbole sacr\u00E9 s\u2019est mis \u00E0 chauffer. Tu es la seule \u00E0 l\u2019avoir senti.'))));
+</script>
+</body>
+</html>

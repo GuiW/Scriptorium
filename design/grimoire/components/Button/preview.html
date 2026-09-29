@@ -1,0 +1,12 @@
+<!-- @dsCard group="Actions" height=72 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Button</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var G = window.Grimoire, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div',{className:'gr-row'},h(G.Button,{icon:'\u2726'},'Nouvelle qu\u00EAte'),h(G.Button,{variant:'secondary'},'Ajouter un objectif'),h(G.Button,{variant:'ghost'},'Voir le journal'),h(G.Button,{size:'sm',variant:'secondary'},'Archiver'),h(G.Button,{disabled:true},'Clore la session')));
+</script>
+</body>
+</html>

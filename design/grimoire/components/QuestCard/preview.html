@@ -1,0 +1,12 @@
+<!-- @dsCard group="Quêtes" height=620 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>QuestCard</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var G = window.Grimoire, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div',{className:'gr-stack',style:{flexDirection:'row',flexWrap:'wrap',alignItems:'flex-start',paddingTop:28,rowGap:32}},h(G.QuestCard,{title:'La crypte sous Otari',status:'active',giver:h(G.ContactChip,{name:'Wrin Sivinxi',reputation:3}),location:'Otari',level:2,summary:'Des lueurs ont \u00E9t\u00E9 vues sous la vieille chapelle. Wrin paiera bien qui d\u00E9couvrira leur source.',objectives:[{label:'Interroger le forgeron',done:true},{label:'Trouver l\u2019entr\u00E9e',done:true},{label:'Retrouver le m\u00E9daillon'},{label:'\u00C9pargner le gardien',optional:true,visibility:{level:'players',players:[{name:'Kyra'}]}}],rewards:[{kind:'coin',label:'250 po'},{kind:'xp',label:'80 XP'},{kind:'item',label:'Lame de lune',rarity:'rare'},{kind:'item',label:'Potion de gu\u00E9rison',rarity:'uncommon'}],showObjectives:true,selected:true,onClick:function(){}}),h(G.QuestCard,{title:'Le phare noy\u00E9',status:'rumor',visibility:{level:'gm'},location:'C\u00F4te des Brumes',summary:'Un marin ivre jure avoir vu la lanterne s\u2019allumer sous les flots.'}),h(G.QuestCard,{title:'L\u2019escorte du marchand',status:'completed',giver:h(G.ContactChip,{name:'Oleg Leveton',reputation:4}),level:1,objectives:[{label:'a',done:true},{label:'b',done:true},{label:'c',done:true}],reward:'80 po'})));
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<!-- @dsCard group="Visibilité" height=330 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>VisibilityPicker</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var G = window.Grimoire, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(function(){var s=React.useState({level:'players',players:[{id:'k',name:'Kyra',character:'Pr\u00EAtresse'}]}),v=s[0],set=s[1];return h('div',{style:{padding:16}},h(G.VisibilityPicker,{level:v.level,players:v.players,onChange:set,roster:[{id:'e',name:'Ezren',character:'Magicien'},{id:'k',name:'Kyra',character:'Pr\u00EAtresse'},{id:'m',name:'Merisiel',character:'Roublarde'},{id:'v',name:'Valeros',character:'Guerrier'}]}))}));
+</script>
+</body>
+</html>

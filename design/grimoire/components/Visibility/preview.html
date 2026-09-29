@@ -1,0 +1,12 @@
+<!-- @dsCard group="Visibilité" height=72 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Visibility</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var G = window.Grimoire, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div',{className:'gr-row'},h(G.Visibility,{level:'gm'}),h(G.Visibility,{level:'players',players:[{name:'Ezren'},{name:'Kyra'}]}),h(G.Visibility,{level:'players',players:[{name:'Ezren',you:true}]}),h(G.Visibility,{level:'players',players:[{name:'Ezren'},{name:'Kyra'},{name:'Merisiel'},{name:'Valeros'}]})));
+</script>
+</body>
+</html>

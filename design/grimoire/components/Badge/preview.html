@@ -1,0 +1,12 @@
+<!-- @dsCard group="Statuts" height=64 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Badge</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var G = window.Grimoire, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div',{className:'gr-row'},h(G.Badge,{tone:'active'}),h(G.Badge,{tone:'completed'}),h(G.Badge,{tone:'failed'}),h(G.Badge,{tone:'rumor'}),h(G.Badge,{tone:'urgent'},'Avant la pleine lune'),h(G.Badge,{tone:'reward'},'250 po \u00B7 80 XP')));
+</script>
+</body>
+</html>

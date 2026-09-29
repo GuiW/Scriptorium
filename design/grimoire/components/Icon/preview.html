@@ -1,0 +1,14 @@
+<!-- @dsCard group="Iconographie" height=300 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Icon</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var G = window.Grimoire, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div',{className:'gr-icons'}, G.Icon.names.map(function(n){
+    return h('div',{key:n,className:'gr-icons__cell'}, h(G.Icon,{name:n,size:24}), h('span',{className:'gr-icons__name'}, n));
+  })));
+</script>
+</body>
+</html>

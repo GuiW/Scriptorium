@@ -1,0 +1,48 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Grimoire</title>
+<style>
+  html, body { margin:0; height:100%; }
+  body { background:var(--surface); color:var(--ink); font-family:var(--font-serif); overflow:hidden; }
+  .cover { position:relative; height:288px; overflow:hidden; }
+  .art { position:absolute; top:0; left:480px; width:480px; height:288px; overflow:hidden; }
+  .art svg { display:block; width:480px; height:288px; }
+  .seal { fill:var(--crimson); }
+  .arcane { fill:var(--arcane); }
+  .gold { fill:var(--gold); }
+  .deep { fill:var(--ink); }
+  .blk { rx:var(--radius-md); }
+  .numeral { fill:var(--surface); font-family:var(--font-display); font-weight:700; font-size:216px; }
+  .words { position:absolute; left:var(--space-12); bottom:var(--space-8); max-width:420px; }
+  .name { margin:0; font-family:var(--font-display); font-size:72px; line-height:.92; font-weight:600; letter-spacing:.01em; color:var(--ink); }
+  .tag { margin:var(--space-3) 0 0 2px; font-family:var(--font-serif); font-style:italic; font-size:14px; line-height:20px; color:var(--ink-muted); }
+</style>
+</head>
+<body>
+<div class="cover">
+<div class="art" aria-hidden="true">
+<svg viewBox="0 0 480 288" width="480" height="288">
+<!--
+  blocks      crimson 176×256 (the wax seal, largest, bled off the top) · ink 144×216 bled off the right edge · arcane 128×152 · gold 128×16 (a gilded strip, kept thin: it is ornament) — ≈ 30% of 960×288
+  arrangement one tall seal slab with satellites, bottoms on one line at y=248, space-4 gutters
+  pattern     "a distinctive display face → one oversized numeral clipped by a block": Cinzel "20" (the natural 20) cut out of the seal in surface
+  scales      gutters space-4 (16); strip height space-4; corners radius-md (4); name inset space-12, bottom space-8
+-->
+<defs><clipPath id="sealclip"><rect x="16" y="-8" width="176" height="256" rx="4"/></clipPath></defs>
+<rect class="seal blk" x="16" y="-8" width="176" height="256" rx="4"/>
+<text class="numeral" x="28" y="236" clip-path="url(#sealclip)">20</text>
+<rect class="gold blk" x="208" y="64" width="128" height="16" rx="4"/>
+<rect class="arcane blk" x="208" y="96" width="128" height="152" rx="4"/>
+<rect class="deep blk" x="352" y="32" width="144" height="216" rx="4"/>
+</svg>
+</div>
+<div class="words">
+<h1 class="name">Grimoire</h1>
+<p class="tag">Le journal de quêtes de votre table.</p>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<!-- @dsCard group="Contacts" height=96 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>ContactChip</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var G = window.Grimoire, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div',{className:'gr-stack'},h('div',{className:'gr-quest__meta'},'Donn\u00E9e par ',h(G.ContactChip,{name:'Wrin Sivinxi',reputation:3,onClick:function(){}}),' \u00B7 Otari'),h('div',{className:'gr-quest__meta'},'Donn\u00E9e par ',h(G.ContactChip,{name:'Les Chevaliers de Lastwall',kind:'faction',reputation:1}),' \u00B7 Niv. 3')));
+</script>
+</body>
+</html>
