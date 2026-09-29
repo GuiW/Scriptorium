@@ -1,9 +1,20 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { COLOR_TOKENS, ThemeService } from '@scriptorium/ui-grimoire';
+import {
+  BADGE_TONES,
+  Badge,
+  Button,
+  ButtonIcon,
+  COLOR_TOKENS,
+  ICON_NAMES,
+  Icon,
+  ThemeService,
+  type BadgeTone,
+} from '@scriptorium/ui-grimoire';
 
-/** TEMPORARY — checks the theme foundations (tokens, fonts, gr-btn buttons) in both themes. */
+/** TEMPORARY — checks the theme foundations and the base components in both themes. */
 @Component({
   selector: 'app-theme-test',
+  imports: [Badge, Button, ButtonIcon, Icon],
   templateUrl: './theme-test.html',
   styleUrl: './theme-test.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -11,4 +22,6 @@ import { COLOR_TOKENS, ThemeService } from '@scriptorium/ui-grimoire';
 export class ThemeTest {
   protected readonly themeService = inject(ThemeService);
   protected readonly colors = COLOR_TOKENS;
+  protected readonly tones = Object.keys(BADGE_TONES) as BadgeTone[];
+  protected readonly iconNames = ICON_NAMES;
 }

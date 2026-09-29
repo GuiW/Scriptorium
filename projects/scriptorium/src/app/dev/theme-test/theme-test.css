@@ -98,3 +98,8 @@
   font: var(--type-ui-sm);
   color: var(--ink-muted);
 }
+
+.test__icons {
+  margin: 0;
+  list-style: none;
+}

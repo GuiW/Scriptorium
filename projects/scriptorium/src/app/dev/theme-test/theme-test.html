@@ -9,16 +9,42 @@
   </header>
 
   <section class="test__section" aria-labelledby="test-buttons">
-    <h2 id="test-buttons" class="test__label">Buttons (gr-btn classes from bundle.css)</h2>
+    <h2 id="test-buttons" class="test__label">Button</h2>
     <div class="test__row">
-      <button type="button" class="gr-btn gr-btn--secondary" (click)="themeService.toggle()">
+      <button grButton variant="secondary" (click)="themeService.toggle()">
         Switch to the {{ themeService.next().name }} theme
       </button>
-      <button type="button" class="gr-btn gr-btn--primary">Primary</button>
-      <button type="button" class="gr-btn gr-btn--secondary">Secondary</button>
-      <button type="button" class="gr-btn gr-btn--ghost">Ghost</button>
-      <button type="button" class="gr-btn gr-btn--primary" disabled>Disabled</button>
+      <button grButton><gr-icon grButtonIcon name="ajouter" />Primary with icon</button>
+      <button grButton variant="secondary">Secondary</button>
+      <button grButton variant="ghost">Ghost</button>
+      <button grButton disabled>Disabled</button>
     </div>
+  </section>
+
+  <section class="test__section" aria-labelledby="test-badges">
+    <h2 id="test-badges" class="test__label">Badge</h2>
+    <div class="test__row">
+      @for (tone of tones; track tone) {
+        <gr-badge [tone]="tone" />
+      }
+      <gr-badge tone="reward">250 po</gr-badge>
+    </div>
+  </section>
+
+  <section class="test__section" aria-labelledby="test-icons">
+    <h2 id="test-icons" class="test__label">Icon</h2>
+    <ul class="gr-icons test__icons">
+      @for (name of iconNames; track name) {
+        <li class="gr-icons__cell">
+          <gr-icon [name]="name" [size]="24" />
+          <span class="gr-icons__name">{{ name }}</span>
+        </li>
+      }
+      <li class="gr-icons__cell">
+        <gr-icon name="secret" [size]="24" label="Secret MJ" />
+        <span class="gr-icons__name">secret (labelled)</span>
+      </li>
+    </ul>
   </section>
 
   <!-- Font samples stay in French: they check the fonts render the interface's accents. -->
