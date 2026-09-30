@@ -28,6 +28,12 @@ What the system does not cover yet, or covers poorly. No style is invented: ever
 | 44px touch targets | All buttons, tablet and mobile | CLAUDE.md requires 44px for `Button` at its default size; `.gr-btn` had `min-height: 40px`. | `min-height: 44px` in `bundle.css`, text and padding unchanged; measured at 44px in both themes. | **Fixed** in `bundle.css`. |
 | Generic components with no Grimoire style: dropdown, modal, side panel, toast, settings checkbox | First screen that needs one | The design system only covers `Button`, `TextField` and `Badge`. PrimeNG was dropped: no style is provided for the rest. The modal backdrop has no token either. | Behaviour from `@angular/aria` or `@angular/cdk`; visuals to design in the design system with the existing tokens (`surface-raised`, `hairline`, `shadow-lifted`, `radius-lg`), plus a backdrop token. | **Decision pending** before the first need (already the case for the mobile modal sheet, above). |
 
+## Found during the "leaf components" slice
+
+| Need | Where | Finding | Lead, with no new style | Status |
+|---|---|---|---|---|
+| Reputation steps that can be told apart | `Reputation`, Parchment | The five `rep-*` Parchment values are all very dark (≥ 7.2:1, AAA) and too close to each other: OKLab ΔE of 5 to 9 between neighbours (`hostile`/`cold` 6, `cold`/`neutral` 5). The word carries the meaning, but the colour no longer reinforces it. | Target AA (≥ 4.5:1 on `surface`, `surface-raised` and `surface-sunk`, which still holds for the 13px bold `surface` text on the label) instead of AAA, and use the freed lightness for chroma. The fully saturated version (`#bc0730`, `#8e4e00`, `#5d5d5d`, `#06658e`, `#066e1d`) was judged too vivid; chroma was lowered to 75 % at the same hues. Dungeon values unchanged. | **Fixed** in `tokens.json`: `rep-hostile` `#a8353e`, `rep-cold` `#835328`, `rep-neutral` `#5e5e5e`, `rep-warm` `#2d6482`, `rep-ally` `#2e6b32` (4.5 to 4.6:1, neighbour ΔE 8 to 13). Design system README, Reputation README and token `usage` updated. |
+
 ## How to use
 
 Any new gap found during implementation is added here with: the screen concerned, what is missing, the solution that only uses what exists, and the decision expected.
