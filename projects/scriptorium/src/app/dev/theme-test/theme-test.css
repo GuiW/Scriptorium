@@ -45,6 +45,10 @@
   gap: var(--space-4);
 }
 
+.test__row--center {
+  align-items: center;
+}
+
 .test__display {
   margin: 0;
   font: var(--type-display);

@@ -7,6 +7,7 @@ import {
   COLOR_TOKENS,
   ICON_NAMES,
   Icon,
+  Medallion,
   ThemeService,
   type BadgeTone,
 } from '@scriptorium/ui-grimoire';
@@ -14,7 +15,7 @@ import {
 /** TEMPORARY — checks the theme foundations and the base components in both themes. */
 @Component({
   selector: 'app-theme-test',
-  imports: [Badge, Button, ButtonIcon, Icon],
+  imports: [Badge, Button, ButtonIcon, Icon, Medallion],
   templateUrl: './theme-test.html',
   styleUrl: './theme-test.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
