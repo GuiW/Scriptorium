@@ -8,6 +8,7 @@ export * from './lib/icon/icon';
 export * from './lib/medallion/medallion';
 export * from './lib/reputation/reputation';
 export * from './lib/shared/types';
+export * from './lib/status-filter/status-filter';
 export * from './lib/theme/color-tokens.generated';
 export * from './lib/theme/theme.service';
 export * from './lib/visibility/player-names';
