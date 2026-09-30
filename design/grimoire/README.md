@@ -50,7 +50,7 @@ The interface is in French; the rules below apply to French copy.
 
 - A contact exists to say **who a quest comes from** and **where they stand with the party** — nothing more. No stats, HP or inventory: it is not a character sheet.
 - Shape = nature: a round seal for an NPC, a shield for a faction, circled in `gold`. Initial in Cinzel when there is no portrait.
-- Reputation is a **position** on 5 steps (PF2e attitudes for NPCs), never a gauge or a percentage; the word always goes with the colour. Dedicated colours `rep-hostile`, `rep-cold`, `rep-neutral`, `rep-warm`, `rep-ally` (≥ 7:1 on every surface), the label as a filled tag with `surface` text.
+- Reputation is a **position** on 5 steps (PF2e attitudes for NPCs), never a gauge or a percentage; the word always goes with the colour. Dedicated colours `rep-hostile`, `rep-cold`, `rep-neutral`, `rep-warm`, `rep-ally` (≥ 4.5:1 on every surface in Parchment, ≥ 7:1 in Dungeon), the label as a filled tag with `surface` text.
 - In a quest, the giver appears as a `ContactChip`; the `ContactCard` fits in four lines.
 
 ## Visibility: Secret MJ and chosen players
