@@ -42,6 +42,17 @@
     </div>
   </section>
 
+  <section class="test__section" aria-labelledby="test-reputations">
+    <h2 id="test-reputations" class="test__label">Reputation</h2>
+    <div class="test__stack">
+      @for (step of npcSteps; track step) {
+        <gr-reputation [value]="step" />
+      }
+      <gr-reputation kind="faction" [value]="1" trend="up" />
+      <gr-reputation kind="faction" [value]="4" trend="down" compact />
+    </div>
+  </section>
+
   <section class="test__section" aria-labelledby="test-icons">
     <h2 id="test-icons" class="test__label">Icon</h2>
     <ul class="gr-icons test__icons">
