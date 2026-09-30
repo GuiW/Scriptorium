@@ -10,3 +10,5 @@ export * from './lib/reputation/reputation';
 export * from './lib/shared/types';
 export * from './lib/theme/color-tokens.generated';
 export * from './lib/theme/theme.service';
+export * from './lib/visibility/player-names';
+export * from './lib/visibility/visibility';
