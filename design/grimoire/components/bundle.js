@@ -216,13 +216,15 @@
       })));
   }
 
-  /* ---- Tabs: filter a list by status (not for page navigation — see BookmarkNav/BookmarkTabs) ---- */
+  /* ---- Tabs (StatusFilter in Angular): filter a list by status, a single choice shown as underlined tabs.
+     Semantically a radio group, not a tablist: every option filters the same list, there is no panel per tab.
+     Not for page navigation — see BookmarkNav/BookmarkTabs. ---- */
   function Tabs(p) {
     var items = p.items || [];
-    return h('div', { className: cx('gr-tabs', p.className), role: 'tablist', 'aria-label': p['aria-label'] }, items.map(function (it) {
+    return h('div', { className: cx('gr-tabs', p.className), role: 'radiogroup', 'aria-label': p['aria-label'] }, items.map(function (it) {
       var on = it.id === p.value;
       return h('button', {
-        key: it.id, type: 'button', role: 'tab', 'aria-selected': on,
+        key: it.id, type: 'button', role: 'radio', 'aria-checked': on,
         className: cx('gr-tabs__tab', on && 'gr-tabs__tab--on'),
         onClick: function () { if (p.onChange) p.onChange(it.id); }
       },
@@ -356,5 +358,5 @@
   }
   Icon.names = Object.keys(ICONS);
 
-  window.Grimoire = { Button: Button, Badge: Badge, TextField: TextField, Objective: Objective, QuestCard: QuestCard, JournalEntry: JournalEntry, Ornament: Ornament, Reputation: Reputation, ContactChip: ContactChip, ContactCard: ContactCard, Medallion: Medallion, BookmarkNav: BookmarkNav, BookmarkTabs: BookmarkTabs, Tabs: Tabs, Visibility: Visibility, SecretBlock: SecretBlock, VisibilityPicker: VisibilityPicker, RewardList: RewardList, RewardSummary: RewardSummary, Icon: Icon };
+  window.Grimoire = { Button: Button, Badge: Badge, TextField: TextField, Objective: Objective, QuestCard: QuestCard, JournalEntry: JournalEntry, Ornament: Ornament, Reputation: Reputation, ContactChip: ContactChip, ContactCard: ContactCard, Medallion: Medallion, BookmarkNav: BookmarkNav, BookmarkTabs: BookmarkTabs, Tabs: Tabs, StatusFilter: Tabs, Visibility: Visibility, SecretBlock: SecretBlock, VisibilityPicker: VisibilityPicker, RewardList: RewardList, RewardSummary: RewardSummary, Icon: Icon };
 })();

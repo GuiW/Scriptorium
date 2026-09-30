@@ -190,7 +190,11 @@ export declare function BookmarkTabs(props: BookmarkTabsProps): JSX.Element;
 
 export interface TabItem { id: string; label: string; count?: number; }
 
-/** Filter a list by status (2–5 tabs), underlined — distinct from BookmarkNav/BookmarkTabs, which are for page navigation. */
+/**
+ * Filter a list by status (2–5 options), shown as underlined tabs — distinct from BookmarkNav/BookmarkTabs,
+ * which are for page navigation. A single-choice radio group (`role="radiogroup"` / `"radio"`), not a tablist:
+ * every option filters the same list. `StatusFilter` in Angular; `Tabs` is kept as the canvas name.
+ */
 export interface TabsProps {
   items: TabItem[];
   value?: string;
@@ -199,6 +203,8 @@ export interface TabsProps {
   className?: string;
 }
 export declare function Tabs(props: TabsProps): JSX.Element;
+export type StatusFilterProps = TabsProps;
+export declare const StatusFilter: typeof Tabs;
 
 /** Restricted-visibility marker: "Secret MJ" (broken seal, dashed) or "Pour toi et Kyra" (player faces, dotted). Renders nothing for `table` unless `showPublic`. */
 export interface VisibilityProps { level?: VisibilityLevel; players?: PlayerRef[]; compact?: boolean; showPublic?: boolean; className?: string; }

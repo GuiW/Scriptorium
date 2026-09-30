@@ -67,7 +67,7 @@ The interface is in French; the rules below apply to French copy.
   - **Tablet (768–1199px)** — `BookmarkNav variant="rail"`: 88px column, icon + short label.
   - **Mobile (< 768px)** — `BookmarkTabs`: bar at the bottom of the screen, 5 tabs at most, the active tab's bookmark hangs from the top edge.
 - On tablet and mobile, icons are mandatory; the campaign name moves to the page header.
-- Filtering a list by status (En cours / Accomplies / Échouées / Rumeurs, for example) is a different need from navigating between pages: use `Tabs`, never the bookmarks of `BookmarkNav`/`BookmarkTabs`, which are reserved for the app's pages.
+- Filtering a list by status (En cours / Accomplies / Échouées / Rumeurs, for example) is a different need from navigating between pages: use `Tabs` (`StatusFilter` in Angular, a single-choice radio group that looks like tabs), never the bookmarks of `BookmarkNav`/`BookmarkTabs`, which are reserved for the app's pages.
 
 ## Components
 
