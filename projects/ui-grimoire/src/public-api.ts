@@ -8,6 +8,7 @@ export * from './lib/contact-chip/contact-chip';
 export * from './lib/icon/icon';
 export * from './lib/medallion/medallion';
 export * from './lib/objective/objective';
+export * from './lib/quest-card/quest-card';
 export * from './lib/reputation/reputation';
 export * from './lib/reward-list/reward-list';
 export * from './lib/reward-summary/reward-summary';
