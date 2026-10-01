@@ -14,6 +14,7 @@ import {
   Reputation,
   RewardList,
   RewardSummary,
+  SecretBlock,
   StatusFilter,
   ThemeService,
   Visibility,
@@ -28,7 +29,7 @@ import { DEMO_QUESTS } from './demo-quests';
 /** TEMPORARY — checks the theme foundations and the base components in both themes. */
 @Component({
   selector: 'app-theme-test',
-  imports: [Badge, Button, ButtonIcon, ContactChip, Icon, Medallion, Objective, Reputation, RewardList, RewardSummary, StatusFilter, Visibility],
+  imports: [Badge, Button, ButtonIcon, ContactChip, Icon, Medallion, Objective, Reputation, RewardList, RewardSummary, SecretBlock, StatusFilter, Visibility],
   templateUrl: './theme-test.html',
   styleUrl: './theme-test.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -11,6 +11,7 @@ export * from './lib/objective/objective';
 export * from './lib/reputation/reputation';
 export * from './lib/reward-list/reward-list';
 export * from './lib/reward-summary/reward-summary';
+export * from './lib/secret-block/secret-block';
 export * from './lib/shared/rewards';
 export * from './lib/shared/types';
 export * from './lib/status-filter/status-filter';
