@@ -126,3 +126,10 @@
   gap: var(--space-8);
   height: calc(var(--space-12) * 10);
 }
+
+/* a phone-width frame for the mobile bar; in the app it is pinned to the bottom of the screen */
+.test__phone {
+  width: calc(var(--space-12) * 8);
+  max-width: 100%;
+  border: 1px solid var(--hairline);
+}
