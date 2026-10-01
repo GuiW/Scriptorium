@@ -277,6 +277,21 @@ button.gr-contact:focus-visible { outline: 2px solid var(--focus); outline-offse
 .gr-obj__vis { margin-left: var(--space-2); vertical-align: 1px; font-size: 11px; line-height: 14px; }
 .gr-obj--restricted .gr-obj__box { border-style: dashed; border-color: var(--secret); }
 
+/* Objective: the label is a <label> for the box, so the whole row toggles; 44px rows on touch screens */
+.gr-obj__label { cursor: pointer; }
+@media (pointer: coarse) {
+  .gr-obj { min-height: 44px; align-items: center; }
+  .gr-obj__box { margin-top: 0; margin-bottom: 0; }
+}
+
+/* QuestCard selection: a button inside the title, stretched over the whole card
+   (a <button> cannot hold the card's heading and lists) */
+.gr-quest__open { margin: 0; padding: 0; border: 0; background: none; font: inherit; color: inherit; text-align: inherit; cursor: pointer; }
+.gr-quest__open::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius-md); }
+.gr-quest__open:focus-visible { outline: none; }
+.gr-quest:has(.gr-quest__open:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+.gr-quest .gr-obj__box, .gr-quest .gr-obj__label, .gr-quest .gr-chip--link { position: relative; z-index: 1; }
+
 /* VisibilityPicker */
 .gr-vpick { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-2); max-width: 460px; }
 .gr-vpick legend { padding: 0; margin-bottom: var(--space-2); }
