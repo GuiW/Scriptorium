@@ -447,3 +447,17 @@ button.gr-contact:focus-visible { outline: 2px solid var(--focus); outline-offse
   from { box-shadow: var(--shadow-lifted), 0 0 0 0 var(--gold); }
   to { box-shadow: var(--shadow-lifted), 0 0 0 12px transparent; }
 }
+
+/* ---- Reputation: the filled diamond glides to the new step ----
+   The component measures the current step (--gr-rep-x, its centre in the track) and adds gr-rep--slide:
+   a single marker is drawn over the track and the current step itself is hidden (it keeps its place). */
+.gr-rep__marker { display: none; position: absolute; top: 50%; left: var(--gr-rep-x); width: 13px; height: 13px;
+  background: var(--rep); transform: translate(-50%, -50%) rotate(45deg); pointer-events: none; }
+.gr-rep--slide .gr-rep__marker { display: block; }
+.gr-rep--slide .gr-rep__step--on { visibility: hidden; }
+@media (prefers-reduced-motion: no-preference) {
+  .gr-rep__marker { transition: left .3s cubic-bezier(.3,.7,.4,1.15), background-color .3s; }
+  .gr-rep__label { transition: background-color .3s; }
+  /* a new trend arrow pulses once (gr-rep__trend--pulse, set on change only) */
+  .gr-rep__trend--pulse { display: inline-block; animation: gr-bump .3s cubic-bezier(.3,.7,.4,1.15); }
+}

@@ -48,7 +48,7 @@ describe('Reputation', () => {
     for (let value = 0; value < 5; value++) {
       const r = await render({ value });
       const label = REPUTATION_SCALES.npc[value];
-      expect(classes(r.rep), label).toEqual(['gr-rep', `gr-rep--${REPUTATION_TONES[value]}`]);
+      expect(classes(r.rep), label).toEqual(['gr-rep', 'gr-rep--slide', `gr-rep--${REPUTATION_TONES[value]}`].sort());
       expect(r.steps.length).toBe(5);
       expect(r.on, label).toBe(value);
       expect(r.label).toBe(label);
@@ -99,7 +99,34 @@ describe('Reputation', () => {
 
   it('adds the compact modifier', async () => {
     const r = await render({ compact: true });
-    expect(classes(r.rep)).toEqual(['gr-rep', 'gr-rep--compact', 'gr-rep--neutral']);
+    expect(classes(r.rep)).toEqual(['gr-rep', 'gr-rep--compact', 'gr-rep--neutral', 'gr-rep--slide']);
+  });
+
+  it('draws one marker over the track, centred on the current step once measured', async () => {
+    const r = await render({ value: 3 });
+    expect(r.rep.classList.contains('gr-rep--slide')).toBe(true);
+    const track = r.rep.querySelector<HTMLElement>('.gr-rep__track')!;
+    expect(track.querySelectorAll('.gr-rep__marker').length).toBe(1);
+    expect(track.getAttribute('aria-hidden')).toBe('true');
+    expect(track.style.getPropertyValue('--gr-rep-x')).toMatch(/^\d+(\.\d+)?px$/);
+    // The current step keeps its place under the marker.
+    expect(r.on).toBe(3);
+  });
+
+  it('pulses the trend arrow when a trend appears, never on the first render', async () => {
+    const already = await render({ value: 3, trend: 'up' });
+    expect(already.trend?.classList.contains('gr-rep__trend--pulse')).toBe(false);
+
+    const fixture = TestBed.createComponent(Host);
+    fixture.componentRef.setInput('value', 3);
+    await fixture.whenStable();
+    fixture.componentRef.setInput('trend', 'down');
+    await fixture.whenStable();
+    const arrow = (fixture.nativeElement as HTMLElement).querySelector('.gr-rep__trend')!;
+    expect(arrow.classList.contains('gr-rep__trend--pulse')).toBe(true);
+    arrow.dispatchEvent(new Event('animationend'));
+    await fixture.whenStable();
+    expect(arrow.classList.contains('gr-rep__trend--pulse')).toBe(false);
   });
 
   it('renders the same markup under the dungeon theme', async () => {

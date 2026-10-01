@@ -1,4 +1,15 @@
-import { ChangeDetectionStrategy, Component, booleanAttribute, computed, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  afterRenderEffect,
+  booleanAttribute,
+  computed,
+  input,
+  signal,
+  viewChildren,
+} from '@angular/core';
+import { flagOnChange } from '../shared/motion';
 import type { ContactKind } from '../shared/types';
 
 export type ReputationTrend = 'up' | 'down';
@@ -34,14 +45,21 @@ export function reputationTone(length: number, step: number): ReputationTone {
     role: 'img',
     '[attr.aria-label]': 'ariaLabel()',
   },
-  template: `<span class="gr-rep__track" aria-hidden="true">
+  template: `<span class="gr-rep__track" aria-hidden="true" [style.--gr-rep-x]="markerX()">
       @for (label of scale(); track $index) {
-        <span class="gr-rep__step" [class.gr-rep__step--on]="$index === step()"></span>
+        <span #stepEl class="gr-rep__step" [class.gr-rep__step--on]="$index === step()"></span>
       }
+      <span class="gr-rep__marker"></span>
     </span>
     <span class="gr-rep__label" aria-hidden="true">{{ scale()[step()] }}</span>
     @if (trendGlyph(); as glyph) {
-      <span class="gr-rep__trend" aria-hidden="true">{{ glyph }}</span>
+      <span
+        class="gr-rep__trend"
+        [class.gr-rep__trend--pulse]="pulse()"
+        aria-hidden="true"
+        (animationend)="pulse.set(false)"
+        >{{ glyph }}</span
+      >
     }`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -57,10 +75,25 @@ export class Reputation {
 
   protected readonly scale = computed(() => this.labels() ?? REPUTATION_SCALES[this.kind()]);
   protected readonly step = computed(() => reputationStep(this.scale().length, this.value()));
+  /** Centre of the current step in the track, for the gliding marker; null before measuring. */
+  protected readonly markerX = signal<string | null>(null);
+  /** Raised when a trend appears or changes after the first render: the arrow pulses once. */
+  protected readonly pulse = flagOnChange(() => this.trend(), (trend) => trend != null);
+  private readonly steps = viewChildren('stepEl', { read: ElementRef<HTMLElement> });
+
   protected readonly classes = computed(() => {
     const tone = reputationTone(this.scale().length, this.step());
-    return `gr-rep gr-rep--${tone}${this.compact() ? ' gr-rep--compact' : ''}`;
+    return `gr-rep gr-rep--${tone}${this.compact() ? ' gr-rep--compact' : ''}${this.markerX() ? ' gr-rep--slide' : ''}`;
   });
+
+  constructor() {
+    // Measure the current step after each render that can move it; the first measure adds
+    // gr-rep--slide, so the marker appears in place without gliding in.
+    afterRenderEffect(() => {
+      const el = this.steps()[this.step()]?.nativeElement;
+      this.markerX.set(el ? `${el.offsetLeft + el.offsetWidth / 2}px` : null);
+    });
+  }
   protected readonly trendGlyph = computed(() => {
     const trend = this.trend();
     return trend === 'up' ? '▲' : trend === 'down' ? '▼' : null;

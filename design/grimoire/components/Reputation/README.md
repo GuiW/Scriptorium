@@ -5,3 +5,4 @@ Where an NPC or a faction stands toward the party, on a 5-step scale: a filled d
 - Colours: `rep-hostile` → `rep-cold` → `rep-neutral` → `rep-warm` → `rep-ally`, stronger than the status colours: ≥ 4.5:1 (AA) on every surface in Parchment, desaturated so the five steps stay distinct; ≥ 7:1 in Dungeon. The word, as a filled label, carries the meaning; the colour reinforces it.
 - `trend`: a discreet ▲ / ▼ to signal a change since the last session.
 - It is a position, not a gauge: never show it as a percentage or a filled bar.
+- When the value changes, the filled diamond glides to its new step (a single `gr-rep__marker` drawn over the track, positioned by the component through `--gr-rep-x`, with `gr-rep--slide`) and the label colour fades; a new trend arrow pulses once. Never on the first render, none under `prefers-reduced-motion`.

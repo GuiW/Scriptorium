@@ -51,6 +51,11 @@
       <gr-reputation kind="faction" [value]="1" trend="up" />
       <gr-reputation kind="faction" [value]="4" trend="down" compact />
     </div>
+    <div class="test__row test__row--center">
+      <button grButton variant="secondary" aria-label="Lower the reputation" (click)="moveStance(-1)">−</button>
+      <gr-reputation [value]="stance()" [trend]="stanceTrend()" />
+      <button grButton variant="secondary" aria-label="Raise the reputation" (click)="moveStance(1)">+</button>
+    </div>
   </section>
 
   <section class="test__section" aria-labelledby="test-visibility">
