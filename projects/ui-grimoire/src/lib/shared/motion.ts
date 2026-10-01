@@ -1,4 +1,4 @@
-import { effect, signal, untracked, type WritableSignal } from '@angular/core';
+import { Directive, effect, input, signal, untracked, type WritableSignal } from '@angular/core';
 
 /**
  * A flag raised when `source` changes after the first render (never on it), and only when
@@ -21,4 +21,17 @@ export function flagOnChange<T>(
     if (when(value)) untracked(() => flag.set(true));
   });
   return flag;
+}
+
+/**
+ * Makes its element jump once (`gr-bump`) when the bound value changes after the first
+ * render: a count that goes up or down, for example.
+ */
+@Directive({
+  selector: '[grBump]',
+  host: { '[class.gr-bump]': 'bump()', '(animationend)': 'bump.set(false)' },
+})
+export class Bump {
+  readonly grBump = input<unknown>();
+  protected readonly bump = flagOnChange(() => this.grBump());
 }

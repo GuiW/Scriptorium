@@ -73,6 +73,7 @@ export const ICON_NAMES = Object.keys(ICONS) as IconName[];
     [title]="label()"
     [attr.role]="label() ? 'img' : null"
     [attr.aria-label]="label() || null"
+    [attr.data-icon]="name()"
     focusable="false"
   ></svg>`,
   changeDetection: ChangeDetectionStrategy.OnPush,

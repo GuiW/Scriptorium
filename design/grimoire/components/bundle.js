@@ -359,7 +359,7 @@
     var label = p.label;
     return h('svg', { className: cx('gr-icon', p.className), width: size, height: size, viewBox: '0 0 24 24', fill: 'none',
       stroke: 'currentColor', strokeWidth: p.strokeWidth || 1.5, strokeLinecap: 'round', strokeLinejoin: 'round',
-      role: label ? 'img' : undefined, 'aria-label': label, 'aria-hidden': label ? undefined : true, focusable: 'false' },
+      role: label ? 'img' : undefined, 'aria-label': label, 'aria-hidden': label ? undefined : true, focusable: 'false', 'data-icon': p.name },
       els.map(function (e, i) {
         var a = {}; for (var k in e[1]) a[k.replace(/-([a-z])/g, function (_, c) { return c.toUpperCase(); })] = e[1][k];
         a.key = i; return h(e[0], a);
