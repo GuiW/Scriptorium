@@ -26,6 +26,7 @@ import {
   type BookmarkNavItem,
   type PlayerRef,
   type QuestStatus,
+  type ReputationTrend,
   type QuestObjective,
   type Reward,
   type StatusFilterItem,
@@ -46,6 +47,15 @@ export class ThemeTest {
   protected readonly tones = Object.keys(BADGE_TONES) as BadgeTone[];
   protected readonly iconNames = ICON_NAMES;
   protected readonly npcSteps = REPUTATION_SCALES.npc.map((_, i) => i);
+  /** A reputation to move step by step, to see the marker glide and the arrow pulse. */
+  protected readonly stance = signal(2);
+  protected readonly stanceTrend = signal<ReputationTrend | undefined>(undefined);
+  protected moveStance(by: -1 | 1): void {
+    const next = Math.max(0, Math.min(4, this.stance() + by));
+    if (next === this.stance()) return;
+    this.stance.set(next);
+    this.stanceTrend.set(by > 0 ? 'up' : 'down');
+  }
   protected readonly statuses = signal<StatusFilterItem[]>([
     { id: 'active', label: 'En cours', count: 3 },
     { id: 'completed', label: 'Accomplies', count: 1 },
