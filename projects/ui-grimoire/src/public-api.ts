@@ -3,6 +3,7 @@
  */
 
 export * from './lib/badge/badge';
+export * from './lib/bookmark-nav/bookmark-nav';
 export * from './lib/button/button';
 export * from './lib/contact-chip/contact-chip';
 export * from './lib/icon/icon';
