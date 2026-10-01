@@ -184,22 +184,26 @@
     var items = p.items || [];
     var rail = p.variant === 'rail';
     var initial = typeof p.title === 'string' ? p.title.replace(/^(l['\u2019]|les |la |le |the )/i, '').charAt(0).normalize('NFD').charAt(0).toUpperCase() : null;
+    // bookmarks lead to pages: links (it.link), aria-current on the active one; onChange is still called on click
     return h('nav', { className: cx('gr-bnav', rail && 'gr-bnav--rail', p.className), 'aria-label': p['aria-label'] || 'Navigation principale' },
       p.title ? h('div', { className: 'gr-bnav__head', title: rail && typeof p.title === 'string' ? p.title : undefined },
         !rail && p.kicker ? h('div', { className: 'gr-bnav__kicker' }, p.kicker) : null,
-        rail && initial ? h('div', { className: 'gr-bnav__mono', 'aria-label': p.title }, initial) : h('div', { className: 'gr-bnav__title' }, p.title)) : null,
+        rail && initial
+          ? h(R.Fragment, null, h('div', { className: 'gr-bnav__mono', 'aria-hidden': true }, initial), h('span', { className: 'gr-sr' }, p.title))
+          : h('div', { className: 'gr-bnav__title' }, p.title)) : null,
       h('ul', { className: 'gr-bnav__list' }, items.map(function (it, i) {
         if (it.divider) return h('li', { key: it.id || 'd' + i, className: 'gr-bnav__divider', role: 'separator' });
         var on = it.id === p.value;
         return h('li', { key: it.id, className: 'gr-bnav__item' },
-          h('button', {
-            type: 'button', className: cx('gr-bnav__ribbon', on && 'gr-bnav__ribbon--on'),
+          h('a', {
+            href: it.link || '#', className: cx('gr-bnav__ribbon', on && 'gr-bnav__ribbon--on'),
             'aria-current': on ? 'page' : undefined,
             onClick: function () { if (p.onChange) p.onChange(it.id); }
           },
             it.icon ? h('span', { className: 'gr-bnav__icon', 'aria-hidden': true }, it.icon) : null,
             h('span', { className: 'gr-bnav__label' }, it.label),
-            it.count != null ? h('span', { className: 'gr-bnav__count', 'aria-label': rail ? '(' + it.count + ')' : undefined }, it.count) : null));
+            it.count != null ? h('span', { className: 'gr-bnav__count' }, rail ? h('span', { 'aria-hidden': true }, it.count) : it.count,
+              rail ? h('span', { className: 'gr-sr' }, ', ' + it.count) : null) : null));
       })),
       p.footer && !rail ? h('div', { className: 'gr-bnav__foot' }, p.footer) : null);
   }
@@ -210,8 +214,8 @@
       h('ul', { className: 'gr-btabs__list' }, items.map(function (it) {
         var on = it.id === p.value;
         return h('li', { key: it.id, className: 'gr-btabs__item' },
-          h('button', {
-            type: 'button', className: cx('gr-btabs__tab', on && 'gr-btabs__tab--on'),
+          h('a', {
+            href: it.link || '#', className: cx('gr-btabs__tab', on && 'gr-btabs__tab--on'),
             'aria-current': on ? 'page' : undefined,
             onClick: function () { if (p.onChange) p.onChange(it.id); }
           },
