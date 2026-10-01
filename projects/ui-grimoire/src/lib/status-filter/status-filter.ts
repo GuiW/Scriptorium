@@ -71,7 +71,7 @@ export class StatusFilterOption implements FocusableOption {
       (click)="select(i)"
     >
       <span class="gr-tabs__label">{{ item.label }}</span>
-      @if (item.count != null) {
+      @if (item.count !== undefined) {
         <span class="gr-tabs__count" [grBump]="item.count">{{ item.count }}</span>
       }
     </button>

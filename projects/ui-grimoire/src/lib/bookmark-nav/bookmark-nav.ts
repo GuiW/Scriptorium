@@ -31,6 +31,8 @@ export function campaignInitial(title: string): string {
  * short label) on tablet. Entries are links; the active one gets `aria-current="page"`.
  */
 @Component({
+  // On the native nav element to keep its semantics; the gr prefix is still enforced by review.
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'nav[grBookmarkNav]',
   imports: [Icon, RouterLink, RouterLinkActive],
   host: {
@@ -71,7 +73,7 @@ export function campaignInitial(title: string): string {
                 /></span>
               }
               <span class="gr-bnav__label">{{ item.label }}</span>
-              @if (item.count != null) {
+              @if (item.count !== undefined) {
                 @if (rail()) {
                   <span class="gr-bnav__count"
                     ><span aria-hidden="true">{{ item.count }}</span

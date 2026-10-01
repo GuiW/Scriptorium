@@ -18,16 +18,20 @@ import { Visibility } from '../visibility/visibility';
  * anywhere on the row toggles it (44px rows on touch screens, from bundle.css).
  */
 @Component({
+  // On the native li element to keep its semantics; the gr prefix is still enforced by review.
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'li[grObjective]',
   imports: [Visibility],
   host: { '[class]': 'classes()' },
-  template: `<button
+  // The box is named by its <label for>, which elements-content does not see.
+  template: `<!-- eslint-disable-next-line @angular-eslint/template/elements-content -->
+    <button
       type="button"
       class="gr-obj__box"
       role="checkbox"
       [id]="boxId"
       [attr.aria-checked]="done()"
-      (click)="toggle.emit()"
+      (click)="doneChange.emit(!done())"
       (animationend)="stamp.set(false)"
     ></button>
     <label class="gr-obj__label" [for]="boxId"
@@ -50,8 +54,8 @@ export class Objective {
   readonly done = input(false, { transform: booleanAttribute });
   readonly optional = input(false, { transform: booleanAttribute });
   readonly visibility = input<VisibilityValue>();
-  /** Emitted on a click on the box or the label, or Space / Enter on the box. */
-  readonly toggle = output<void>();
+  /** The new state, on a click on the box or the label, or Space / Enter on the box: `[(done)]` works. */
+  readonly doneChange = output<boolean>();
 
   protected readonly boxId = inject(_IdGenerator).getId('gr-obj-');
   protected readonly restricted = computed(() => {

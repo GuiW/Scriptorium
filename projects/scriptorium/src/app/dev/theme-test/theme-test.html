@@ -108,7 +108,7 @@
           [done]="o.done ?? false"
           [optional]="o.optional ?? false"
           [visibility]="o.visibility"
-          (toggle)="toggleObjective(i)"
+          (doneChange)="toggleObjective(i)"
         >
           {{ o.label }}
         </li>

@@ -29,6 +29,13 @@
           "options": {
             "tsConfig": "projects/ui-grimoire/tsconfig.spec.json"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["projects/ui-grimoire/**/*.ts", "projects/ui-grimoire/**/*.html"],
+            "eslintConfig": "projects/ui-grimoire/eslint.config.js"
+          }
         }
       }
     },
@@ -94,6 +101,13 @@
         },
         "test": {
           "builder": "@angular/build:unit-test"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["projects/scriptorium/**/*.ts", "projects/scriptorium/**/*.html"],
+            "eslintConfig": "projects/scriptorium/eslint.config.js"
+          }
         }
       }
     }

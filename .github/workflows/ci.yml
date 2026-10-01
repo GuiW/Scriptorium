@@ -34,6 +34,9 @@ jobs:
       - name: Formatting (Prettier)
         run: npm run format:check
 
+      - name: Lint (ESLint, angular-eslint with template accessibility)
+        run: npm run lint
+
       - name: Design system (known tokens, no hard-coded colour)
         run: npm run check:tokens
 
