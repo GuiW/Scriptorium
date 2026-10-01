@@ -3,6 +3,7 @@ import {
   BADGE_TONES,
   Badge,
   BookmarkNav,
+  BookmarkTabs,
   Button,
   ButtonIcon,
   COLOR_TOKENS,
@@ -33,7 +34,7 @@ import { DEMO_QUESTS } from './demo-quests';
 /** TEMPORARY — checks the theme foundations and the base components in both themes. */
 @Component({
   selector: 'app-theme-test',
-  imports: [Badge, BookmarkNav, Button, ButtonIcon, ContactChip, Icon, Medallion, Objective, QuestCard, QuestGiver, Reputation, RewardList, RewardSummary, SecretBlock, StatusFilter, Visibility],
+  imports: [Badge, BookmarkNav, BookmarkTabs, Button, ButtonIcon, ContactChip, Icon, Medallion, Objective, QuestCard, QuestGiver, Reputation, RewardList, RewardSummary, SecretBlock, StatusFilter, Visibility],
   templateUrl: './theme-test.html',
   styleUrl: './theme-test.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
