@@ -4,6 +4,7 @@
 
 export * from './lib/badge/badge';
 export * from './lib/button/button';
+export * from './lib/contact-chip/contact-chip';
 export * from './lib/icon/icon';
 export * from './lib/medallion/medallion';
 export * from './lib/objective/objective';
