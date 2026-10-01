@@ -10,6 +10,8 @@ import {
   Icon,
   Medallion,
   Objective,
+  QuestCard,
+  QuestGiver,
   REPUTATION_SCALES,
   Reputation,
   RewardList,
@@ -29,7 +31,7 @@ import { DEMO_QUESTS } from './demo-quests';
 /** TEMPORARY — checks the theme foundations and the base components in both themes. */
 @Component({
   selector: 'app-theme-test',
-  imports: [Badge, Button, ButtonIcon, ContactChip, Icon, Medallion, Objective, Reputation, RewardList, RewardSummary, SecretBlock, StatusFilter, Visibility],
+  imports: [Badge, Button, ButtonIcon, ContactChip, Icon, Medallion, Objective, QuestCard, QuestGiver, Reputation, RewardList, RewardSummary, SecretBlock, StatusFilter, Visibility],
   templateUrl: './theme-test.html',
   styleUrl: './theme-test.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -60,6 +62,7 @@ export class ThemeTest {
   ]);
   protected readonly chipClicks = signal(0);
   protected readonly quests = DEMO_QUESTS;
+  protected readonly selectedQuest = signal('q1');
   protected readonly extraRewards: Reward[] = [
     { kind: 'reputation', label: 'Chevaliers de Lastwall +2' },
     { kind: 'other', label: 'Un repas chez les Emberlyn', note: 'au choix du groupe' },
