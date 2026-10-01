@@ -25,6 +25,7 @@ import {
   type BadgeTone,
   type BookmarkNavItem,
   type PlayerRef,
+  type QuestStatus,
   type QuestObjective,
   type Reward,
   type StatusFilterItem,
@@ -87,6 +88,7 @@ export class ThemeTest {
     },
   ];
   protected readonly selectedQuest = signal('q1');
+  protected readonly detailStatus = signal<QuestStatus>('active');
   protected readonly extraRewards: Reward[] = [
     { kind: 'reputation', label: 'Chevaliers de Lastwall +2' },
     { kind: 'other', label: 'Un repas chez les Emberlyn', note: 'au choix du groupe' },
@@ -101,6 +103,11 @@ export class ThemeTest {
     { name: 'Merisiel' },
     { name: 'Valeros' },
   ];
+
+  protected cycleStatus(): void {
+    const order: QuestStatus[] = ['active', 'completed', 'failed', 'rumor'];
+    this.detailStatus.update((s) => order[(order.indexOf(s) + 1) % order.length]);
+  }
 
   protected toggleObjective(index: number): void {
     this.objectives.update((list) =>

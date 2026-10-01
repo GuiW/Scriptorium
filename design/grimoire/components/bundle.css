@@ -66,7 +66,10 @@ textarea.gr-field__input { resize: vertical; min-height: 96px; }
 }
 .gr-obj--done .gr-obj__box { background: var(--forest); border-color: var(--forest); }
 .gr-obj--done .gr-obj__box::after { content: ""; width: 4px; height: 4px; background: var(--surface-raised); }
-.gr-obj--done .gr-obj__label { color: var(--ink-muted); text-decoration: line-through; text-decoration-color: var(--hairline); }
+.gr-obj--done .gr-obj__label { color: var(--ink-muted); }
+/* the strike-through is a hairline drawn under the text span, so it can be drawn from left to right */
+.gr-obj__text { background: linear-gradient(var(--hairline), var(--hairline)) left 55% / 0 1px no-repeat; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.gr-obj--done .gr-obj__text { background-size: 100% 1px; }
 .gr-obj__optional { font-style: italic; color: var(--ink-muted); font-family: var(--font-serif); margin-left: var(--space-1); }
 .gr-objs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-2); }
 
@@ -396,4 +399,23 @@ button.gr-contact:focus-visible { outline: 2px solid var(--focus); outline-offse
    for screen readers and shows in the detail view); a detailed card (objectives or rewards listed) is not clamped */
 .gr-quest:not(.gr-quest--detailed) .gr-quest__summary {
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden;
+}
+
+/* ---- Juiciness: short motion on actions, one bounce curve, never on first render, none under reduced motion ---- */
+@media (prefers-reduced-motion: no-preference) {
+  /* Objective: the strike-through is drawn, the diamond is stamped (gr-obj--stamp, set on change only) */
+  .gr-obj__text { transition: background-size .3s ease-out; }
+  .gr-obj--stamp .gr-obj__box { animation: gr-stamp .3s cubic-bezier(.3,.7,.4,1.15); }
+  /* QuestCard: the progress moves on, a selectable card lifts on hover */
+  .gr-track__fill { transition: width .3s cubic-bezier(.3,.7,.4,1.15); }
+  .gr-quest:has(.gr-quest__open) { transition: box-shadow .15s, transform .15s cubic-bezier(.3,.7,.4,1.15); }
+  .gr-quest:has(.gr-quest__open):hover { transform: translateY(-2px); }
+  /* Badge: a new status is pressed like a wax seal (gr-badge--stamp, set on change only) */
+  .gr-badge--stamp { animation: gr-seal .35s cubic-bezier(.3,.7,.4,1.15); }
+}
+@keyframes gr-stamp { 0% { scale: 1; } 40% { scale: 1.35; } 100% { scale: 1; } }
+@keyframes gr-seal {
+  0% { scale: 1.4; rotate: -8deg; opacity: 0; }
+  60% { scale: .95; rotate: 2deg; opacity: 1; }
+  100% { scale: 1; rotate: 0deg; }
 }

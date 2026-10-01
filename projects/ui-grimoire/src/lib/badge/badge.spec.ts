@@ -63,6 +63,21 @@ describe('Badge', () => {
     expect(r.label).toBe('Accomplie');
   });
 
+  it('presses a new status like a seal, never on the first render', async () => {
+    const fixture = TestBed.createComponent(Host);
+    fixture.componentRef.setInput('tone', 'active');
+    await fixture.whenStable();
+    const badge = (fixture.nativeElement as HTMLElement).querySelector('gr-badge')!;
+    expect(badge.classList.contains('gr-badge--stamp')).toBe(false);
+
+    fixture.componentRef.setInput('tone', 'completed');
+    await fixture.whenStable();
+    expect(badge.className).toBe('gr-badge gr-badge--completed gr-badge--stamp');
+    badge.dispatchEvent(new Event('animationend'));
+    await fixture.whenStable();
+    expect(badge.className).toBe('gr-badge gr-badge--completed');
+  });
+
   it('renders the same markup under the dungeon theme', async () => {
     const light = await render({ tone: 'failed' });
     const dark = await render({ tone: 'failed', theme: 'dungeon' });
