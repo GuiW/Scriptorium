@@ -50,14 +50,18 @@
       hintId ? h('div', { className: 'gr-field__hint', id: hintId }, p.error || p.hint) : null);
   }
 
+  var objId = 0;
   function Objective(p) {
+    // the label is a <label> for the box: its text names the checkbox and a click anywhere on it toggles
+    var ref = R.useRef(null);
+    if (ref.current == null) ref.current = 'gr-obj-' + (++objId);
     var restricted = p.visibility && p.visibility.level && p.visibility.level !== 'table';
     return h('li', { className: cx('gr-obj', p.done && 'gr-obj--done', restricted && 'gr-obj--restricted', p.className) },
       h('button', {
-        type: 'button', className: 'gr-obj__box', role: 'checkbox', 'aria-checked': !!p.done,
-        'aria-label': p.done ? 'Marquer comme non fait' : 'Marquer comme fait', onClick: p.onToggle
+        id: ref.current, type: 'button', className: 'gr-obj__box', role: 'checkbox', 'aria-checked': !!p.done,
+        onClick: p.onToggle
       }),
-      h('span', { className: 'gr-obj__label' }, p.children,
+      h('label', { className: 'gr-obj__label', htmlFor: ref.current }, p.children,
         p.optional ? h('span', { className: 'gr-obj__optional' }, '(facultatif)') : null,
         restricted ? h(Visibility, { level: p.visibility.level, players: p.visibility.players, compact: true, className: 'gr-obj__vis' }) : null));
   }
@@ -71,13 +75,16 @@
     var pct = objs.length ? Math.round(done / objs.length * 100) : 0;
     var parts = [p.giver ? h(R.Fragment, { key: 'g' }, 'Donn\u00E9e par ', p.giver) : null, p.location, p.level != null ? 'Niv. ' + p.level : null].filter(Boolean);
     var meta = parts.length ? parts.reduce(function (acc, x, i) { if (i) acc.push(' \u00B7 '); acc.push(h('span', { key: 'm' + i, className: 'gr-nowrap' }, x)); return acc; }, []) : null;
-    return h(p.onClick ? 'button' : 'article', {
-      type: p.onClick ? 'button' : undefined, onClick: p.onClick, 'aria-pressed': p.onClick ? !!p.selected : undefined,
+    // selectable card: a button inside the title, stretched over the card by CSS (a button cannot hold the heading and lists)
+    var title = p.onClick
+      ? h('button', { type: 'button', className: 'gr-quest__open', onClick: p.onClick, 'aria-pressed': !!p.selected }, p.title)
+      : p.title;
+    return h('article', {
       className: cx('gr-quest', 'gr-quest--' + status, p.selected && 'gr-quest--selected', vis !== 'table' && 'gr-quest--restricted', vis === 'players' && 'gr-quest--restricted-players', p.className)
     },
       vis !== 'table' ? h('div', { className: 'gr-quest__vis' }, h(Visibility, { level: vis, players: p.visibility.players })) : null,
       h('div', { className: 'gr-quest__head' },
-        h('div', null, h('h3', { className: 'gr-quest__title' }, p.title), meta ? h('div', { className: 'gr-quest__meta' }, meta) : null),
+        h('div', null, h('h3', { className: 'gr-quest__title' }, title), meta ? h('div', { className: 'gr-quest__meta' }, meta) : null),
         h(Badge, { tone: status })),
       p.summary ? h('p', { className: 'gr-quest__summary' }, p.summary) : null,
       p.showObjectives && objs.length ? h('ul', { className: 'gr-objs' }, objs.map(function (o, i) {
