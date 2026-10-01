@@ -134,6 +134,9 @@ export function buildTokens(json) {
       '',
       '  /* Radii */',
       ...declare(flat(json.radius?.tokens, 'radius')),
+      '',
+      '  /* Sizes */',
+      ...declare(flat(json.size?.tokens, 'size')),
       '}',
     ].join('\n'),
   );

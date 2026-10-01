@@ -49,12 +49,12 @@ test('declares shadows for both themes', () => {
   }
 });
 
-test('puts fonts, spacing and radii in :root only', () => {
+test('puts fonts, spacing, radii and sizes in :root only', () => {
   for (const [name, value] of Object.entries(source.type.families)) {
     assert.equal(root.get(`font-${name}`), value);
     assert.equal(dungeon.has(`font-${name}`), false);
   }
-  for (const t of [...source.spacing.tokens, ...source.radius.tokens]) {
+  for (const t of [...source.spacing.tokens, ...source.radius.tokens, ...source.size.tokens]) {
     assert.equal(root.get(t.name), t.value, t.name);
     assert.equal(dungeon.has(t.name), false, t.name);
   }
