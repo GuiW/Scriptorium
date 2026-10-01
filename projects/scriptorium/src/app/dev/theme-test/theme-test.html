@@ -126,6 +126,19 @@
     <gr-reward-list [rewards]="extraRewards" title="Autres récompenses" />
   </section>
 
+  <section class="test__section" aria-labelledby="test-secret-block">
+    <h2 id="test-secret-block" class="test__label">SecretBlock</h2>
+    <gr-secret-block>
+      <p>
+        Le médaillon est un faux : le vrai est resté dans le coffre de la prêtresse. Wrin le sait et
+        se tait.
+      </p>
+    </gr-secret-block>
+    <gr-secret-block level="players" [players]="youAndKyra">
+      <p>La broche des Emberlyn porte le sceau d'une maison éteinte.</p>
+    </gr-secret-block>
+  </section>
+
   <section class="test__section" aria-labelledby="test-icons">
     <h2 id="test-icons" class="test__label">Icon</h2>
     <ul class="gr-icons test__icons">
