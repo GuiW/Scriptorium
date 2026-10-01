@@ -234,9 +234,6 @@ export interface Reward {
   /** Items only (PF2e rarity). */
   rarity?: Rarity;
   note?: string;
-  /** Character who received it. */
-  to?: string;
-  claimed?: boolean;
   visibility?: VisibilityValue;
 }
 

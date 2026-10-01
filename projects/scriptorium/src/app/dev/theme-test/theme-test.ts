@@ -63,7 +63,7 @@ export class ThemeTest {
     { kind: 'reputation', label: 'Chevaliers de Lastwall +2' },
     { kind: 'other', label: 'Un repas chez les Emberlyn', note: 'au choix du groupe' },
     { kind: 'item', label: 'Couronne du roi noyé', rarity: 'unique', visibility: { level: 'gm' } },
-    { kind: 'coin', label: '80 po', claimed: true, to: 'Kyra' },
+    { kind: 'other', label: 'Une faveur du conseil', visibility: { level: 'players', players: [{ name: 'Kyra' }] } },
   ];
   protected readonly kyra: PlayerRef[] = [{ name: 'Kyra' }];
   protected readonly youAndKyra: PlayerRef[] = [{ name: 'Ezren', you: true }, { name: 'Kyra' }];

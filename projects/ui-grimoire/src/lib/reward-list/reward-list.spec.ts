@@ -38,7 +38,7 @@ const classes = (el: Element) => [...el.classList].sort();
 const ALL: Reward[] = [
   { kind: 'coin', label: '250 po' },
   { kind: 'xp', label: '80 XP' },
-  { kind: 'item', label: 'Lame de lune', rarity: 'rare', note: 'épée longue +1', to: 'Valeros' },
+  { kind: 'item', label: 'Lame de lune', rarity: 'rare', note: 'épée longue +1' },
   { kind: 'item', label: 'Potion de guérison moyenne', rarity: 'uncommon' },
   { kind: 'reputation', label: 'Chevaliers de Lastwall +2' },
   { kind: 'other', label: 'Un repas chez les Emberlyn' },
@@ -96,17 +96,10 @@ describe('RewardList', () => {
     expect(classes(r.items[2])).toEqual(['gr-rarity--rare', 'gr-reward', 'gr-reward--item']);
   });
 
-  it('adds the note and the recipient', async () => {
+  it('adds the note in the label', async () => {
     const r = await render({ rewards: ALL });
-    const blade = r.items[2];
-    expect(blade.querySelector('.gr-reward__note')?.textContent).toBe('épée longue +1');
-    expect(blade.querySelector('.gr-reward__to')?.textContent).toBe('→ Valeros');
-  });
-
-  it('strikes a handed-out reward and says so to screen readers', async () => {
-    const r = await render({ rewards: [{ kind: 'coin', label: '80 po', claimed: true }] });
-    expect(r.items[0].classList.contains('gr-reward--claimed')).toBe(true);
-    expect(r.items[0].querySelector('.gr-sr')?.textContent).toBe(' (remis)');
+    const note = r.items[2].querySelector('.gr-reward__label .gr-reward__note');
+    expect(note?.textContent).toBe('épée longue +1');
   });
 
   it('marks a restricted reward with a compact visibility marker', async () => {

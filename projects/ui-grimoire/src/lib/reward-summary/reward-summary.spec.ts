@@ -30,7 +30,7 @@ async function render(inputs: Partial<Record<keyof Host, unknown>> = {}) {
 const Q1: Reward[] = [
   { kind: 'coin', label: '250 po' },
   { kind: 'xp', label: '80 XP' },
-  { kind: 'item', label: 'Lame de lune', rarity: 'rare', note: 'épée longue +1', to: 'Valeros' },
+  { kind: 'item', label: 'Lame de lune', rarity: 'rare', note: 'épée longue +1' },
   { kind: 'item', label: 'Potion de guérison moyenne', rarity: 'uncommon' },
 ];
 

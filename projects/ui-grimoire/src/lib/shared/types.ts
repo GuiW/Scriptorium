@@ -35,8 +35,5 @@ export interface Reward {
   label: string;
   rarity?: Rarity;
   note?: string;
-  /** Character who received it. */
-  to?: string;
-  claimed?: boolean;
   visibility?: VisibilityValue;
 }

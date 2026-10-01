@@ -337,14 +337,12 @@
       p.title === false ? null : h('div', { className: 'gr-rewards__title' }, p.title || 'R\u00E9compenses'),
       h('ul', { className: 'gr-rewards__list' }, rs.map(function (r, i) {
         var restricted = r.visibility && r.visibility.level && r.visibility.level !== 'table';
-        return h('li', { key: i, className: cx('gr-reward', 'gr-reward--' + (r.kind || 'other'), r.rarity && 'gr-rarity--' + r.rarity, r.claimed && 'gr-reward--claimed') },
+        return h('li', { key: i, className: cx('gr-reward', 'gr-reward--' + (r.kind || 'other'), r.rarity && 'gr-rarity--' + r.rarity) },
           h('span', { className: 'gr-reward__glyph', 'aria-hidden': true }, h(Icon, { name: REWARD_ICON[r.kind] || 'quete', size: 16 })),
           h('span', { className: 'gr-reward__label' }, r.label,
             r.note ? h('span', { className: 'gr-reward__note' }, r.note) : null),
           r.rarity && r.rarity !== 'common' ? h('span', { className: 'gr-reward__rarity' }, RARITY[r.rarity]) : null,
-          r.to ? h('span', { className: 'gr-reward__to' }, '\u2192 ' + r.to) : null,
-          restricted ? h(Visibility, { level: r.visibility.level, players: r.visibility.players, compact: true }) : null,
-          r.claimed ? h('span', { className: 'gr-sr' }, ' (remis)') : null);
+          restricted ? h(Visibility, { level: r.visibility.level, players: r.visibility.players, compact: true }) : null);
       })));
   }
 
