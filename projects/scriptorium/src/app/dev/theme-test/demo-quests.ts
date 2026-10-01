@@ -43,7 +43,7 @@ export const DEMO_QUESTS: DemoQuest[] = [
     rewards: [
       { kind: 'coin', label: '250 po' },
       { kind: 'xp', label: '80 XP' },
-      { kind: 'item', label: 'Lame de lune', rarity: 'rare', note: 'épée longue +1', to: 'Valeros' },
+      { kind: 'item', label: 'Lame de lune', rarity: 'rare', note: 'épée longue +1' },
       { kind: 'item', label: 'Potion de guérison moyenne', rarity: 'uncommon' },
     ],
   },
@@ -81,7 +81,7 @@ export const DEMO_QUESTS: DemoQuest[] = [
       { label: "Repousser l'embuscade", done: true },
       { label: 'Livrer les fourrures', done: true },
     ],
-    rewards: [{ kind: 'coin', label: '80 po', claimed: true }],
+    rewards: [{ kind: 'coin', label: '80 po' }],
   },
   {
     id: 'q4',

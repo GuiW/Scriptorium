@@ -6,7 +6,7 @@ import { Visibility } from '../visibility/visibility';
 
 /**
  * Full list of a quest's rewards: one icon per kind, the PF2e rarity word on items,
- * a note, the recipient, struck through once handed out, and a marker when restricted.
+ * a note, and a marker when restricted.
  */
 @Component({
   selector: 'gr-reward-list',
@@ -30,14 +30,8 @@ import { Visibility } from '../visibility/visibility';
           @if (r.rarity && r.rarity !== 'common') {
             <span class="gr-reward__rarity">{{ rarities[r.rarity] }}</span>
           }
-          @if (r.to) {
-            <span class="gr-reward__to">→ {{ r.to }}</span>
-          }
           @if (r.visibility && r.visibility.level !== 'table') {
             <gr-visibility [level]="r.visibility.level" [players]="r.visibility.players ?? []" compact />
-          }
-          @if (r.claimed) {
-            <span class="gr-sr"> (remis)</span>
           }
         </li>
       }
@@ -57,7 +51,6 @@ export class RewardList {
       'gr-reward',
       `gr-reward--${r.kind || 'other'}`,
       r.rarity ? `gr-rarity--${r.rarity}` : '',
-      r.claimed ? 'gr-reward--claimed' : '',
     ]
       .filter(Boolean)
       .join(' ');

@@ -346,11 +346,10 @@ button.gr-contact:focus-visible { outline: 2px solid var(--focus); outline-offse
 .gr-reward--reputation .gr-reward__glyph { color: var(--arcane); font-size: 10px; }
 .gr-reward--coin .gr-reward__label, .gr-reward--xp .gr-reward__label { font-weight: 700; font-variant-numeric: tabular-nums; color: var(--gold-ink); }
 .gr-reward__label { min-width: 0; }
+.gr-reward .gr-vis { align-self: center; } /* the smaller boxed marker would sit 2px high on the text baseline */
 .gr-reward__note { margin-left: var(--space-2); font: italic 400 14px/20px var(--font-serif); color: var(--ink-muted); }
 .gr-reward__rarity { font: 700 11px/14px var(--font-sans); letter-spacing: .06em; text-transform: uppercase; color: var(--rar); border: 1px solid currentColor; border-radius: var(--radius-sm); padding: 1px 6px; }
 .gr-rarity--unique .gr-reward__rarity { border-color: var(--gold); }
-.gr-reward__to { font: 500 13px/18px var(--font-sans); color: var(--ink-muted); }
-.gr-reward--claimed .gr-reward__label { color: var(--ink-muted); text-decoration: line-through; text-decoration-color: var(--hairline); }
 .gr-quest__rewards { padding-top: var(--space-3); border-top: 1px solid var(--hairline); }
 
 /* ---- Icon ---- */
