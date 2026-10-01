@@ -61,7 +61,7 @@
         id: ref.current, type: 'button', className: 'gr-obj__box', role: 'checkbox', 'aria-checked': !!p.done,
         onClick: p.onToggle
       }),
-      h('label', { className: 'gr-obj__label', htmlFor: ref.current }, p.children,
+      h('label', { className: 'gr-obj__label', htmlFor: ref.current }, h('span', { className: 'gr-obj__text' }, p.children),
         p.optional ? h('span', { className: 'gr-obj__optional' }, '(facultatif)') : null,
         restricted ? h(Visibility, { level: p.visibility.level, players: p.visibility.players, compact: true, className: 'gr-obj__vis' }) : null));
   }

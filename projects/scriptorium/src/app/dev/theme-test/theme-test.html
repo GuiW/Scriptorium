@@ -172,11 +172,14 @@
     </div>
     <p class="test__ui">Selected quest: {{ selectedQuest() }} — link clicks: {{ chipClicks() }}</p>
     <h3 class="test__label">Detailed view</h3>
+    <div class="test__row">
+      <button grButton variant="secondary" (click)="cycleStatus()">Cycle the status ({{ detailStatus() }})</button>
+    </div>
     <div class="test__cards">
       <article
         grQuestCard
         [title]="quests[0].title"
-        [status]="quests[0].status"
+        [status]="detailStatus()"
         giver="Wrin Sivinxi"
         [location]="quests[0].location"
         [level]="quests[0].level"

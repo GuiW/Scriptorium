@@ -8,6 +8,7 @@ import {
   input,
   output,
 } from '@angular/core';
+import { flagOnChange } from '../shared/motion';
 import type { VisibilityValue } from '../shared/types';
 import { Visibility } from '../visibility/visibility';
 
@@ -27,9 +28,10 @@ import { Visibility } from '../visibility/visibility';
       [id]="boxId"
       [attr.aria-checked]="done()"
       (click)="toggle.emit()"
+      (animationend)="stamp.set(false)"
     ></button>
     <label class="gr-obj__label" [for]="boxId"
-      ><ng-content />@if (optional()) {
+      ><span class="gr-obj__text"><ng-content /></span>@if (optional()) {
         <span class="gr-obj__optional">(facultatif)</span>
       }
       @if (restricted(); as vis) {
@@ -55,8 +57,10 @@ export class Objective {
     const vis = this.visibility();
     return vis && vis.level !== 'table' ? vis : null;
   });
+  /** Raised when the objective gets done (not on the first render): the diamond is stamped. */
+  protected readonly stamp = flagOnChange(() => this.done(), (done) => done);
   protected readonly classes = computed(
     () =>
-      `gr-obj${this.done() ? ' gr-obj--done' : ''}${this.restricted() ? ' gr-obj--restricted' : ''}`,
+      `gr-obj${this.done() ? ' gr-obj--done' : ''}${this.restricted() ? ' gr-obj--restricted' : ''}${this.stamp() ? ' gr-obj--stamp' : ''}`,
   );
 }

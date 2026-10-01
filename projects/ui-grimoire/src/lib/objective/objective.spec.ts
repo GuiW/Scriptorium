@@ -98,6 +98,29 @@ describe('Objective', () => {
     expect(classes(table.li)).toEqual(['gr-obj']);
   });
 
+  it('wraps the projected text in the span that carries the strike-through', async () => {
+    const r = await render({ done: true });
+    expect(r.label.firstElementChild?.className).toBe('gr-obj__text');
+    expect(r.label.firstElementChild?.textContent?.trim()).toBe('Retrouver le médaillon de la prêtresse');
+  });
+
+  it('stamps the diamond when the objective gets done, never on the first render', async () => {
+    const done = await render({ done: true });
+    expect(done.li.classList.contains('gr-obj--stamp')).toBe(false);
+
+    const r = await render();
+    r.fixture.componentRef.setInput('done', true);
+    await r.fixture.whenStable();
+    expect(r.li.classList.contains('gr-obj--stamp')).toBe(true);
+    r.box.dispatchEvent(new Event('animationend'));
+    await r.fixture.whenStable();
+    expect(r.li.classList.contains('gr-obj--stamp')).toBe(false);
+
+    r.fixture.componentRef.setInput('done', false);
+    await r.fixture.whenStable();
+    expect(r.li.classList.contains('gr-obj--stamp')).toBe(false);
+  });
+
   it('renders the same markup under the dungeon theme, ids aside', async () => {
     const inputs = { done: true, visibility: { level: 'gm' } as VisibilityValue };
     const light = await render(inputs);

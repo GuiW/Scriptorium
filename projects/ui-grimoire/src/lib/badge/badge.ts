@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { flagOnChange } from '../shared/motion';
 
 export type QuestStatus = 'active' | 'completed' | 'failed' | 'rumor';
 export type BadgeTone = QuestStatus | 'urgent' | 'reward';
@@ -19,7 +20,7 @@ export const BADGE_TONES: Record<BadgeTone, { glyph: string; label: string }> = 
  */
 @Component({
   selector: 'gr-badge',
-  host: { '[class]': 'classes()' },
+  host: { '[class]': 'classes()', '(animationend)': 'stamp.set(false)' },
   template: `@if (shownGlyph(); as g) {
       <span class="gr-badge__glyph" aria-hidden="true">{{ g }}</span>
     }<ng-content>{{ tones[tone()].label }}</ng-content>`,
@@ -31,7 +32,11 @@ export class Badge {
   readonly glyph = input<string | false>();
 
   protected readonly tones = BADGE_TONES;
-  protected readonly classes = computed(() => `gr-badge gr-badge--${this.tone()}`);
+  /** Raised when the tone changes after the first render: the new status is pressed like a wax seal. */
+  protected readonly stamp = flagOnChange(() => this.tone());
+  protected readonly classes = computed(
+    () => `gr-badge gr-badge--${this.tone()}${this.stamp() ? ' gr-badge--stamp' : ''}`,
+  );
   protected readonly shownGlyph = computed(() => {
     const glyph = this.glyph();
     return glyph === false ? null : glyph || BADGE_TONES[this.tone()].glyph;
