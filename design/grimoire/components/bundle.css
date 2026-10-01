@@ -190,10 +190,11 @@ button.gr-contact:focus-visible { outline: 2px solid var(--focus); outline-offse
   border: 0; border-radius: 0; cursor: pointer; text-align: left;
   font: 500 15px/22px var(--font-sans); color: var(--ink); background: var(--surface-raised);
   clip-path: polygon(0 0, 100% 0, calc(100% - var(--notch)) 50%, 100% 100%, 0 100%);
-  transition: width .15s ease, background-color .15s;
+  /* same slight bounce as the BookmarkTabs ribbon, on hover and when a bookmark becomes active */
+  transition: width .22s cubic-bezier(.3,.7,.4,1.15), padding-left .22s cubic-bezier(.3,.7,.4,1.15), background-color .15s;
 }
-.gr-bnav__ribbon:hover { width: calc(100% - var(--space-6)); }
-.gr-bnav__ribbon--on, .gr-bnav__ribbon--on:hover { width: 100%; background: var(--crimson); color: var(--on-crimson); font-weight: 700; }
+.gr-bnav__ribbon:hover { width: calc(100% - var(--space-6)); padding-left: calc(var(--space-6) + var(--space-1)); } /* icon and label follow by half the 8px, as in the rail */
+.gr-bnav__ribbon--on, .gr-bnav__ribbon--on:hover { width: 100%; padding-left: var(--space-6); background: var(--crimson); color: var(--on-crimson); font-weight: 700; }
 .gr-bnav__ribbon:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--focus); }
 .gr-bnav__ribbon--on:focus-visible { box-shadow: inset 0 0 0 2px var(--on-crimson); }
 .gr-bnav__icon { width: 16px; text-align: center; font-size: 13px; color: var(--ink-muted); }
