@@ -151,6 +151,11 @@ textarea.gr-field__input { resize: vertical; min-height: 96px; }
 .gr-chip--link:hover { border-color: var(--gold); }
 .gr-chip--link:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-sm); }
 .gr-chip__rep { width: 6px; height: 6px; transform: rotate(45deg); background: var(--rep); margin-left: 2px; }
+/* touch screens: an invisible 44px-high hit area around a linked chip, without changing its look or the line height */
+@media (pointer: coarse) {
+  .gr-chip--link { position: relative; }
+  .gr-chip--link::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 44px; transform: translateY(-50%); }
+}
 
 /* ContactCard: deliberately short — who, their stance, what they gave us */
 .gr-contact {
