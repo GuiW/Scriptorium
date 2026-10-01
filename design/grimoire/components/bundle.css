@@ -375,3 +375,10 @@ button.gr-contact:focus-visible { outline: 2px solid var(--focus); outline-offse
   box-sizing: border-box; height: var(--size-tag); padding-top: 0; padding-bottom: 0;
   display: inline-flex; align-items: center;
 }
+
+/* QuestCard head: title and status badge side by side, the meta line below across the full width
+   (in the title column it wrapped beside the badge) */
+.gr-quest__head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 var(--space-4); align-items: start; }
+.gr-quest__head > div { display: contents; }
+.gr-quest__head > .gr-badge { grid-column: 2; grid-row: 1; }
+.gr-quest__head .gr-quest__meta { grid-column: 1 / -1; }
