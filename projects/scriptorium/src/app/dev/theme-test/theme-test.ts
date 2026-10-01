@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import {
   BADGE_TONES,
   Badge,
+  BookmarkNav,
   Button,
   ButtonIcon,
   COLOR_TOKENS,
@@ -21,6 +22,7 @@ import {
   ThemeService,
   Visibility,
   type BadgeTone,
+  type BookmarkNavItem,
   type PlayerRef,
   type QuestObjective,
   type Reward,
@@ -31,7 +33,7 @@ import { DEMO_QUESTS } from './demo-quests';
 /** TEMPORARY — checks the theme foundations and the base components in both themes. */
 @Component({
   selector: 'app-theme-test',
-  imports: [Badge, Button, ButtonIcon, ContactChip, Icon, Medallion, Objective, QuestCard, QuestGiver, Reputation, RewardList, RewardSummary, SecretBlock, StatusFilter, Visibility],
+  imports: [Badge, BookmarkNav, Button, ButtonIcon, ContactChip, Icon, Medallion, Objective, QuestCard, QuestGiver, Reputation, RewardList, RewardSummary, SecretBlock, StatusFilter, Visibility],
   templateUrl: './theme-test.html',
   styleUrl: './theme-test.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -61,6 +63,16 @@ export class ThemeTest {
     { label: 'Confirmer la trahison de Corvin', visibility: { level: 'gm' } },
   ]);
   protected readonly chipClicks = signal(0);
+  /** The canvas's navigation, pointing at temporary test routes. */
+  protected readonly navItems: BookmarkNavItem[] = [
+    { id: 'quests', label: 'Quêtes', link: '/theme-test/quetes', icon: 'quete', count: 3 },
+    { id: 'journal', label: 'Journal', link: '/theme-test/journal', icon: 'journal' },
+    { id: 'contacts', label: 'Contacts', link: '/theme-test/contacts', icon: 'joueurs' },
+    { id: 'places', label: 'Lieux', link: '/theme-test/lieux', icon: 'carte' },
+    { id: 'loot', label: 'Butin', link: '/theme-test/butin', icon: 'butin' },
+    { id: 'd1', divider: true },
+    { id: 'settings', label: 'Réglages', link: '/theme-test/reglages', icon: 'reglages' },
+  ];
   protected readonly quests = DEMO_QUESTS;
   /** The demo quests plus one with a long summary, to check the 3-line clamp. */
   protected readonly listQuests = [

@@ -190,6 +190,26 @@
     </div>
   </section>
 
+  <section class="test__section" aria-labelledby="test-bookmark-nav">
+    <h2 id="test-bookmark-nav" class="test__label">BookmarkNav</h2>
+    <div class="test__navs">
+      <nav
+        grBookmarkNav
+        [items]="navItems"
+        kicker="Campagne"
+        [title]="'L\'Âge des Cendres'"
+        footer="Session XIV · 12 septembre"
+      ></nav>
+      <nav
+        grBookmarkNav
+        [items]="navItems"
+        variant="rail"
+        [title]="'L\'Âge des Cendres'"
+        aria-label="Navigation principale (rail)"
+      ></nav>
+    </div>
+  </section>
+
   <section class="test__section" aria-labelledby="test-icons">
     <h2 id="test-icons" class="test__label">Icon</h2>
     <ul class="gr-icons test__icons">

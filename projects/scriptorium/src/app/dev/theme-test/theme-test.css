@@ -120,3 +120,9 @@
   grid-template-columns: repeat(auto-fill, minmax(calc(var(--space-8) * 10), 1fr));
   gap: var(--space-4);
 }
+
+.test__navs {
+  display: flex;
+  gap: var(--space-8);
+  height: calc(var(--space-12) * 10);
+}
