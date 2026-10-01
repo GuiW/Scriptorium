@@ -142,7 +142,7 @@
   <section class="test__section" aria-labelledby="test-quest-cards">
     <h2 id="test-quest-cards" class="test__label">QuestCard</h2>
     <div class="test__cards">
-      @for (q of quests; track q.id) {
+      @for (q of listQuests; track q.id) {
         <article
           grQuestCard
           [title]="q.title"

@@ -387,3 +387,9 @@ button.gr-contact:focus-visible { outline: 2px solid var(--focus); outline-offse
    so the foot stays at the bottom (without a summary, the foot is pushed down on its own) */
 .gr-quest__summary { flex: 1 0 auto; }
 .gr-quest__foot { margin-top: auto; }
+
+/* QuestCard in a list: the summary is clamped to 3 lines with an ellipsis (the full text stays in the DOM
+   for screen readers and shows in the detail view); a detailed card (objectives or rewards listed) is not clamped */
+.gr-quest:not(.gr-quest--detailed) .gr-quest__summary {
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden;
+}
