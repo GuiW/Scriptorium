@@ -7,4 +7,4 @@ List of a quest's rewards: coins, XP, items, reputation, other; each line has it
   - `visibility`: a reward can be hidden (Secret MJ) or promised to some players, like an objective.
 - `title`: « Récompenses » by default, `false` to remove it.
 - Recommended order: coins, XP, items (rarest to most common), reputation, other.
-- In `QuestCard`, the card foot only shows a **summary**: coins and XP as values, items counted (« 2 objets », in the colour of the rarest item, list on hover), the rest as « +1 ». The full list shows with `showRewards` (detailed view).
+- In `QuestCard`, the card foot only shows a **summary**: coins and XP as values, items counted (« 2 objets », in the colour of the rarest item, list on hover), the rest as « +1 ». Rewards more restricted than the quest are left out of that summary; they show, with their marker, in the full list (`showRewards`, detailed view).
