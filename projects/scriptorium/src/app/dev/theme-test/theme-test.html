@@ -107,6 +107,19 @@
     </p>
   </section>
 
+  <section class="test__section" aria-labelledby="test-reward-summary">
+    <h2 id="test-reward-summary" class="test__label">RewardSummary</h2>
+    <div class="test__stack">
+      @for (q of quests; track q.id) {
+        @if (q.rewards.length) {
+          <p class="test__ui test__row test__row--center">
+            {{ q.title }} : <gr-reward-summary [rewards]="q.rewards" />
+          </p>
+        }
+      }
+    </div>
+  </section>
+
   <section class="test__section" aria-labelledby="test-icons">
     <h2 id="test-icons" class="test__label">Icon</h2>
     <ul class="gr-icons test__icons">

@@ -23,3 +23,20 @@ export interface QuestObjective {
   optional?: boolean;
   visibility?: VisibilityValue;
 }
+
+export type RewardKind = 'coin' | 'xp' | 'item' | 'reputation' | 'other';
+
+/** PF2e rarity, items only. */
+export type Rarity = 'common' | 'uncommon' | 'rare' | 'unique';
+
+export interface Reward {
+  kind: RewardKind;
+  /** « 250 po », « 80 XP », « Lame de lune », « Chevaliers de Lastwall +1 ». */
+  label: string;
+  rarity?: Rarity;
+  note?: string;
+  /** Character who received it. */
+  to?: string;
+  claimed?: boolean;
+  visibility?: VisibilityValue;
+}
