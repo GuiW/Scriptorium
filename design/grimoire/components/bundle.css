@@ -251,7 +251,6 @@ button.gr-contact:focus-visible { outline: 2px solid var(--focus); outline-offse
 .gr-vis { display: inline-flex; align-items: center; gap: var(--space-1); white-space: nowrap; font: 700 12px/16px var(--font-sans);
   color: var(--secret); padding: 1px var(--space-2); border-radius: var(--radius-sm); border: 1.5px solid var(--secret);
   background: repeating-linear-gradient(135deg, var(--secret-hatch) 0 4px, transparent 4px 8px), var(--surface-raised); }
-.gr-vis--players { border-style: dotted; border-width: 2px; padding: 0 7px; }
 .gr-vis--table { color: var(--ink-muted); border: 1px solid var(--hairline); background: var(--surface-raised); font-weight: 500; }
 .gr-vis__glyph { flex: none; }
 .gr-vis__faces { display: inline-flex; }
@@ -262,7 +261,6 @@ button.gr-contact:focus-visible { outline: 2px solid var(--focus); outline-offse
 /* SecretBlock: frame any content; hatched tab names who can see it */
 .gr-secret { position: relative; border: 2px dashed var(--secret); border-radius: var(--radius-md); padding: var(--space-6) var(--space-4) var(--space-4);
   background: repeating-linear-gradient(135deg, var(--secret-hatch) 0 4px, transparent 4px 8px) top / 100% 12px no-repeat, var(--surface-raised); }
-.gr-secret--players { border-style: dotted; border-width: 2px; }
 .gr-secret__tab { position: absolute; top: -11px; left: var(--space-4); }
 .gr-secret__body { font: 400 17px/26px var(--font-serif); color: var(--ink); }
 .gr-secret__body > :first-child { margin-top: 0; } .gr-secret__body > :last-child { margin-bottom: 0; }
@@ -270,7 +268,6 @@ button.gr-contact:focus-visible { outline: 2px solid var(--focus); outline-offse
 /* on QuestCard and Objective */
 .gr-quest--restricted { border: 2px dashed var(--secret); padding: 23px;
   background: repeating-linear-gradient(135deg, var(--secret-hatch) 0 4px, transparent 4px 8px) top / 100% 12px no-repeat, var(--surface-raised); }
-.gr-quest--restricted-players { border-style: dotted; }
 .gr-quest--restricted.gr-quest--selected { border: 2px solid var(--gold); outline: 2px dashed var(--secret); outline-offset: 3px; }
 .gr-quest { position: relative; }
 .gr-quest__vis { position: absolute; top: -11px; left: var(--space-6); }
@@ -303,7 +300,6 @@ button.gr-contact:focus-visible { outline: 2px solid var(--focus); outline-offse
 .gr-vpick__opt--on { border: 2px solid var(--ink); padding: 11px; }
 .gr-vpick__opt--on.gr-vpick__opt--gm, .gr-vpick__opt--on.gr-vpick__opt--players { border-color: var(--secret); color: var(--secret);
   background: repeating-linear-gradient(135deg, var(--secret-hatch) 0 4px, transparent 4px 8px), var(--surface-raised); }
-.gr-vpick__opt--on.gr-vpick__opt--players { border-style: dotted; }
 .gr-vpick__opt--on.gr-vpick__opt--gm { border-style: dashed; }
 .gr-vpick__mark svg { display: block; margin-top: 4px; }
 .gr-vpick__mark { flex: none; width: 14px; text-align: center; font-size: 13px; line-height: 20px; }

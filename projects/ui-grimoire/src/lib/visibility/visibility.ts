@@ -3,8 +3,8 @@ import type { PlayerRef, VisibilityLevel } from '../shared/types';
 import { playerNames } from './player-names';
 
 /**
- * Restricted-visibility marker: « Secret MJ » (broken seal, dashed rule) or
- * « Pour toi et Kyra » (player faces, dotted rule). Always a glyph and a word.
+ * Restricted-visibility marker: « Secret MJ » (broken seal) or « Pour toi et Kyra »
+ * (player faces), in the same frame. Always a glyph and a word.
  * Renders nothing for `table`, the norm, unless `showPublic`.
  */
 @Component({

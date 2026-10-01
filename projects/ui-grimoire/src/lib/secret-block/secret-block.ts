@@ -5,7 +5,7 @@ import { Visibility } from '../visibility/visibility';
 
 /**
  * Frame for a restricted content block inside a public page (note, journal paragraph,
- * clue): dashed `secret` rule (dotted for chosen players), hatched band at the top and a
+ * clue): dashed `secret` rule (the same for chosen players), hatched band at the top and a
  * Visibility tab on the top edge. Do not nest two secret frames.
  */
 @Component({
