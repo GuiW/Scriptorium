@@ -12,6 +12,7 @@ import {
   Objective,
   REPUTATION_SCALES,
   Reputation,
+  RewardList,
   RewardSummary,
   StatusFilter,
   ThemeService,
@@ -19,6 +20,7 @@ import {
   type BadgeTone,
   type PlayerRef,
   type QuestObjective,
+  type Reward,
   type StatusFilterItem,
 } from '@scriptorium/ui-grimoire';
 import { DEMO_QUESTS } from './demo-quests';
@@ -26,7 +28,7 @@ import { DEMO_QUESTS } from './demo-quests';
 /** TEMPORARY — checks the theme foundations and the base components in both themes. */
 @Component({
   selector: 'app-theme-test',
-  imports: [Badge, Button, ButtonIcon, ContactChip, Icon, Medallion, Objective, Reputation, RewardSummary, StatusFilter, Visibility],
+  imports: [Badge, Button, ButtonIcon, ContactChip, Icon, Medallion, Objective, Reputation, RewardList, RewardSummary, StatusFilter, Visibility],
   templateUrl: './theme-test.html',
   styleUrl: './theme-test.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -57,6 +59,12 @@ export class ThemeTest {
   ]);
   protected readonly chipClicks = signal(0);
   protected readonly quests = DEMO_QUESTS;
+  protected readonly extraRewards: Reward[] = [
+    { kind: 'reputation', label: 'Chevaliers de Lastwall +2' },
+    { kind: 'other', label: 'Un repas chez les Emberlyn', note: 'au choix du groupe' },
+    { kind: 'item', label: 'Couronne du roi noyé', rarity: 'unique', visibility: { level: 'gm' } },
+    { kind: 'coin', label: '80 po', claimed: true, to: 'Kyra' },
+  ];
   protected readonly kyra: PlayerRef[] = [{ name: 'Kyra' }];
   protected readonly youAndKyra: PlayerRef[] = [{ name: 'Ezren', you: true }, { name: 'Kyra' }];
   protected readonly party: PlayerRef[] = [

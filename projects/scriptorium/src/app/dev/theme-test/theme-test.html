@@ -120,6 +120,12 @@
     </div>
   </section>
 
+  <section class="test__section" aria-labelledby="test-reward-list">
+    <h2 id="test-reward-list" class="test__label">RewardList</h2>
+    <gr-reward-list [rewards]="quests[0].rewards" />
+    <gr-reward-list [rewards]="extraRewards" title="Autres récompenses" />
+  </section>
+
   <section class="test__section" aria-labelledby="test-icons">
     <h2 id="test-icons" class="test__label">Icon</h2>
     <ul class="gr-icons test__icons">
