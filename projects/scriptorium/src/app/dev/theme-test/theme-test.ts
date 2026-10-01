@@ -5,6 +5,7 @@ import {
   Button,
   ButtonIcon,
   COLOR_TOKENS,
+  ContactChip,
   ICON_NAMES,
   Icon,
   Medallion,
@@ -23,7 +24,7 @@ import {
 /** TEMPORARY — checks the theme foundations and the base components in both themes. */
 @Component({
   selector: 'app-theme-test',
-  imports: [Badge, Button, ButtonIcon, Icon, Medallion, Objective, Reputation, StatusFilter, Visibility],
+  imports: [Badge, Button, ButtonIcon, ContactChip, Icon, Medallion, Objective, Reputation, StatusFilter, Visibility],
   templateUrl: './theme-test.html',
   styleUrl: './theme-test.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -52,6 +53,7 @@ export class ThemeTest {
     },
     { label: 'Confirmer la trahison de Corvin', visibility: { level: 'gm' } },
   ]);
+  protected readonly chipClicks = signal(0);
   protected readonly kyra: PlayerRef[] = [{ name: 'Kyra' }];
   protected readonly youAndKyra: PlayerRef[] = [{ name: 'Ezren', you: true }, { name: 'Kyra' }];
   protected readonly party: PlayerRef[] = [

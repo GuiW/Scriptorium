@@ -93,6 +93,20 @@
     </ul>
   </section>
 
+  <section class="test__section" aria-labelledby="test-contact-chips">
+    <h2 id="test-contact-chips" class="test__label">ContactChip</h2>
+    <div class="test__row test__row--center">
+      <gr-contact-chip name="Wrin Sivinxi" [reputation]="3" />
+      <gr-contact-chip name="Les Chevaliers de Lastwall" kind="faction" [reputation]="1" />
+      <gr-contact-chip name="Oleg Leveton" [reputation]="4" link (activate)="chipClicks.set(chipClicks() + 1)" />
+      <gr-contact-chip name="Yvane Emberlyn" />
+    </div>
+    <p class="test__ui">
+      Donnée par <gr-contact-chip name="Wrin Sivinxi" [reputation]="3" link /> · Otari · Niv. 2
+      — link clicks: {{ chipClicks() }}
+    </p>
+  </section>
+
   <section class="test__section" aria-labelledby="test-icons">
     <h2 id="test-icons" class="test__label">Icon</h2>
     <ul class="gr-icons test__icons">
