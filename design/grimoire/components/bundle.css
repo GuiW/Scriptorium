@@ -204,6 +204,9 @@ button.gr-contact:focus-visible { outline: 2px solid var(--focus); outline-offse
 .gr-bnav__divider { height: 1px; margin: var(--space-2) var(--space-6); background: var(--hairline); }
 .gr-bnav__foot { margin-top: auto; padding: 0 var(--space-6); font: 500 13px/18px var(--font-sans); color: var(--ink-muted); }
 @media (prefers-reduced-motion: reduce) { .gr-bnav__ribbon { transition: none; } }
+/* bookmarks are links: no underline; a link is content-box by default, unlike a button */
+.gr-bnav__ribbon, .gr-btabs__tab { text-decoration: none; }
+.gr-btabs__tab { box-sizing: border-box; }
 
 /* BookmarkNav variant="rail": tablet (768–1199px), 88px, icon above a short label */
 .gr-bnav--rail { width: 88px; gap: var(--space-4); padding: var(--space-6) 0 var(--space-4); }

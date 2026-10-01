@@ -159,7 +159,8 @@ export interface ContactCardProps {
 }
 export declare function ContactCard(props: ContactCardProps): JSX.Element;
 
-export interface BookmarkNavItem { id: string; label?: string; icon?: ReactNode; count?: number; divider?: boolean; }
+/** A bookmark leads to a page: it is a link to `link`, with `aria-current="page"` when active. */
+export interface BookmarkNavItem { id: string; label?: string; icon?: ReactNode; count?: number; divider?: boolean; link?: string; }
 
 /** Desktop vertical navigation: each entry a ribbon bookmark; the active one in crimson reaches furthest. */
 export interface BookmarkNavProps {
