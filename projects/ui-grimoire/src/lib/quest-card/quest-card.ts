@@ -27,6 +27,8 @@ export class QuestGiver {}
  * the objective boxes and the giver link keep working.
  */
 @Component({
+  // On the native article element to keep its semantics; the gr prefix is still enforced by review.
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'article[grQuestCard]',
   imports: [Badge, Objective, RewardList, RewardSummary, Visibility],
   host: {
@@ -87,7 +89,7 @@ export class QuestGiver {}
             [done]="o.done ?? false"
             [optional]="o.optional ?? false"
             [visibility]="o.visibility"
-            (toggle)="objectiveToggle.emit(i)"
+            (doneChange)="objectiveToggle.emit(i)"
           >
             {{ o.label }}
           </li>

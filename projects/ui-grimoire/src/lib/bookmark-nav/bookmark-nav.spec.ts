@@ -27,7 +27,7 @@ const NAV_ITEMS: BookmarkNavItem[] = [
       [items]="items"
       [variant]="variant()"
       kicker="Campagne"
-      [title]="'L\\'Âge des Cendres'"
+      [title]="campaign"
       footer="Session XIV · 12 septembre"
     ></nav>
   </div>`,
@@ -36,6 +36,7 @@ class Host {
   readonly theme = input<string>();
   readonly variant = input<BookmarkNavVariant>('full');
   readonly items = NAV_ITEMS;
+  readonly campaign = "L'Âge des Cendres";
 }
 
 async function render(inputs: Partial<Record<keyof Host, unknown>> = {}, url = '/quetes') {

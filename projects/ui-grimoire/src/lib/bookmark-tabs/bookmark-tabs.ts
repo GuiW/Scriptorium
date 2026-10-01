@@ -12,6 +12,8 @@ export const BOOKMARK_TABS_MAX = 5;
  * (the number is read out to screen readers). Pin it to the bottom of the screen.
  */
 @Component({
+  // On the native nav element to keep its semantics; the gr prefix is still enforced by review.
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'nav[grBookmarkTabs]',
   imports: [Icon, RouterLink, RouterLinkActive],
   host: { class: 'gr-btabs', '[attr.aria-label]': 'ariaLabel()' },

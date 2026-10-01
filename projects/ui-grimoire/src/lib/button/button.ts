@@ -19,6 +19,8 @@ export class ButtonIcon {}
  * One `primary` per screen; the label is a verb in the infinitive (« Ajouter un objectif »).
  */
 @Component({
+  // On the native button element to keep its semantics; the gr prefix is still enforced by review.
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'button[grButton]',
   host: { '[class]': 'classes()', '[attr.type]': 'type()' },
   template: `@if (icon()) {

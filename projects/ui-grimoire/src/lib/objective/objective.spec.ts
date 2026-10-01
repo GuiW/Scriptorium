@@ -12,7 +12,7 @@ import { Objective } from './objective';
         [done]="done()"
         [optional]="optional()"
         [visibility]="visibility()"
-        (toggle)="toggles = toggles + 1"
+        (doneChange)="changes.push($event)"
       >
         Retrouver le médaillon de la prêtresse
       </li>
@@ -24,7 +24,7 @@ class Host {
   readonly done = input(false);
   readonly optional = input(false);
   readonly visibility = input<VisibilityValue>();
-  toggles = 0;
+  changes: boolean[] = [];
 }
 
 async function render(inputs: Partial<Record<keyof Host, unknown>> = {}) {
@@ -79,7 +79,8 @@ describe('Objective', () => {
     const r = await render();
     r.box.click();
     r.label.click();
-    expect(r.fixture.componentInstance.toggles).toBe(2);
+    // Not bound back to done here, so both clicks ask for the same new state.
+    expect(r.fixture.componentInstance.changes).toEqual([true, true]);
   });
 
   it('shows a compact marker for an objective shared with some players', async () => {
