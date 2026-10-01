@@ -13,7 +13,7 @@ const ITEMS: StatusFilterItem[] = [
   imports: [StatusFilter],
   template: `<div [attr.data-theme]="theme()">
     <gr-status-filter
-      [items]="items"
+      [items]="items()"
       [(value)]="value"
       aria-label="Filtrer les quêtes"
       controls="quest-list"
@@ -22,7 +22,7 @@ const ITEMS: StatusFilterItem[] = [
 })
 class Host {
   readonly theme = input<string>();
-  readonly items = ITEMS;
+  readonly items = signal(ITEMS);
   readonly value = signal<string | undefined>('active');
 }
 
@@ -47,7 +47,7 @@ async function render(inputs: Partial<Record<'theme', unknown>> = {}, value?: st
 describe('StatusFilter', () => {
   it('renders a labelled radio group with the gr-tabs classes', async () => {
     const r = await render();
-    expect(r.group.className).toBe('gr-tabs');
+    expect(r.group.classList.contains('gr-tabs')).toBe(true);
     expect(r.group.getAttribute('role')).toBe('radiogroup');
     expect(r.group.getAttribute('aria-label')).toBe('Filtrer les quêtes');
     expect(r.group.getAttribute('aria-controls')).toBe('quest-list');
@@ -122,6 +122,33 @@ describe('StatusFilter', () => {
     await r.fixture.whenStable();
     await r.key(r.options()[1], 'ArrowLeft');
     expect(r.host.value()).toBe('active');
+  });
+
+  it('positions the sliding underline on the checked option once measured', async () => {
+    const r = await render();
+    expect(r.group.classList.contains('gr-tabs--slide')).toBe(true);
+    const style = (r.group as HTMLElement).style;
+    expect(style.getPropertyValue('--gr-tabs-x')).toMatch(/^\d+px$/);
+    expect(style.getPropertyValue('--gr-tabs-w')).toMatch(/^\d+px$/);
+    const none = await render({}, 'unknown');
+    expect(none.group.classList.contains('gr-tabs--slide')).toBe(false);
+  });
+
+  it('makes a count jump when it changes, never on the first render', async () => {
+    const r = await render();
+    const count = (i: number) => r.options()[i].querySelector('.gr-tabs__count')!;
+    expect(r.group.querySelectorAll('.gr-bump').length).toBe(0);
+    r.host.items.set([
+      { id: 'active', label: 'En cours', count: 2 },
+      { id: 'completed', label: 'Accomplies', count: 2 },
+      { id: 'failed', label: 'Échouées', count: 0 },
+      { id: 'rumor', label: 'Rumeurs' },
+    ]);
+    await r.fixture.whenStable();
+    expect([0, 1, 2].map((i) => count(i).classList.contains('gr-bump'))).toEqual([true, true, false]);
+    count(0).dispatchEvent(new Event('animationend'));
+    await r.fixture.whenStable();
+    expect(count(0).classList.contains('gr-bump')).toBe(false);
   });
 
   it('renders the same markup under the dungeon theme', async () => {

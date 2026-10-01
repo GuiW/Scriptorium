@@ -46,12 +46,25 @@ export class ThemeTest {
   protected readonly tones = Object.keys(BADGE_TONES) as BadgeTone[];
   protected readonly iconNames = ICON_NAMES;
   protected readonly npcSteps = REPUTATION_SCALES.npc.map((_, i) => i);
-  protected readonly statuses: StatusFilterItem[] = [
+  protected readonly statuses = signal<StatusFilterItem[]>([
     { id: 'active', label: 'En cours', count: 3 },
     { id: 'completed', label: 'Accomplies', count: 1 },
     { id: 'failed', label: 'Échouées', count: 1 },
     { id: 'rumor', label: 'Rumeurs', count: 1 },
-  ];
+  ]);
+
+  /** Moves one quest from « En cours » to « Accomplies », to see the counts jump. */
+  protected completeQuest(): void {
+    this.statuses.update((items) =>
+      items.map((item) =>
+        item.id === 'active' && item.count
+          ? { ...item, count: item.count - 1 }
+          : item.id === 'completed'
+            ? { ...item, count: (item.count ?? 0) + 1 }
+            : item,
+      ),
+    );
+  }
   protected readonly status = signal('active');
   protected readonly objectives = signal<QuestObjective[]>([
     { label: "Interroger le forgeron d'Otari", done: true },

@@ -12,6 +12,7 @@ import { Badge, type QuestStatus } from '../badge/badge';
 import { Objective } from '../objective/objective';
 import { RewardList } from '../reward-list/reward-list';
 import { RewardSummary } from '../reward-summary/reward-summary';
+import { flagOnChange } from '../shared/motion';
 import type { QuestObjective, Reward, VisibilityValue } from '../shared/types';
 import { Visibility } from '../visibility/visibility';
 
@@ -32,6 +33,7 @@ export class QuestGiver {}
     '[class]': 'classes()',
     // `title` is an input: never leave it as a tooltip on the whole card.
     '[attr.title]': 'null',
+    '(animationend)': 'onAnimationEnd($event)',
   },
   template: `@if (restricted(); as vis) {
       <div class="gr-quest__vis">
@@ -140,6 +142,8 @@ export class QuestCard {
   /** Index of the objective whose box or label was activated (with `showObjectives`). */
   readonly objectiveToggle = output<number>();
 
+  /** Raised when the card becomes selected (not on the first render): a gold ring spreads once. */
+  protected readonly chosen = flagOnChange(() => this.selected(), (selected) => selected);
   protected readonly giverSlot = contentChild(QuestGiver);
   protected readonly hasGiver = computed(() => !!this.giverSlot() || !!this.giver());
   protected readonly metaParts = computed(() =>
@@ -165,10 +169,16 @@ export class QuestCard {
       // Detailed card: the summary is not clamped to 3 lines.
       this.showObjectives() || this.showRewards() ? 'gr-quest--detailed' : '',
       this.selected() ? 'gr-quest--selected' : '',
+      this.chosen() ? 'gr-quest--chosen' : '',
       vis ? 'gr-quest--restricted' : '',
       vis?.level === 'players' ? 'gr-quest--restricted-players' : '',
     ]
       .filter(Boolean)
       .join(' ');
   });
+
+  /** Ends the selection ring; the stamp and seal of the children bubble up here too. */
+  protected onAnimationEnd(event: AnimationEvent): void {
+    if (event.target === event.currentTarget) this.chosen.set(false);
+  }
 }

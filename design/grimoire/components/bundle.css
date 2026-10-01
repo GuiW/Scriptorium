@@ -419,3 +419,31 @@ button.gr-contact:focus-visible { outline: 2px solid var(--focus); outline-offse
   60% { scale: .95; rotate: 2deg; opacity: 1; }
   100% { scale: 1; rotate: 0deg; }
 }
+
+/* ---- Juiciness, second round: buttons, status filter, quest card activation ---- */
+/* StatusFilter sliding underline: the component measures the checked option (--gr-tabs-x, --gr-tabs-w)
+   and adds gr-tabs--slide; without it, each option keeps its own bottom rule */
+.gr-tabs { position: relative; }
+.gr-tabs--slide .gr-tabs__tab--on { border-bottom-color: transparent; }
+.gr-tabs--slide::after {
+  content: ""; position: absolute; left: 0; bottom: -1px; height: 2px; background: var(--crimson);
+  width: var(--gr-tabs-w); transform: translateX(var(--gr-tabs-x)); pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* Button: pressed in, released with the bounce; a « + » icon turns a quarter on hover */
+  .gr-btn { transition: background-color .12s, border-color .12s, color .12s, scale .22s cubic-bezier(.3,.7,.4,1.15); }
+  .gr-btn:active:not(:disabled) { scale: .97; transition-duration: .12s, .12s, .12s, .06s; }
+  .gr-btn__icon [data-icon="ajouter"] { transition: rotate .22s cubic-bezier(.3,.7,.4,1.15); }
+  .gr-btn:hover:not(:disabled) .gr-btn__icon [data-icon="ajouter"] { rotate: 90deg; }
+  /* StatusFilter: the underline glides to the chosen option; a changed count jumps (gr-bump, set on change only) */
+  .gr-tabs--slide::after { transition: transform .22s cubic-bezier(.3,.7,.4,1.15), width .22s cubic-bezier(.3,.7,.4,1.15); }
+  .gr-bump { display: inline-block; animation: gr-bump .3s cubic-bezier(.3,.7,.4,1.15); }
+  /* QuestCard: pressed in under the pointer; a gold ring spreads once when it becomes selected (gr-quest--chosen) */
+  .gr-quest:has(.gr-quest__open):active { transform: translateY(-1px); transition-duration: .15s, .06s; }
+  .gr-quest--chosen { animation: gr-ring .45s ease-out; }
+}
+@keyframes gr-bump { 0% { scale: 1; } 40% { scale: 1.4; } 100% { scale: 1; } }
+@keyframes gr-ring {
+  from { box-shadow: var(--shadow-lifted), 0 0 0 0 var(--gold); }
+  to { box-shadow: var(--shadow-lifted), 0 0 0 12px transparent; }
+}

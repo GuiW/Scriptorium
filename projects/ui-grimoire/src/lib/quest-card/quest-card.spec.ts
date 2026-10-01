@@ -154,6 +154,23 @@ describe('QuestCard', () => {
     expect(table.q('.gr-quest__vis')).toBeNull();
   });
 
+  it('spreads a gold ring once when the card becomes selected, never on the first render', async () => {
+    const already = await render({ selectable: true, selected: true });
+    expect(already.card.classList.contains('gr-quest--chosen')).toBe(false);
+
+    const r = await render({ selectable: true, showObjectives: true });
+    r.fixture.componentRef.setInput('selected', true);
+    await r.fixture.whenStable();
+    expect(r.card.classList.contains('gr-quest--chosen')).toBe(true);
+    // A child's animation (an objective stamp) bubbling up does not end the ring.
+    r.q('.gr-obj__box')!.dispatchEvent(new Event('animationend', { bubbles: true }));
+    await r.fixture.whenStable();
+    expect(r.card.classList.contains('gr-quest--chosen')).toBe(true);
+    r.card.dispatchEvent(new Event('animationend', { bubbles: true }));
+    await r.fixture.whenStable();
+    expect(r.card.classList.contains('gr-quest--chosen')).toBe(false);
+  });
+
   it('becomes selectable through a stretched button in the title', async () => {
     const r = await render({ selectable: true, selected: true });
     expect(r.card.tagName).toBe('ARTICLE');

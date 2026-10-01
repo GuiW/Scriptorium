@@ -2,18 +2,23 @@ import { FocusKeyManager, type FocusableOption } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
 import {
   ChangeDetectionStrategy,
+  DestroyRef,
   Component,
   Directive,
   ElementRef,
   Injector,
+  afterNextRender,
+  afterRenderEffect,
   computed,
   effect,
   inject,
   input,
   model,
+  signal,
   untracked,
   viewChildren,
 } from '@angular/core';
+import { Bump } from '../shared/motion';
 
 /** One option of the filter (TabItem in design/grimoire/components/index.d.ts). */
 export interface StatusFilterItem {
@@ -26,11 +31,11 @@ export interface StatusFilterItem {
 /** Internal (exported for the Angular compiler only): gives the key manager something focusable for each option. */
 @Directive({ selector: 'button[grStatusFilterOption]' })
 export class StatusFilterOption implements FocusableOption {
-  private readonly element = inject<ElementRef<HTMLButtonElement>>(ElementRef);
+  readonly element = inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement;
   readonly id = input.required<string>({ alias: 'grStatusFilterOption' });
 
   focus(): void {
-    this.element.nativeElement.focus();
+    this.element.focus();
   }
 }
 
@@ -42,13 +47,17 @@ export class StatusFilterOption implements FocusableOption {
  */
 @Component({
   selector: 'gr-status-filter',
-  imports: [StatusFilterOption],
+  imports: [Bump, StatusFilterOption],
   host: {
     class: 'gr-tabs',
     role: 'radiogroup',
     '[attr.aria-label]': 'ariaLabel()',
     '[attr.aria-controls]': 'controls()',
     '(keydown)': 'onKeydown($event)',
+    // Sliding underline (bundle.css): position and width of the checked option.
+    '[class.gr-tabs--slide]': 'indicator() !== null',
+    '[style.--gr-tabs-x]': 'indicator()?.x',
+    '[style.--gr-tabs-w]': 'indicator()?.w',
   },
   template: `@for (item of items(); track item.id; let i = $index) {
     <button
@@ -63,7 +72,7 @@ export class StatusFilterOption implements FocusableOption {
     >
       <span class="gr-tabs__label">{{ item.label }}</span>
       @if (item.count != null) {
-        <span class="gr-tabs__count">{{ item.count }}</span>
+        <span class="gr-tabs__count" [grBump]="item.count">{{ item.count }}</span>
       }
     </button>
   }`,
@@ -88,11 +97,36 @@ export class StatusFilter {
     Math.max(0, this.items().findIndex((item) => item.id === this.value())),
   );
 
+  /** Position and width of the checked option, for the sliding underline; null before measuring. */
+  protected readonly indicator = signal<{ x: string; w: string } | null>(null);
+  /** Bumped when the group is resized, so the underline is measured again. */
+  private readonly resized = signal(0);
+
   constructor() {
     // Keep the key manager on the checked option when the value changes from outside.
     effect(() => {
       const index = this.tabStop();
       if (this.options().length) untracked(() => this.keyManager.updateActiveItem(index));
+    });
+
+    // Measure the checked option after each render that can move it; the first measure
+    // adds gr-tabs--slide, so the underline appears in place without gliding in.
+    afterRenderEffect(() => {
+      this.resized();
+      const id = this.value();
+      const option = this.options().find((o) => o.id() === id);
+      this.indicator.set(
+        option ? { x: `${option.element.offsetLeft}px`, w: `${option.element.offsetWidth}px` } : null,
+      );
+    });
+
+    const host = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+    const destroyRef = inject(DestroyRef);
+    afterNextRender(() => {
+      if (typeof ResizeObserver === 'undefined') return;
+      const observer = new ResizeObserver(() => this.resized.update((n) => n + 1));
+      observer.observe(host);
+      destroyRef.onDestroy(() => observer.disconnect());
     });
   }
 
