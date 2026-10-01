@@ -38,7 +38,9 @@ async function render(inputs: Partial<Record<'theme', unknown>> = {}, value?: st
   const options = () => [...group.querySelectorAll<HTMLButtonElement>('button')];
   const key = async (target: HTMLElement, k: string) => {
     // The CDK key manager reads keyCode, which browsers set but synthetic events do not.
-    target.dispatchEvent(new KeyboardEvent('keydown', { key: k, keyCode: KEY_CODES[k], bubbles: true }));
+    target.dispatchEvent(
+      new KeyboardEvent('keydown', { key: k, keyCode: KEY_CODES[k], bubbles: true }),
+    );
     await fixture.whenStable();
   };
   return { fixture, group, options, key, host: fixture.componentInstance };
@@ -68,11 +70,13 @@ describe('StatusFilter', () => {
 
   it('checks the active option only and makes it the single Tab stop', async () => {
     const r = await render({}, 'completed');
-    const states = r.options().map((o) => [
-      o.classList.contains('gr-tabs__tab--on'),
-      o.getAttribute('aria-checked'),
-      o.tabIndex,
-    ]);
+    const states = r
+      .options()
+      .map((o) => [
+        o.classList.contains('gr-tabs__tab--on'),
+        o.getAttribute('aria-checked'),
+        o.tabIndex,
+      ]);
     expect(states).toEqual([
       [false, 'false', -1],
       [true, 'true', 0],
@@ -145,7 +149,11 @@ describe('StatusFilter', () => {
       { id: 'rumor', label: 'Rumeurs' },
     ]);
     await r.fixture.whenStable();
-    expect([0, 1, 2].map((i) => count(i).classList.contains('gr-bump'))).toEqual([true, true, false]);
+    expect([0, 1, 2].map((i) => count(i).classList.contains('gr-bump'))).toEqual([
+      true,
+      true,
+      false,
+    ]);
     count(0).dispatchEvent(new Event('animationend'));
     await r.fixture.whenStable();
     expect(count(0).classList.contains('gr-bump')).toBe(false);

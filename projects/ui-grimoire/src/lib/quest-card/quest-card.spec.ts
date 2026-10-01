@@ -91,7 +91,9 @@ describe('QuestCard', () => {
     expect(text(r.q('h3.gr-quest__title'))).toBe('La crypte sous Otari');
     expect(r.q('h3 button')).toBeNull();
     expect(r.q('.gr-quest__head gr-badge')?.className).toBe('gr-badge gr-badge--active');
-    expect(text(r.q('p.gr-quest__summary'))).toBe('Des lueurs ont été vues sous la vieille chapelle.');
+    expect(text(r.q('p.gr-quest__summary'))).toBe(
+      'Des lueurs ont été vues sous la vieille chapelle.',
+    );
   });
 
   it('renders every status with its badge and track colour class', async () => {
@@ -149,7 +151,9 @@ describe('QuestCard', () => {
     expect(text(gm.q('.gr-quest__vis'))).toBe('Secret MJ');
     const kyra = await render({ visibility: { level: 'players', players: [{ name: 'Kyra' }] } });
     expect(kyra.card.classList.contains('gr-quest--restricted-players')).toBe(true);
-    expect(kyra.q('.gr-quest__vis .gr-vis--players')?.lastElementChild?.textContent).toBe('Pour Kyra');
+    expect(kyra.q('.gr-quest__vis .gr-vis--players')?.lastElementChild?.textContent).toBe(
+      'Pour Kyra',
+    );
     const table = await render({ visibility: { level: 'table' } });
     expect(table.q('.gr-quest__vis')).toBeNull();
   });
@@ -185,8 +189,12 @@ describe('QuestCard', () => {
 
   it('marks a detailed card, whose summary is not clamped', async () => {
     expect((await render()).card.classList.contains('gr-quest--detailed')).toBe(false);
-    expect((await render({ showObjectives: true })).card.classList.contains('gr-quest--detailed')).toBe(true);
-    expect((await render({ showRewards: true })).card.classList.contains('gr-quest--detailed')).toBe(true);
+    expect(
+      (await render({ showObjectives: true })).card.classList.contains('gr-quest--detailed'),
+    ).toBe(true);
+    expect(
+      (await render({ showRewards: true })).card.classList.contains('gr-quest--detailed'),
+    ).toBe(true);
   });
 
   it('lists the objectives and the full rewards in the detailed view', async () => {
@@ -208,7 +216,11 @@ describe('QuestCard', () => {
   });
 
   it('renders the same markup under the dungeon theme, ids aside', async () => {
-    const inputs = { visibility: { level: 'gm' } as VisibilityValue, showObjectives: true, chip: true };
+    const inputs = {
+      visibility: { level: 'gm' } as VisibilityValue,
+      showObjectives: true,
+      chip: true,
+    };
     const light = await render(inputs);
     const dark = await render({ ...inputs, theme: 'dungeon' });
     const strip = (html: string) => html.replace(/gr-obj-\w+/g, 'gr-obj-N');

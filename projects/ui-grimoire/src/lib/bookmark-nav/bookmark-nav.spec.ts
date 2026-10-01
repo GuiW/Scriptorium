@@ -1,7 +1,12 @@
 import { Component, input } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Router, provideRouter } from '@angular/router';
-import { BookmarkNav, campaignInitial, type BookmarkNavItem, type BookmarkNavVariant } from './bookmark-nav';
+import {
+  BookmarkNav,
+  campaignInitial,
+  type BookmarkNavItem,
+  type BookmarkNavVariant,
+} from './bookmark-nav';
 
 /** The canvas's navigation. */
 const NAV_ITEMS: BookmarkNavItem[] = [

@@ -25,13 +25,17 @@ import { Visibility } from '../visibility/visibility';
             >{{ r.label }}
             @if (r.note) {
               <span class="gr-reward__note">{{ r.note }}</span>
-            }</span
-          >
+            }
+          </span>
           @if (r.rarity && r.rarity !== 'common') {
             <span class="gr-reward__rarity">{{ rarities[r.rarity] }}</span>
           }
           @if (r.visibility && r.visibility.level !== 'table') {
-            <gr-visibility [level]="r.visibility.level" [players]="r.visibility.players ?? []" compact />
+            <gr-visibility
+              [level]="r.visibility.level"
+              [players]="r.visibility.players ?? []"
+              compact
+            />
           }
         </li>
       }

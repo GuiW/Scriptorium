@@ -41,7 +41,9 @@ describe('Medallion', () => {
     for (const kind of ['npc', 'faction'] as const) {
       for (const size of ['md', 'xs'] as const) {
         const medal = await render({ kind, size, name: 'Chevaliers de Lastwall' });
-        expect(classes(medal)).toEqual(['gr-medal', `gr-medal--${kind}`, `gr-medal--${size}`].sort());
+        expect(classes(medal)).toEqual(
+          ['gr-medal', `gr-medal--${kind}`, `gr-medal--${size}`].sort(),
+        );
         expect(medal.textContent!.trim()).toBe('C');
       }
     }

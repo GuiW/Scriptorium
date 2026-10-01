@@ -87,12 +87,9 @@ describe('RewardList', () => {
         { kind: 'item', label: 'Couronne', rarity: 'unique' },
       ],
     });
-    expect(r.items.map((li) => li.querySelector('.gr-reward__rarity')?.textContent ?? null)).toEqual([
-      null,
-      'Peu courant',
-      'Rare',
-      'Unique',
-    ]);
+    expect(
+      r.items.map((li) => li.querySelector('.gr-reward__rarity')?.textContent ?? null),
+    ).toEqual([null, 'Peu courant', 'Rare', 'Unique']);
     expect(classes(r.items[2])).toEqual(['gr-rarity--rare', 'gr-reward', 'gr-reward--item']);
   });
 
@@ -106,7 +103,11 @@ describe('RewardList', () => {
     const r = await render({
       rewards: [
         { kind: 'item', label: 'Clé du caveau', visibility: { level: 'gm' } },
-        { kind: 'other', label: 'Une faveur', visibility: { level: 'players', players: [{ name: 'Kyra' }] } },
+        {
+          kind: 'other',
+          label: 'Une faveur',
+          visibility: { level: 'players', players: [{ name: 'Kyra' }] },
+        },
         { kind: 'coin', label: '10 po', visibility: { level: 'table' } },
       ],
     });
@@ -116,7 +117,9 @@ describe('RewardList', () => {
   });
 
   it('accepts a custom title and removes it with false', async () => {
-    expect((await render({ rewards: ALL, title: 'Butin promis' })).title?.textContent).toBe('Butin promis');
+    expect((await render({ rewards: ALL, title: 'Butin promis' })).title?.textContent).toBe(
+      'Butin promis',
+    );
     expect((await render({ rewards: ALL, title: false })).title).toBeNull();
   });
 

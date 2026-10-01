@@ -89,7 +89,7 @@ export const DEMO_QUESTS: DemoQuest[] = [
     status: 'failed',
     location: "Marché noir d'Almas",
     level: 3,
-    summary: "Un informateur promettait le nom du commanditaire ; il a filé avant la pleine lune.",
+    summary: 'Un informateur promettait le nom du commanditaire ; il a filé avant la pleine lune.',
     objectives: [
       { label: "Retrouver l'informateur", done: true },
       { label: 'Obtenir le nom avant la pleine lune' },

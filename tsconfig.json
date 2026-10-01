@@ -15,9 +15,7 @@
     "target": "ES2022",
     "module": "preserve",
     "paths": {
-      "@scriptorium/ui-grimoire": [
-        "./projects/ui-grimoire/src/public-api.ts"
-      ]
+      "@scriptorium/ui-grimoire": ["./projects/ui-grimoire/src/public-api.ts"]
     }
   },
   "angularCompilerOptions": {

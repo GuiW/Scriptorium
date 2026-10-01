@@ -38,15 +38,22 @@ export class RewardSummary {
   );
   protected readonly items = computed(() => this.rewards().filter((r) => r.kind === 'item'));
   protected readonly others = computed(
-    () => this.rewards().filter((r) => r.kind !== 'coin' && r.kind !== 'xp' && r.kind !== 'item').length,
+    () =>
+      this.rewards().filter((r) => r.kind !== 'coin' && r.kind !== 'xp' && r.kind !== 'item')
+        .length,
   );
   protected readonly rarest = computed(() =>
     this.items().reduce<Rarity>(
-      (best, r) => (RARITIES.indexOf(r.rarity ?? 'common') > RARITIES.indexOf(best) ? r.rarity! : best),
+      (best, r) =>
+        RARITIES.indexOf(r.rarity ?? 'common') > RARITIES.indexOf(best) ? r.rarity! : best,
       'common',
     ),
   );
-  protected readonly itemNames = computed(() => this.items().map((r) => r.label).join(', '));
+  protected readonly itemNames = computed(() =>
+    this.items()
+      .map((r) => r.label)
+      .join(', '),
+  );
   protected readonly itemCount = computed(() => {
     const n = this.items().length;
     return n === 1 ? '1 objet' : `${n} objets`;

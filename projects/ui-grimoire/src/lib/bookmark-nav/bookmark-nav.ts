@@ -66,7 +66,9 @@ export function campaignInitial(title: string): string {
               ariaCurrentWhenActive="page"
             >
               @if (item.icon) {
-                <span class="gr-bnav__icon" aria-hidden="true"><gr-icon [name]="item.icon" [size]="16" /></span>
+                <span class="gr-bnav__icon" aria-hidden="true"
+                  ><gr-icon [name]="item.icon" [size]="16"
+                /></span>
               }
               <span class="gr-bnav__label">{{ item.label }}</span>
               @if (item.count != null) {
@@ -87,7 +89,7 @@ export function campaignInitial(title: string): string {
     @if (footer() && !rail()) {
       <div class="gr-bnav__foot">{{ footer() }}</div>
     }
-`,
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookmarkNav {

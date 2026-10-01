@@ -25,15 +25,24 @@ import type { ContactKind } from '../shared/types';
       <gr-medallion [name]="name()" [kind]="kind()" [image]="image()" size="xs" />
       <span class="gr-chip__name">{{ name() }}</span>
       @if (stance(); as s) {
-        <span class="gr-chip__rep gr-rep--{{ s.tone }}"><span class="gr-sr">, {{ s.label }}</span></span>
+        <span class="gr-chip__rep gr-rep--{{ s.tone }}"
+          ><span class="gr-sr">, {{ s.label }}</span></span
+        >
       }
     </ng-template>
     @if (link()) {
-      <button type="button" class="gr-chip gr-chip--link" [attr.title]="title()" (click)="activate.emit()">
+      <button
+        type="button"
+        class="gr-chip gr-chip--link"
+        [attr.title]="title()"
+        (click)="activate.emit()"
+      >
         <ng-container *ngTemplateOutlet="content" />
       </button>
     } @else {
-      <span class="gr-chip" [attr.title]="title()"><ng-container *ngTemplateOutlet="content" /></span>
+      <span class="gr-chip" [attr.title]="title()"
+        ><ng-container *ngTemplateOutlet="content"
+      /></span>
     }`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

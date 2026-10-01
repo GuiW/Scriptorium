@@ -22,7 +22,13 @@ export const REPUTATION_SCALES: Record<ContactKind, readonly string[]> = {
 };
 
 /** Colour steps, spread along the scale whatever its length. */
-export const REPUTATION_TONES: readonly ReputationTone[] = ['hostile', 'cold', 'neutral', 'warm', 'ally'];
+export const REPUTATION_TONES: readonly ReputationTone[] = [
+  'hostile',
+  'cold',
+  'neutral',
+  'warm',
+  'ally',
+];
 
 /** Clamps `value` to the scale; defaults to the middle step. */
 export function reputationStep(length: number, value?: number | null): number {
@@ -78,7 +84,10 @@ export class Reputation {
   /** Centre of the current step in the track, for the gliding marker; null before measuring. */
   protected readonly markerX = signal<string | null>(null);
   /** Raised when a trend appears or changes after the first render: the arrow pulses once. */
-  protected readonly pulse = flagOnChange(() => this.trend(), (trend) => trend != null);
+  protected readonly pulse = flagOnChange(
+    () => this.trend(),
+    (trend) => trend != null,
+  );
   private readonly steps = viewChildren('stepEl', { read: ElementRef<HTMLElement> });
 
   protected readonly classes = computed(() => {

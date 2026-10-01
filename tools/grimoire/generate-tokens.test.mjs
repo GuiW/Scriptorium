@@ -5,7 +5,10 @@ import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { buildTokens } from './generate-tokens.mjs';
 
-const tokensPath = resolve(dirname(fileURLToPath(import.meta.url)), '../../design/grimoire/tokens.json');
+const tokensPath = resolve(
+  dirname(fileURLToPath(import.meta.url)),
+  '../../design/grimoire/tokens.json',
+);
 const source = JSON.parse(readFileSync(tokensPath, 'utf8'));
 const clone = () => structuredClone(source);
 
