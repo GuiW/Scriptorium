@@ -166,6 +166,12 @@ describe('QuestCard', () => {
     expect(r.host.activations).toBe(1);
   });
 
+  it('marks a detailed card, whose summary is not clamped', async () => {
+    expect((await render()).card.classList.contains('gr-quest--detailed')).toBe(false);
+    expect((await render({ showObjectives: true })).card.classList.contains('gr-quest--detailed')).toBe(true);
+    expect((await render({ showRewards: true })).card.classList.contains('gr-quest--detailed')).toBe(true);
+  });
+
   it('lists the objectives and the full rewards in the detailed view', async () => {
     const r = await render({ showObjectives: true, showRewards: true });
     const items = r.card.querySelectorAll('ul.gr-objs > li.gr-obj');

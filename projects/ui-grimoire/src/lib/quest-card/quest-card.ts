@@ -162,6 +162,8 @@ export class QuestCard {
     return [
       'gr-quest',
       `gr-quest--${this.status()}`,
+      // Detailed card: the summary is not clamped to 3 lines.
+      this.showObjectives() || this.showRewards() ? 'gr-quest--detailed' : '',
       this.selected() ? 'gr-quest--selected' : '',
       vis ? 'gr-quest--restricted' : '',
       vis?.level === 'players' ? 'gr-quest--restricted-players' : '',

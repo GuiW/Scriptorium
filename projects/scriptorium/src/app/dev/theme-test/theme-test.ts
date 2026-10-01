@@ -62,6 +62,17 @@ export class ThemeTest {
   ]);
   protected readonly chipClicks = signal(0);
   protected readonly quests = DEMO_QUESTS;
+  /** The demo quests plus one with a long summary, to check the 3-line clamp. */
+  protected readonly listQuests = [
+    ...DEMO_QUESTS,
+    {
+      ...DEMO_QUESTS[4],
+      id: 'q7',
+      title: 'Les cloches de Roslar',
+      summary:
+        "Chaque nuit de brume, les cloches englouties de Roslar sonnent sous la baie. Les pêcheurs n'osent plus sortir, le prêtre du port affirme qu'il s'agit d'un avertissement, et la guilde des marchands offre une prime à qui fera taire ce vacarme avant la foire d'automne.",
+    },
+  ];
   protected readonly selectedQuest = signal('q1');
   protected readonly extraRewards: Reward[] = [
     { kind: 'reputation', label: 'Chevaliers de Lastwall +2' },

@@ -80,7 +80,7 @@
       ? h('button', { type: 'button', className: 'gr-quest__open', onClick: p.onClick, 'aria-pressed': !!p.selected }, p.title)
       : p.title;
     return h('article', {
-      className: cx('gr-quest', 'gr-quest--' + status, p.selected && 'gr-quest--selected', vis !== 'table' && 'gr-quest--restricted', vis === 'players' && 'gr-quest--restricted-players', p.className)
+      className: cx('gr-quest', 'gr-quest--' + status, (p.showObjectives || p.showRewards) && 'gr-quest--detailed', p.selected && 'gr-quest--selected', vis !== 'table' && 'gr-quest--restricted', vis === 'players' && 'gr-quest--restricted-players', p.className)
     },
       vis !== 'table' ? h('div', { className: 'gr-quest__vis' }, h(Visibility, { level: vis, players: p.visibility.players })) : null,
       h('div', { className: 'gr-quest__head' },
