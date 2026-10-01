@@ -72,6 +72,9 @@
     var status = p.status || 'active';
     var vis = (p.visibility && p.visibility.level) || 'table';
     var rewards = p.rewards || (p.reward ? [{ kind: 'coin', label: p.reward }] : []);
+    // the foot summary leaves out rewards more restricted than the quest: no room for their Visibility marker
+    var rank = { table: 0, players: 1, gm: 2 };
+    var footRewards = rewards.filter(function (r) { return rank[(r.visibility && r.visibility.level) || 'table'] <= rank[vis]; });
     var pct = objs.length ? Math.round(done / objs.length * 100) : 0;
     var parts = [p.giver ? h(R.Fragment, { key: 'g' }, 'Donn\u00E9e par ', p.giver) : null, p.location, p.level != null ? 'Niv. ' + p.level : null].filter(Boolean);
     var meta = parts.length ? parts.reduce(function (acc, x, i) { if (i) acc.push(' \u00B7 '); acc.push(h('span', { key: 'm' + i, className: 'gr-nowrap' }, x)); return acc; }, []) : null;
@@ -91,11 +94,11 @@
         return h(Objective, { key: i, done: o.done, optional: o.optional, visibility: o.visibility }, o.label);
       })) : null,
       p.showRewards && rewards.length ? h(RewardList, { rewards: rewards, className: 'gr-quest__rewards' }) : null,
-      !objs.length && !rewards.length ? null : h('div', { className: 'gr-quest__foot' },
+      !objs.length && !footRewards.length ? null : h('div', { className: 'gr-quest__foot' },
         objs.length ? h('div', { className: 'gr-track', role: 'progressbar', 'aria-valuenow': done, 'aria-valuemin': 0, 'aria-valuemax': objs.length, 'aria-label': 'Objectifs' },
           h('div', { className: 'gr-track__fill', style: { width: pct + '%' } })) : h('div', { style: { flex: 1 } }),
         objs.length ? h('span', { className: 'gr-count' }, done + '/' + objs.length) : null,
-        rewards.length && !p.showRewards ? h(RewardSummary, { rewards: rewards }) : null));
+        footRewards.length && !p.showRewards ? h(RewardSummary, { rewards: footRewards }) : null));
   }
 
   function Ornament() {

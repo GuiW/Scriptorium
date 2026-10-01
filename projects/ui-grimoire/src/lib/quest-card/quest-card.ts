@@ -13,6 +13,7 @@ import { Objective } from '../objective/objective';
 import { RewardList } from '../reward-list/reward-list';
 import { RewardSummary } from '../reward-summary/reward-summary';
 import { flagOnChange } from '../shared/motion';
+import { rewardsWithin } from '../shared/rewards';
 import type { QuestObjective, Reward, VisibilityValue } from '../shared/types';
 import { Visibility } from '../visibility/visibility';
 
@@ -99,7 +100,7 @@ export class QuestGiver {}
     @if (showRewards() && rewards().length) {
       <gr-reward-list class="gr-quest__rewards" [rewards]="rewards()" />
     }
-    @if (objectives().length || rewards().length) {
+    @if (objectives().length || footRewards().length) {
       <div class="gr-quest__foot">
         @if (objectives().length) {
           <div
@@ -116,8 +117,8 @@ export class QuestGiver {}
         } @else {
           <div style="flex: 1"></div>
         }
-        @if (rewards().length && !showRewards()) {
-          <gr-reward-summary [rewards]="rewards()" />
+        @if (footRewards().length && !showRewards()) {
+          <gr-reward-summary [rewards]="footRewards()" />
         }
       </div>
     }`,
@@ -163,6 +164,8 @@ export class QuestCard {
     const vis = this.visibility();
     return vis && vis.level !== 'table' ? vis : null;
   });
+  /** Rewards summarised in the foot: those more restricted than the quest are left out. */
+  protected readonly footRewards = computed(() => rewardsWithin(this.rewards(), this.visibility()));
   protected readonly done = computed(() => this.objectives().filter((o) => o.done).length);
   protected readonly progress = computed(() => {
     const total = this.objectives().length;

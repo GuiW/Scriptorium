@@ -74,7 +74,7 @@ export interface QuestCardProps {
   objectives?: QuestObjective[];
   /** Also list the objectives inside the card. */
   showObjectives?: boolean;
-  /** Rewards; the card foot shows a summary, `showRewards` the full list. */
+  /** Rewards; the card foot shows a summary (without those more restricted than the quest), `showRewards` the full list. */
   rewards?: Reward[];
   showRewards?: boolean;
   /** @deprecated single coin reward, e.g. "250 po" — use `rewards`. */

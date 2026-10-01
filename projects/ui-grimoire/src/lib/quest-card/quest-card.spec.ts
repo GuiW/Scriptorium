@@ -145,6 +145,44 @@ describe('QuestCard', () => {
     expect(empty.q('.gr-quest__foot')).toBeNull();
   });
 
+  it('leaves rewards more restricted than the quest out of the foot summary', async () => {
+    const rewards: Reward[] = [
+      ...REWARDS,
+      {
+        kind: 'item',
+        label: 'Couronne du roi noyé',
+        rarity: 'unique',
+        visibility: { level: 'gm' },
+      },
+      {
+        kind: 'other',
+        label: 'Une faveur du conseil',
+        visibility: { level: 'players', players: [{ name: 'Kyra' }] },
+      },
+    ];
+    const items = (r: Awaited<ReturnType<typeof render>>) => r.q('.gr-rsum__items');
+
+    const open = await render({ rewards });
+    expect(text(items(open))).toBe('1 objet');
+    expect(items(open)?.getAttribute('title')).toBe('Lame de lune');
+    expect(items(open)?.classList.contains('gr-rarity--rare')).toBe(true);
+    expect(open.q('.gr-rsum__more')).toBeNull();
+
+    const shared = await render({
+      rewards,
+      visibility: { level: 'players', players: [{ name: 'Kyra' }] },
+    });
+    expect(text(items(shared))).toBe('1 objet');
+    expect(text(shared.q('.gr-rsum__more'))).toBe('+1');
+
+    const secret = await render({ rewards, visibility: { level: 'gm' } });
+    expect(text(items(secret))).toBe('2 objets');
+    expect(items(secret)?.classList.contains('gr-rarity--unique')).toBe(true);
+
+    const onlySecret = await render({ objectives: [], rewards: rewards.slice(3, 4) });
+    expect(onlySecret.q('.gr-quest__foot')).toBeNull();
+  });
+
   it('frames a GM-only quest and one shared with Kyra', async () => {
     const gm = await render({ visibility: { level: 'gm' } });
     expect(classes(gm.card)).toEqual(['gr-quest', 'gr-quest--active', 'gr-quest--restricted']);
