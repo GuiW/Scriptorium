@@ -7,7 +7,7 @@
     "prestart": "npm run tokens",
     "start": "ng serve",
     "prebuild": "npm run tokens",
-    "build": "ng build",
+    "build": "ng build ui-grimoire && ng build scriptorium",
     "prewatch": "npm run tokens",
     "watch": "ng build --watch --configuration development",
     "pretest": "npm run tokens",

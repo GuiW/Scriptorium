@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NG_CLI_ANALYTICS: 'false'
+
+jobs:
+  test:
+    name: Test and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Token generator tests
+        run: npm run test:tools
+
+      # pretest regenerates tokens.css from design/grimoire/tokens.json
+      - name: Unit tests (ui-grimoire and scriptorium)
+        run: npm test -- --watch=false
+
+      - name: Build (ui-grimoire, then scriptorium)
+        run: npm run build
