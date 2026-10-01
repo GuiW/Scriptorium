@@ -56,7 +56,7 @@ The interface is in French; the rules below apply to French copy.
 ## Visibility: Secret MJ and chosen players
 
 - Three levels for any content (quest, objective, note, contact): **Toute la table** (default, no marker), **Certains joueurs** (the GM plus a selection) and **Secret MJ**.
-- Restricted content is recognisable at a glance, in the `secret` colour reserved for that meaning: a **dashed** rule + broken seal for Secret MJ, a **dotted** rule + player faces for a selection, `secret-hatch` hatching as decoration. Always a glyph and a word.
+- Restricted content is recognisable at a glance, in the `secret` colour reserved for that meaning: the same **dashed** rule (solid on the small markers) for Secret MJ and for a selection of players, told apart by the label: broken seal + « Secret MJ », player faces + « Pour Kyra »; `secret-hatch` hatching as decoration. Always a glyph and a word.
 - On the player side, content shared with them reads « Pour toi » (or « Pour toi et Kyra »); the rest is simply not sent. The marker informs, it protects nothing: the app does the filtering.
 - The GM chooses with `VisibilityPicker`; it is displayed with `Visibility` (badge), `SecretBlock` (block), or the `visibility` prop of `QuestCard` and `Objective`.
 

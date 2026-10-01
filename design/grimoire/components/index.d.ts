@@ -206,7 +206,7 @@ export declare function Tabs(props: TabsProps): JSX.Element;
 export type StatusFilterProps = TabsProps;
 export declare const StatusFilter: typeof Tabs;
 
-/** Restricted-visibility marker: "Secret MJ" (broken seal, dashed) or "Pour toi et Kyra" (player faces, dotted). Renders nothing for `table` unless `showPublic`. */
+/** Restricted-visibility marker: "Secret MJ" (broken seal) or "Pour toi et Kyra" (player faces), same frame. Renders nothing for `table` unless `showPublic`. */
 export interface VisibilityProps { level?: VisibilityLevel; players?: PlayerRef[]; compact?: boolean; showPublic?: boolean; className?: string; }
 export declare function Visibility(props: VisibilityProps): JSX.Element | null;
 

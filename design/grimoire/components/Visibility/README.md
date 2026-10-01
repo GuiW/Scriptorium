@@ -1,4 +1,4 @@
-Restricted-visibility marker: « Secret MJ » (broken seal, dashed rule) or « Pour toi et Kyra » (player faces, dotted rule). `secret` colour on `secret-hatch` hatching, always with a glyph and a word.
+Restricted-visibility marker: « Secret MJ » (broken seal) or « Pour toi et Kyra » (player faces), in the same `secret` frame: the glyph and the word tell them apart. `secret` colour on `secret-hatch` hatching, always with a glyph and a word.
 
 - `level`: `table` (default, nothing is shown — public is the norm), `gm` or `players`.
 - `players`: `[{name, you?}]`. With `you: true`, the label becomes « Pour toi et… »: this is what a player it concerns sees. Beyond three names: « Pour Ezren, Kyra et +2 », with the full list on hover.
