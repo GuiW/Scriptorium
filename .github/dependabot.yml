@@ -1,0 +1,28 @@
+version: 2
+updates:
+  # npm: one weekly PR for the Angular packages, which move together, one for the rest
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      angular:
+        patterns:
+          - '@angular/*'
+          - '@angular-devkit/*'
+          - 'ng-packagr'
+          - 'angular-eslint'
+          - '@angular-eslint/*'
+      dev-tools:
+        dependency-type: development
+        exclude-patterns:
+          - '@angular/*'
+          - '@angular-devkit/*'
+          - 'ng-packagr'
+          - 'angular-eslint'
+          - '@angular-eslint/*'
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

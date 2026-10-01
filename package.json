@@ -12,7 +12,9 @@
     "watch": "ng build --watch --configuration development",
     "pretest": "npm run tokens",
     "test": "ng test",
-    "test:tools": "node --test \"tools/**/*.test.mjs\""
+    "test:tools": "node --test \"tools/**/*.test.mjs\"",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "private": true,
   "packageManager": "npm@11.19.0",
