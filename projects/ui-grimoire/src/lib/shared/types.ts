@@ -16,3 +16,10 @@ export interface VisibilityValue {
   level: VisibilityLevel;
   players?: PlayerRef[];
 }
+
+export interface QuestObjective {
+  label: string;
+  done?: boolean;
+  optional?: boolean;
+  visibility?: VisibilityValue;
+}

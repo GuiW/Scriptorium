@@ -6,6 +6,7 @@ export * from './lib/badge/badge';
 export * from './lib/button/button';
 export * from './lib/icon/icon';
 export * from './lib/medallion/medallion';
+export * from './lib/objective/objective';
 export * from './lib/reputation/reputation';
 export * from './lib/shared/types';
 export * from './lib/status-filter/status-filter';

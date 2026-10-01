@@ -76,6 +76,23 @@
     <p id="test-status-filter-result" class="test__ui">Filtre actif : {{ status() }}</p>
   </section>
 
+  <section class="test__section" aria-labelledby="test-objectives">
+    <h2 id="test-objectives" class="test__label">Objective</h2>
+    <ul class="gr-objs">
+      @for (o of objectives(); track o.label; let i = $index) {
+        <li
+          grObjective
+          [done]="o.done ?? false"
+          [optional]="o.optional ?? false"
+          [visibility]="o.visibility"
+          (toggle)="toggleObjective(i)"
+        >
+          {{ o.label }}
+        </li>
+      }
+    </ul>
+  </section>
+
   <section class="test__section" aria-labelledby="test-icons">
     <h2 id="test-icons" class="test__label">Icon</h2>
     <ul class="gr-icons test__icons">
