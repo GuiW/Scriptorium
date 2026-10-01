@@ -60,7 +60,9 @@ export class QuestGiver {}
           <div class="gr-quest__meta">
             @if (hasGiver()) {
               <span class="gr-nowrap"
-                >Donnée par <ng-content select="[grQuestGiver]" />{{ giverSlot() ? '' : giver() }}</span
+                >Donnée par <ng-content select="[grQuestGiver]" />{{
+                  giverSlot() ? '' : giver()
+                }}</span
               >
             }
             @for (part of metaParts(); track $index) {
@@ -143,7 +145,10 @@ export class QuestCard {
   readonly objectiveToggle = output<number>();
 
   /** Raised when the card becomes selected (not on the first render): a gold ring spreads once. */
-  protected readonly chosen = flagOnChange(() => this.selected(), (selected) => selected);
+  protected readonly chosen = flagOnChange(
+    () => this.selected(),
+    (selected) => selected,
+  );
   protected readonly giverSlot = contentChild(QuestGiver);
   protected readonly hasGiver = computed(() => !!this.giverSlot() || !!this.giver());
   protected readonly metaParts = computed(() =>

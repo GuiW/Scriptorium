@@ -77,7 +77,10 @@ describe('BookmarkTabs', () => {
   it('marks the current page, and follows navigation', async () => {
     const r = await render();
     const active = () =>
-      r.tabs().filter((a) => a.classList.contains('gr-btabs__tab--on')).map((a) => a.getAttribute('href'));
+      r
+        .tabs()
+        .filter((a) => a.classList.contains('gr-btabs__tab--on'))
+        .map((a) => a.getAttribute('href'));
     expect(active()).toEqual(['/quetes']);
     expect(r.tabs()[0].getAttribute('aria-current')).toBe('page');
     await TestBed.inject(Router).navigateByUrl('/lieux');

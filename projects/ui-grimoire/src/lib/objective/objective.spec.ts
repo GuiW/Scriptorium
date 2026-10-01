@@ -101,7 +101,9 @@ describe('Objective', () => {
   it('wraps the projected text in the span that carries the strike-through', async () => {
     const r = await render({ done: true });
     expect(r.label.firstElementChild?.className).toBe('gr-obj__text');
-    expect(r.label.firstElementChild?.textContent?.trim()).toBe('Retrouver le médaillon de la prêtresse');
+    expect(r.label.firstElementChild?.textContent?.trim()).toBe(
+      'Retrouver le médaillon de la prêtresse',
+    );
   });
 
   it('stamps the diamond when the objective gets done, never on the first render', async () => {

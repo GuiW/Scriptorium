@@ -1,7 +1,12 @@
 import { Component, input } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import type { ContactKind } from '../shared/types';
-import { REPUTATION_SCALES, REPUTATION_TONES, Reputation, type ReputationTrend } from './reputation';
+import {
+  REPUTATION_SCALES,
+  REPUTATION_TONES,
+  Reputation,
+  type ReputationTrend,
+} from './reputation';
 
 @Component({
   imports: [Reputation],
@@ -48,7 +53,9 @@ describe('Reputation', () => {
     for (let value = 0; value < 5; value++) {
       const r = await render({ value });
       const label = REPUTATION_SCALES.npc[value];
-      expect(classes(r.rep), label).toEqual(['gr-rep', 'gr-rep--slide', `gr-rep--${REPUTATION_TONES[value]}`].sort());
+      expect(classes(r.rep), label).toEqual(
+        ['gr-rep', 'gr-rep--slide', `gr-rep--${REPUTATION_TONES[value]}`].sort(),
+      );
       expect(r.steps.length).toBe(5);
       expect(r.on, label).toBe(value);
       expect(r.label).toBe(label);
@@ -99,7 +106,12 @@ describe('Reputation', () => {
 
   it('adds the compact modifier', async () => {
     const r = await render({ compact: true });
-    expect(classes(r.rep)).toEqual(['gr-rep', 'gr-rep--compact', 'gr-rep--neutral', 'gr-rep--slide']);
+    expect(classes(r.rep)).toEqual([
+      'gr-rep',
+      'gr-rep--compact',
+      'gr-rep--neutral',
+      'gr-rep--slide',
+    ]);
   });
 
   it('draws one marker over the track, centred on the current step once measured', async () => {

@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, Directive, computed, contentChild, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Directive,
+  computed,
+  contentChild,
+  input,
+} from '@angular/core';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 export type ButtonSize = 'md' | 'sm';
@@ -16,7 +23,8 @@ export class ButtonIcon {}
   host: { '[class]': 'classes()', '[attr.type]': 'type()' },
   template: `@if (icon()) {
       <span class="gr-btn__icon" aria-hidden="true"><ng-content select="[grButtonIcon]" /></span>
-    }<ng-content />`,
+    }
+    <ng-content />`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Button {

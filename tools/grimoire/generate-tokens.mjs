@@ -45,7 +45,10 @@ function resolveValues(token, kind, themes, known) {
     if (!alias) return { values: { [themes[0]]: value }, alias: false };
     if (alias[1] === name) fail(`${kind} "${name}": alias to itself`);
     if (!known.has(alias[1])) fail(`${kind} "${name}": alias to unknown token "${alias[1]}"`);
-    return { values: Object.fromEntries(themes.map((t) => [t, `var(--${alias[1]})`])), alias: true };
+    return {
+      values: Object.fromEntries(themes.map((t) => [t, `var(--${alias[1]})`])),
+      alias: true,
+    };
   }
 
   if (value && typeof value === 'object') {
@@ -88,9 +91,13 @@ function typeStyles(type) {
     if (!(group.family in families)) fail(`type "${group.name}": unknown family "${group.family}"`);
     for (const s of group.styles) {
       const { name, fontSize, lineHeight, fontWeight, fontStyle, letterSpacing } = s;
-      if (!name || !fontSize || !lineHeight || !fontWeight) fail(`type "${name}": incomplete style`);
+      if (!name || !fontSize || !lineHeight || !fontWeight)
+        fail(`type "${name}": incomplete style`);
       const italic = fontStyle && fontStyle !== 'normal' ? `${fontStyle} ` : '';
-      lines.push([`type-${name}`, `${italic}${fontWeight} ${fontSize}/${lineHeight} var(--font-${group.family})`]);
+      lines.push([
+        `type-${name}`,
+        `${italic}${fontWeight} ${fontSize}/${lineHeight} var(--font-${group.family})`,
+      ]);
       if (letterSpacing) lines.push([`type-${name}-tracking`, letterSpacing]);
     }
   }
@@ -105,7 +112,8 @@ const single = (text) => `'${String(text).replace(/\\/g, '\\\\').replace(/'/g, "
 export function buildTokens(json) {
   const themes = (json.color?.themes ?? []).map((t) => t.id);
   if (!themes.length) fail('color.themes: no themes');
-  for (const id of themes) if (!(id in COLOR_SCHEME)) fail(`theme "${id}": color-scheme must be declared in the script`);
+  for (const id of themes)
+    if (!(id in COLOR_SCHEME)) fail(`theme "${id}": color-scheme must be declared in the script`);
   const [base, ...others] = themes;
 
   const colors = collect(json.color.tokens, 'color', themes);
@@ -195,7 +203,10 @@ function main() {
     },
   });
   const { css, ts } = buildTokens(JSON.parse(readFileSync(values.tokens, 'utf8')));
-  for (const [file, content] of [[values.css, css], [values.ts, ts]]) {
+  for (const [file, content] of [
+    [values.css, css],
+    [values.ts, ts],
+  ]) {
     mkdirSync(dirname(file), { recursive: true });
     writeFileSync(file, content, 'utf8');
     console.log(`wrote ${file}`);

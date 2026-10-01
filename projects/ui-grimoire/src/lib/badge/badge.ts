@@ -23,7 +23,8 @@ export const BADGE_TONES: Record<BadgeTone, { glyph: string; label: string }> = 
   host: { '[class]': 'classes()', '(animationend)': 'stamp.set(false)' },
   template: `@if (shownGlyph(); as g) {
       <span class="gr-badge__glyph" aria-hidden="true">{{ g }}</span>
-    }<ng-content>{{ tones[tone()].label }}</ng-content>`,
+    }
+    <ng-content>{{ tones[tone()].label }}</ng-content>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Badge {

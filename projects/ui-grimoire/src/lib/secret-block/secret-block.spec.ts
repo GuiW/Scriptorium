@@ -45,10 +45,15 @@ describe('SecretBlock', () => {
   });
 
   it('frames content shared with some players', async () => {
-    const r = await render({ level: 'players', players: [{ name: 'Ezren', you: true }, { name: 'Kyra' }] });
+    const r = await render({
+      level: 'players',
+      players: [{ name: 'Ezren', you: true }, { name: 'Kyra' }],
+    });
     expect(classes(r.block)).toEqual(['gr-secret', 'gr-secret--players']);
     expect(r.block.getAttribute('aria-label')).toBe('Partagé avec toi et Kyra');
-    expect(r.tab?.querySelector('.gr-vis--players')?.lastElementChild?.textContent).toBe('Pour toi et Kyra');
+    expect(r.tab?.querySelector('.gr-vis--players')?.lastElementChild?.textContent).toBe(
+      'Pour toi et Kyra',
+    );
   });
 
   it('projects the content into the body', async () => {

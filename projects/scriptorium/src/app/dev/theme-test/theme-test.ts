@@ -36,7 +36,25 @@ import { DEMO_QUESTS } from './demo-quests';
 /** TEMPORARY — checks the theme foundations and the base components in both themes. */
 @Component({
   selector: 'app-theme-test',
-  imports: [Badge, BookmarkNav, BookmarkTabs, Button, ButtonIcon, ContactChip, Icon, Medallion, Objective, QuestCard, QuestGiver, Reputation, RewardList, RewardSummary, SecretBlock, StatusFilter, Visibility],
+  imports: [
+    Badge,
+    BookmarkNav,
+    BookmarkTabs,
+    Button,
+    ButtonIcon,
+    ContactChip,
+    Icon,
+    Medallion,
+    Objective,
+    QuestCard,
+    QuestGiver,
+    Reputation,
+    RewardList,
+    RewardSummary,
+    SecretBlock,
+    StatusFilter,
+    Visibility,
+  ],
   templateUrl: './theme-test.html',
   styleUrl: './theme-test.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -116,7 +134,11 @@ export class ThemeTest {
     { kind: 'reputation', label: 'Chevaliers de Lastwall +2' },
     { kind: 'other', label: 'Un repas chez les Emberlyn', note: 'au choix du groupe' },
     { kind: 'item', label: 'Couronne du roi noyé', rarity: 'unique', visibility: { level: 'gm' } },
-    { kind: 'other', label: 'Une faveur du conseil', visibility: { level: 'players', players: [{ name: 'Kyra' }] } },
+    {
+      kind: 'other',
+      label: 'Une faveur du conseil',
+      visibility: { level: 'players', players: [{ name: 'Kyra' }] },
+    },
   ];
   protected readonly kyra: PlayerRef[] = [{ name: 'Kyra' }];
   protected readonly youAndKyra: PlayerRef[] = [{ name: 'Ezren', you: true }, { name: 'Kyra' }];

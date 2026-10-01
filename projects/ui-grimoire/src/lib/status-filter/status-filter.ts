@@ -94,7 +94,10 @@ export class StatusFilter {
 
   /** Index of the only option reachable with Tab: the checked one, else the first. */
   protected readonly tabStop = computed(() =>
-    Math.max(0, this.items().findIndex((item) => item.id === this.value())),
+    Math.max(
+      0,
+      this.items().findIndex((item) => item.id === this.value()),
+    ),
   );
 
   /** Position and width of the checked option, for the sliding underline; null before measuring. */
@@ -116,7 +119,9 @@ export class StatusFilter {
       const id = this.value();
       const option = this.options().find((o) => o.id() === id);
       this.indicator.set(
-        option ? { x: `${option.element.offsetLeft}px`, w: `${option.element.offsetWidth}px` } : null,
+        option
+          ? { x: `${option.element.offsetLeft}px`, w: `${option.element.offsetWidth}px` }
+          : null,
       );
     });
 

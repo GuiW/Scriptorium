@@ -3,8 +3,9 @@
     <p class="test__kicker">Temporary page</p>
     <h1 class="test__title">Theme foundations</h1>
     <p class="test__lead">
-      Current theme: <strong>{{ themeService.info().name }}</strong>. Each swatch reads the CSS
-      variable it is named after; switch themes to check both sets of values.
+      Current theme: <strong>{{ themeService.info().name }}</strong
+      >. Each swatch reads the CSS variable it is named after; switch themes to check both sets of
+      values.
     </p>
   </header>
 
@@ -52,9 +53,23 @@
       <gr-reputation kind="faction" [value]="4" trend="down" compact />
     </div>
     <div class="test__row test__row--center">
-      <button grButton variant="secondary" aria-label="Lower the reputation" (click)="moveStance(-1)">−</button>
+      <button
+        grButton
+        variant="secondary"
+        aria-label="Lower the reputation"
+        (click)="moveStance(-1)"
+      >
+        −
+      </button>
       <gr-reputation [value]="stance()" [trend]="stanceTrend()" />
-      <button grButton variant="secondary" aria-label="Raise the reputation" (click)="moveStance(1)">+</button>
+      <button
+        grButton
+        variant="secondary"
+        aria-label="Raise the reputation"
+        (click)="moveStance(1)"
+      >
+        +
+      </button>
     </div>
   </section>
 
@@ -106,12 +121,17 @@
     <div class="test__row test__row--center">
       <gr-contact-chip name="Wrin Sivinxi" [reputation]="3" />
       <gr-contact-chip name="Les Chevaliers de Lastwall" kind="faction" [reputation]="1" />
-      <gr-contact-chip name="Oleg Leveton" [reputation]="4" link (activate)="chipClicks.set(chipClicks() + 1)" />
+      <gr-contact-chip
+        name="Oleg Leveton"
+        [reputation]="4"
+        link
+        (activate)="chipClicks.set(chipClicks() + 1)"
+      />
       <gr-contact-chip name="Yvane Emberlyn" />
     </div>
     <p class="test__ui">
-      Donnée par <gr-contact-chip name="Wrin Sivinxi" [reputation]="3" link /> · Otari · Niv. 2
-      — link clicks: {{ chipClicks() }}
+      Donnée par <gr-contact-chip name="Wrin Sivinxi" [reputation]="3" link /> · Otari · Niv. 2 —
+      link clicks: {{ chipClicks() }}
     </p>
   </section>
 
@@ -181,7 +201,9 @@
     <p class="test__ui">Selected quest: {{ selectedQuest() }} — link clicks: {{ chipClicks() }}</p>
     <h3 class="test__label">Detailed view</h3>
     <div class="test__row">
-      <button grButton variant="secondary" (click)="cycleStatus()">Cycle the status ({{ detailStatus() }})</button>
+      <button grButton variant="secondary" (click)="cycleStatus()">
+        Cycle the status ({{ detailStatus() }})
+      </button>
     </div>
     <div class="test__cards">
       <article
