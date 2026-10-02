@@ -12,6 +12,12 @@ import {
 export const CAMPAIGN = { title: "L'Âge des Cendres", session: 'Session XIV · 12 septembre' };
 
 /**
+ * Entries of the mobile tab bar (five at most): those of the mobile mockup, with Réglages in
+ * place of « Plus » until that menu exists (design/GAPS.md). Lieux is not in the bar.
+ */
+const MOBILE_ENTRIES = ['quests', 'journal', 'contacts', 'loot', 'settings'];
+
+/**
  * Application frame: the page navigation for the current layout (BookmarkNav full on desktop,
  * rail on tablet, BookmarkTabs at the bottom on mobile) around the routed page.
  */
@@ -21,7 +27,7 @@ export const CAMPAIGN = { title: "L'Âge des Cendres", session: 'Session XIV · 
   host: { class: 'shell', '[class.shell--mobile]': "layout() === 'mobile'" },
   template: `@if (layout() === 'mobile') {
       <main class="shell__page"><router-outlet /></main>
-      <nav grBookmarkTabs class="shell__tabs" [items]="items()"></nav>
+      <nav grBookmarkTabs class="shell__tabs" [items]="mobileItems()"></nav>
     } @else {
       <nav
         grBookmarkNav
@@ -57,4 +63,7 @@ export class Shell {
     { id: 'd1', divider: true },
     { id: 'settings', label: 'Réglages', link: '/reglages', icon: 'reglages' },
   ]);
+  protected readonly mobileItems = computed(() =>
+    this.items().filter((item) => MOBILE_ENTRIES.includes(item.id)),
+  );
 }
