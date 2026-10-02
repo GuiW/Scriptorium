@@ -4,4 +4,5 @@ Action button; a single `primary` variant (`crimson` fill, `on-crimson` text) pe
 - `size="sm"` in toolbars and cards.
 - `icon`: a glyph or a line icon, left of the label.
 - Label = a verb in the infinitive, sentence case. Never « OK » or « Valider » on its own.
+- A button that leads to a page is a link: `<a grButton>` in Angular (« ‹ Retour aux quêtes »), same classes, no `type`.
 - Avoid: two `primary` buttons side by side; a `primary` button for a deletion (use `secondary` + confirmation).
