@@ -39,6 +39,31 @@
         }
       }
     },
+    "feature-quests": {
+      "projectType": "library",
+      "root": "projects/feature-quests",
+      "sourceRoot": "projects/feature-quests/src",
+      "prefix": "quests",
+      "architect": {
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "buildTarget": "scriptorium:build:development",
+            "tsConfig": "projects/feature-quests/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/feature-quests/**/*.ts",
+              "projects/feature-quests/**/*.html"
+            ],
+            "eslintConfig": "projects/feature-quests/eslint.config.js"
+          }
+        }
+      }
+    },
     "scriptorium": {
       "projectType": "application",
       "schematics": {},
