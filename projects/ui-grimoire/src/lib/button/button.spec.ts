@@ -30,6 +30,16 @@ class Host {
   readonly submit = input(false);
 }
 
+@Component({
+  imports: [Button],
+  template: `<div [attr.data-theme]="theme()">
+    <a grButton variant="ghost" href="/quetes">‹ Retour aux quêtes</a>
+  </div>`,
+})
+class LinkHost {
+  readonly theme = input<string>();
+}
+
 async function render(inputs: Partial<Record<keyof Host, unknown>> = {}) {
   const fixture = TestBed.createComponent(Host);
   for (const [key, value] of Object.entries(inputs)) fixture.componentRef.setInput(key, value);
@@ -75,6 +85,19 @@ describe('Button', () => {
 
   it('uses the native disabled state', async () => {
     expect((await render({ disabled: true })).disabled).toBe(true);
+  });
+
+  it('works on a link, without a type, in both themes', async () => {
+    for (const theme of [undefined, 'dungeon']) {
+      const fixture = TestBed.createComponent(LinkHost);
+      fixture.componentRef.setInput('theme', theme);
+      await fixture.whenStable();
+      const link = (fixture.nativeElement as HTMLElement).querySelector('a')!;
+      expect(link.className, theme).toBe('gr-btn gr-btn--ghost');
+      expect(link.hasAttribute('type'), theme).toBe(false);
+      expect(link.getAttribute('href'), theme).toBe('/quetes');
+      expect(link.textContent!.trim(), theme).toBe('‹ Retour aux quêtes');
+    }
   });
 
   it('renders the same markup under the dungeon theme', async () => {

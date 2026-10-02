@@ -8,6 +8,7 @@ export * from './lib/bookmark-tabs/bookmark-tabs';
 export * from './lib/button/button';
 export * from './lib/contact-chip/contact-chip';
 export * from './lib/icon/icon';
+export * from './lib/layout/layout';
 export * from './lib/medallion/medallion';
 export * from './lib/objective/objective';
 export * from './lib/quest-card/quest-card';

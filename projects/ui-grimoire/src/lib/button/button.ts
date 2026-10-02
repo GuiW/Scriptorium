@@ -2,8 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   Directive,
+  ElementRef,
   computed,
   contentChild,
+  inject,
   input,
 } from '@angular/core';
 
@@ -17,12 +19,13 @@ export class ButtonIcon {}
 /**
  * Action button on the native `<button>`, which keeps disabled, click, form submission and aria-label.
  * One `primary` per screen; the label is a verb in the infinitive (« Ajouter un objectif »).
+ * On an `<a>` when the action leads to a page (« ‹ Retour aux quêtes »): same look, no `type`.
  */
 @Component({
-  // On the native button element to keep its semantics; the gr prefix is still enforced by review.
+  // On the native button or link element to keep its semantics; the gr prefix is still enforced by review.
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'button[grButton]',
-  host: { '[class]': 'classes()', '[attr.type]': 'type()' },
+  selector: 'button[grButton], a[grButton]',
+  host: { '[class]': 'classes()', '[attr.type]': 'isLink ? null : type()' },
   template: `@if (icon()) {
       <span class="gr-btn__icon" aria-hidden="true"><ng-content select="[grButtonIcon]" /></span>
     }
@@ -33,9 +36,11 @@ export class Button {
   readonly variant = input<ButtonVariant>('primary');
   /** `sm` is for desktop toolbars only: never on tablet or mobile, where targets must stay ≥ 44px. */
   readonly size = input<ButtonSize>('md');
-  /** Defaults to `button` so a Grimoire button never submits a form by accident. */
+  /** Defaults to `button` so a Grimoire button never submits a form by accident; ignored on a link. */
   readonly type = input<'button' | 'submit' | 'reset'>('button');
 
+  protected readonly isLink =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement.tagName === 'A';
   protected readonly icon = contentChild(ButtonIcon);
   protected readonly classes = computed(
     () => `gr-btn gr-btn--${this.variant()}${this.size() === 'sm' ? ' gr-btn--sm' : ''}`,

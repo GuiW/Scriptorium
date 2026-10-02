@@ -60,7 +60,7 @@ What the system does not cover yet, or covers poorly. No style is invented: ever
 
 | Need | Where | Finding | Lead, with no new style | Status |
 |---|---|---|---|---|
-| Layout breakpoints | Whole app: navigation (`BookmarkNav` full / rail, `BookmarkTabs`), quest detail (side panel or page) | The design system has no breakpoint token; the mockups are drawn at 390px (mobile), 1024px (tablet) and 1440px (desktop). | Mobile below 768px, tablet from 768px, desktop from 1280px. Kept as constants next to `injectLayout()` in `ui-grimoire`, since a media query cannot read a CSS variable; the page CSS uses the same values. | **Decided** with the Quêtes page plan. |
+| Layout breakpoints | Whole app: navigation (`BookmarkNav` full / rail, `BookmarkTabs`), quest detail (side panel or page) | No breakpoint token in `tokens.json`, but the design system README (Navigation) and the BookmarkNav and BookmarkTabs READMEs fix them: mobile below 768px, tablet 768–1199px, desktop from 1200px. | Those values, kept as constants next to `injectLayout()` in `ui-grimoire` (a media query cannot read a CSS variable); the page CSS repeats them. The plan first proposed 1280px, from the mockup widths: corrected to the documented 1200px. | **Fixed**: no new value. |
 | Link styled as a button | « ‹ Retour aux quêtes » (tablet and mobile quest page) | The canvas draws a ghost `Button`, but the action leads to a page: it must be a link (same reasoning as the bookmarks). | `grButton` also accepts an `<a>`: same `gr-btn` classes, no `type` attribute. As for the bookmarks, `bundle.css` adds `text-decoration: none` and `box-sizing: border-box` on `.gr-btn` (a link is not a button); no visual change on a `<button>`. | **Decided** with the Quêtes page plan. |
 
 ## How to use
