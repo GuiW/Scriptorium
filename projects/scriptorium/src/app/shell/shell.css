@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  min-height: 100dvh;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+/* The navigation column stays in view while the page scrolls; no overflow: the active ribbon reaches past it. */
+.shell__nav {
+  position: sticky;
+  top: 0;
+  flex: none;
+  height: 100dvh;
+}
+
+.shell__page {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Mobile: the page above, the tab bar pinned to the bottom of the screen. */
+:host(.shell--mobile) {
+  flex-direction: column;
+}
+
+.shell__tabs {
+  position: sticky;
+  bottom: 0;
+}
