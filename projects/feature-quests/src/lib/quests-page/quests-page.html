@@ -1,0 +1,70 @@
+@if (selected(); as quest) {
+  @if (!inPanel()) {
+    <div class="quests__page">
+      <div>
+        <a grButton variant="ghost" routerLink="/quetes" queryParamsHandling="preserve"
+          >‹ Retour aux quêtes</a
+        >
+      </div>
+      <quests-quest-detail
+        mode="page"
+        [quest]="quest"
+        (objectiveToggle)="toggleObjective($event)"
+      />
+    </div>
+  }
+}
+
+@if (!selected() || inPanel()) {
+  <div class="quests__main">
+    <header class="quests__head">
+      <h1 class="quests__title">Quêtes</h1>
+      <gr-status-filter
+        [items]="filters()"
+        [value]="status()"
+        (valueChange)="selectStatus($event)"
+        aria-label="Filtrer les quêtes"
+        controls="quests-list"
+      />
+    </header>
+    <div id="quests-list" class="quests__grid">
+      @for (q of quests(); track q.id) {
+        <article
+          grQuestCard
+          [attr.data-quest]="q.id"
+          [title]="q.title"
+          [status]="q.status"
+          [location]="q.location"
+          [level]="q.level"
+          [summary]="q.summary"
+          [objectives]="q.objectives"
+          [rewards]="q.rewards"
+          [visibility]="q.visibility"
+          [selected]="q.id === selected()?.id"
+          selectable
+          (activate)="open(q.id)"
+        >
+          @if (q.giver; as giver) {
+            <gr-contact-chip
+              grQuestGiver
+              [name]="giver.name"
+              [kind]="giver.kind"
+              [reputation]="giver.reputation"
+            />
+          }
+        </article>
+      } @empty {
+        <p class="quests__empty">{{ emptyText() }}</p>
+      }
+    </div>
+  </div>
+  @if (selected(); as quest) {
+    <aside class="quests__panel" aria-label="Détail de la quête">
+      <quests-quest-detail mode="panel" [quest]="quest" (objectiveToggle)="toggleObjective($event)">
+        <button grButton questsDetailAction variant="ghost" size="sm" (click)="close()">
+          Fermer
+        </button>
+      </quests-quest-detail>
+    </aside>
+  }
+}
