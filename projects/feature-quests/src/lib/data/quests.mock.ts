@@ -1,26 +1,10 @@
-import type {
-  ContactKind,
-  QuestObjective,
-  QuestStatus,
-  Reward,
-  VisibilityValue,
-} from '@scriptorium/ui-grimoire';
+import type { Quest } from './quest';
 
-/** TEMPORARY — the canvas's demo quests (design/quetes/Main.dc.html); moves to the feature library with the page. */
-export interface DemoQuest {
-  id: string;
-  title: string;
-  status: QuestStatus;
-  giver?: { name: string; kind: ContactKind; reputation: number };
-  location: string;
-  level?: number;
-  summary: string;
-  visibility?: VisibilityValue;
-  objectives: QuestObjective[];
-  rewards: Reward[];
-}
-
-export const DEMO_QUESTS: DemoQuest[] = [
+/**
+ * The canvas's six demo quests (design/quetes/Main.dc.html): one Secret MJ, one shared with Kyra.
+ * Mock data until the backend exists; only QuestsStore reads it.
+ */
+export const QUESTS_MOCK: readonly Quest[] = [
   {
     id: 'q1',
     title: 'La crypte sous Otari',
@@ -46,6 +30,8 @@ export const DEMO_QUESTS: DemoQuest[] = [
       { kind: 'item', label: 'Lame de lune', rarity: 'rare', note: 'épée longue +1' },
       { kind: 'item', label: 'Potion de guérison moyenne', rarity: 'uncommon' },
     ],
+    secretNote:
+      'Le médaillon est un faux : le vrai est resté dans le coffre de la prêtresse. Wrin le sait et se tait.',
   },
   {
     id: 'q2',
