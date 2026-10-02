@@ -77,7 +77,7 @@ describe('Shell', () => {
     expect(root.querySelector('.gr-btabs')).toBeNull();
   });
 
-  it('shows the BookmarkTabs after the page on mobile, five entries at most', async () => {
+  it('shows the BookmarkTabs after the page on mobile, with Réglages in the five entries', async () => {
     const { root } = await render(390);
     expect(root.querySelector('.gr-bnav')).toBeNull();
     const tabs = root.querySelector('nav.gr-btabs')!;
@@ -86,9 +86,10 @@ describe('Shell', () => {
       'Quêtes',
       'Journal',
       'Contacts',
-      'Lieux',
       'Butin',
+      'Réglages',
     ]);
+    expect(tabs.querySelector('a[href="/reglages"]')).not.toBeNull();
   });
 
   it('marks Quêtes as the current page and counts the quests in progress', async () => {

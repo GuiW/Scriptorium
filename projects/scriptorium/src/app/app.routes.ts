@@ -23,7 +23,11 @@ export const routes: Routes = [
       comingSoon('contacts', 'Contacts'),
       comingSoon('lieux', 'Lieux'),
       comingSoon('butin', 'Butin'),
-      comingSoon('reglages', 'Réglages'),
+      {
+        path: 'reglages',
+        title: 'Réglages · Scriptorium',
+        loadComponent: () => import('./settings/settings').then((m) => m.Settings),
+      },
       { path: '', pathMatch: 'full', redirectTo: 'quetes' },
     ],
   },
