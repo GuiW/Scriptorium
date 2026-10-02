@@ -1,0 +1,92 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  color: var(--ink);
+}
+
+/* The quest page keeps a readable line length (tablet mockup: 720px). */
+:host(.detail--page) {
+  max-width: 720px;
+}
+
+.detail__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Above the title: the visibility marker on the left, the action (« Fermer ») on the right. */
+.detail__top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Nothing to show: no gap left above the title (quest page of a public quest). */
+.detail__top:not(:has(gr-visibility)):has(> .detail__action:empty) {
+  display: none;
+}
+
+.detail__action {
+  display: flex;
+  margin-left: auto;
+}
+
+/*
+ * In the desktop panel, that bar sits in the panel's top padding, out of the flow: the title
+ * keeps the baseline of « Quêtes » whatever the quest, and its row only holds the status.
+ */
+:host(:not(.detail--page)) .detail__head {
+  position: relative;
+}
+
+:host(:not(.detail--page)) .detail__top {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  margin-bottom: var(--space-2);
+}
+
+.detail__title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.detail__title {
+  margin: 0;
+  font: var(--type-title-lg);
+}
+
+/* One title line high (title-lg), so the status is centred on the title's first line. */
+.detail__status {
+  display: flex;
+  flex: none;
+  align-items: center;
+  height: 1lh;
+  font: var(--type-title-lg);
+}
+
+.detail__summary {
+  margin: 0;
+  font: var(--type-body);
+}
+
+:host(.detail--page) .detail__summary {
+  font: var(--type-body-lg);
+}
+
+.detail__label {
+  margin-bottom: var(--space-3);
+  font: var(--type-label-caps);
+  letter-spacing: var(--type-label-caps-tracking);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.detail__note {
+  margin: 0;
+}
