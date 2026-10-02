@@ -15,8 +15,10 @@ export const routes: Routes = [
     path: '',
     component: Shell,
     children: [
-      // TEMPORARY: replaced by the feature-quests routes with the Quêtes page.
-      comingSoon('quetes', 'Quêtes'),
+      {
+        path: 'quetes',
+        loadChildren: () => import('@scriptorium/feature-quests').then((m) => m.QUESTS_ROUTES),
+      },
       comingSoon('journal', 'Journal'),
       comingSoon('contacts', 'Contacts'),
       comingSoon('lieux', 'Lieux'),

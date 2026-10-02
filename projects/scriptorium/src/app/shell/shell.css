@@ -13,6 +13,14 @@
   height: 100dvh;
 }
 
+/*
+ * Desktop column: the campaign name sits on the baseline of the page title (title-lg, under a
+ * space-12 page padding). 6px is below the token scale: see design/GAPS.md.
+ */
+.shell__nav:not(.gr-bnav--rail) {
+  padding-top: calc(var(--space-8) + 6px);
+}
+
 .shell__page {
   flex: 1;
   min-width: 0;

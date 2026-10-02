@@ -1,0 +1,131 @@
+:host {
+  display: flex;
+  min-height: 100%;
+}
+
+.quests__main,
+.quests__page {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-12);
+}
+
+.quests__main {
+  gap: var(--space-8);
+}
+
+.quests__page {
+  gap: var(--space-6);
+}
+
+/* The quest page is one centred column, the « Retour » link aligned on the detail (720px wide). */
+.quests__page > * {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+.quests__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.quests__title {
+  margin: 0;
+  font: var(--type-title-lg);
+  color: var(--ink);
+}
+
+/* As many card columns as fit (two at 1024 and 1440px with the panel), one on a phone. */
+.quests__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: var(--space-4);
+  align-content: start;
+  /* A column wider than a card (.gr-quest caps at 440px of content): the card sits centred. */
+  justify-items: center;
+}
+
+/* Cards still fill their column up to that cap, whatever the length of their text. */
+.quests__grid > article {
+  width: -webkit-fill-available;
+  width: -moz-available;
+  width: stretch;
+}
+
+.quests__grid > .quests__empty {
+  justify-self: stretch;
+}
+
+.quests__empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  font: var(--type-body);
+  color: var(--ink-muted);
+}
+
+/*
+ * Desktop side panel, in view while the list scrolls. A share of the page so it grows on wide
+ * screens (35% = the mockup's 420px at 1440px), never narrower than those 420px.
+ */
+.quests__panel {
+  position: sticky;
+  top: 0;
+  flex: none;
+  box-sizing: border-box;
+  width: 35%;
+  min-width: 420px;
+  height: 100dvh;
+  overflow-y: auto;
+  /* Same top as the page, so the quest title shares the baseline of « Quêtes ». */
+  padding: var(--space-12) var(--space-8) var(--space-8);
+  background: var(--surface-raised);
+  border-left: 1px solid var(--hairline);
+}
+
+@media (max-width: 767px) {
+  .quests__main,
+  .quests__page {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  /* The header carries the top and bottom spacing so it can stay pinned. */
+  .quests__main {
+    gap: 0;
+    padding-top: 0;
+  }
+
+  /*
+   * The title and the filter stay pinned at the top while the cards scroll under them; the
+   * header spans the side gutters so nothing shows past its edges.
+   */
+  .quests__head {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    gap: var(--space-4);
+    margin-inline: calc(-1 * var(--space-4));
+    /* Its content lines up with the card column below. */
+    padding: var(--space-6)
+      max(var(--space-4), calc(50% + var(--space-4) - var(--quests-column) / 2)) var(--space-4);
+    background: var(--surface);
+  }
+
+  /*
+   * One column of cards, as in the mobile mockup, centred on a large phone (no lone card left
+   * over in a second column). As wide as a card can be: .gr-quest caps its content at 440px
+   * (bundle.css), plus its space-6 padding and 1px border.
+   */
+  .quests__main {
+    --quests-column: calc(440px + 2 * var(--space-6) + 2px);
+  }
+
+  .quests__grid {
+    grid-template-columns: minmax(0, var(--quests-column));
+    justify-content: center;
+  }
+}
