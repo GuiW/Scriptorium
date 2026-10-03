@@ -1,18 +1,23 @@
-@if (selected(); as quest) {
-  @if (!inPanel()) {
-    <div class="quests__page">
-      <div>
-        <a grButton variant="ghost" routerLink="/quetes" queryParamsHandling="preserve"
-          >‹ Retour aux quêtes</a
-        >
-      </div>
+<!--
+  The open quest is keyed by its id: another quest is a new detail, which plays its entrance;
+  ticking an objective of the same quest keeps it in place.
+-->
+@if (selected() && !inPanel()) {
+  <div class="quests__page">
+    <div>
+      <a grButton variant="ghost" routerLink="/quetes" queryParamsHandling="preserve"
+        >‹ Retour aux quêtes</a
+      >
+    </div>
+    @for (quest of open(); track quest.id) {
       <quests-quest-detail
+        animate.enter="quests-enter"
         mode="page"
         [quest]="quest"
         (objectiveToggle)="toggleObjective($event)"
       />
-    </div>
-  }
+    }
+  </div>
 }
 
 @if (!selected() || inPanel()) {
@@ -28,9 +33,11 @@
       />
     </header>
     <div id="quests-list" class="quests__grid">
-      @for (q of quests(); track q.id) {
+      @for (q of quests(); track q.id; let i = $index) {
         <article
           grQuestCard
+          animate.enter="quests-enter"
+          [style.--quests-order]="i"
           [attr.data-quest]="q.id"
           [title]="q.title"
           [status]="q.status"
@@ -42,7 +49,7 @@
           [visibility]="q.visibility"
           [selected]="q.id === selected()?.id"
           selectable
-          (activate)="open(q.id)"
+          (activate)="openQuest(q.id)"
         >
           @if (q.giver; as giver) {
             <gr-contact-chip
@@ -54,17 +61,24 @@
           }
         </article>
       } @empty {
-        <p class="quests__empty">{{ emptyText() }}</p>
+        <p class="quests__empty" animate.enter="quests-enter">{{ emptyText() }}</p>
       }
     </div>
   </div>
-  @if (selected(); as quest) {
+  @if (selected()) {
     <aside class="quests__panel" aria-label="Détail de la quête">
-      <quests-quest-detail mode="panel" [quest]="quest" (objectiveToggle)="toggleObjective($event)">
-        <button grButton questsDetailAction variant="ghost" size="sm" (click)="close()">
-          Fermer
-        </button>
-      </quests-quest-detail>
+      @for (quest of open(); track quest.id) {
+        <quests-quest-detail
+          animate.enter="quests-enter"
+          mode="panel"
+          [quest]="quest"
+          (objectiveToggle)="toggleObjective($event)"
+        >
+          <button grButton questsDetailAction variant="ghost" size="sm" (click)="close()">
+            Fermer
+          </button>
+        </quests-quest-detail>
+      }
     </aside>
   }
 }

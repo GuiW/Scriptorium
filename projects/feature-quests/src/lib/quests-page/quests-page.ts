@@ -97,6 +97,11 @@ export class QuestsPage {
     const id = this.questId();
     return id ? this.store.quest(id) : undefined;
   });
+  /** The open quest as a list keyed by id, so another quest is a new detail with its entrance. */
+  protected readonly open = computed(() => {
+    const quest = this.selected();
+    return quest ? [quest] : [];
+  });
   /** Desktop shows the detail beside the list; smaller screens show it instead of the list. */
   protected readonly inPanel = computed(() => this.layout() === 'desktop');
 
@@ -137,7 +142,7 @@ export class QuestsPage {
     });
   }
 
-  protected open(id: string): void {
+  protected openQuest(id: string): void {
     this.navigate(['/quetes', id]);
   }
 
