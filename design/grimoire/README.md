@@ -19,6 +19,7 @@ The interface is in French; the rules below apply to French copy.
 ## Colour
 
 - `ink` on `surface`, `surface-raised` or `surface-sunk` for all text; `ink-muted` for metadata.
+- `surface-high`, one step lighter than a card, only for small elements laid on a card (`ContactChip`).
 - Quest statuses: En cours → `arcane` + ◆; Accomplie → `forest` + ✓; Échouée → `crimson` + ✕; Rumeur → `ink-muted` + ?. Always a glyph **and** a word: `forest` and `crimson` cannot be told apart by hue alone.
 - `ember` for urgency (deadline, danger); `gold-ink` for rewards (po, XP).
 - Item rarity (PF2e): Peu courant `ember`, Rare `arcane`, Unique `gold-ink` circled in `gold`; always spelled out.
@@ -51,7 +52,7 @@ The interface is in French; the rules below apply to French copy.
 
 - A contact exists to say **who a quest comes from** and **where they stand with the party** — nothing more. No stats, HP or inventory: it is not a character sheet.
 - Shape = nature: a round seal for an NPC, a shield for a faction, circled in `gold`. Initial in Cinzel when there is no portrait.
-- Reputation is a **position** on 5 steps (PF2e attitudes for NPCs), never a gauge or a percentage; the word always goes with the colour. Dedicated colours `rep-hostile`, `rep-cold`, `rep-neutral`, `rep-warm`, `rep-ally` (≥ 4.5:1 on every surface in Parchment, ≥ 7:1 in Dungeon), the label as a filled tag with `surface` text.
+- Reputation is a **position** on 5 steps (PF2e attitudes for NPCs), never a gauge or a percentage; the word always goes with the colour. Dedicated colours `rep-hostile`, `rep-cold`, `rep-neutral`, `rep-warm`, `rep-ally` (≥ 4.5:1 on `surface`, `surface-raised` and `surface-sunk` in Parchment, ≥ 7:1 in Dungeon; the ContactChip diamond on `surface-high` ≥ 5.7:1), the label as a filled tag with `surface` text.
 - In a quest, the giver appears as a `ContactChip`; the `ContactCard` fits in four lines.
 
 ## Visibility: Secret MJ and chosen players
