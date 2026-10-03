@@ -138,6 +138,28 @@ describe('QuestsPage', () => {
     expect(document.activeElement).toBe(card('q2').querySelector('.gr-quest__open'));
   });
 
+  it('builds a new detail, with its entrance, for another quest but not for a ticked objective', async () => {
+    const { page, settle, card } = await render('/quetes/q1');
+    const detail = () => page().querySelector('.quests__panel quests-quest-detail')!;
+    const first = detail();
+
+    page().querySelectorAll<HTMLButtonElement>('.quests__panel .gr-obj__box')[2].click();
+    await settle();
+    expect(detail()).toBe(first);
+
+    card('q2').querySelector<HTMLButtonElement>('.gr-quest__open')!.click();
+    await settle();
+    expect(detail()).not.toBe(first);
+    expect(detail().querySelector('h2')?.textContent).toBe('Le serment des Cendres');
+  });
+
+  it('orders the cards of a filter for their staggered entrance', async () => {
+    const { card } = await render('/quetes');
+    expect(
+      ['q1', 'q2', 'q6'].map((id) => card(id).style.getPropertyValue('--quests-order')),
+    ).toEqual(['0', '1', '2']);
+  });
+
   it('keeps the filter when a quest opens and closes', async () => {
     const { router, settle, card } = await render('/quetes?statut=echouees');
     card('q4').querySelector<HTMLButtonElement>('.gr-quest__open')!.click();
