@@ -36,6 +36,7 @@ The interface is in French; the rules below apply to French copy.
 
 - 4px grid: `space-6` inside cards, `space-4` between them, `space-8` between sections.
 - Cards: `surface-raised`, `hairline` rule, `radius-md`, `shadow-card`; `shadow-lifted` on hover. Selected card: 2px `gold` rule.
+- Bar pinned to the bottom of the screen (`BookmarkTabs`): `shadow-bar`, the card shadow cast upwards.
 - Objective boxes are diamonds (a `radius-sm` square rotated 45°) — the system's only recurring motif.
 - Ornamental dividers: a `hairline` rule broken by a `gold` diamond. One per journal entry, no more.
 
