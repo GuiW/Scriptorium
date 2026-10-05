@@ -2,8 +2,14 @@
 
 The Quêtes page: quest model, store, list filtered by status and quest detail.
 
-Never published: the `scriptorium` app compiles it from source through the
-`@scriptorium/feature-quests` alias (`tsconfig.json`) and loads `QUESTS_ROUTES` lazily.
+Never published: the `scriptorium` app compiles it from source through two aliases
+(`tsconfig.json`):
+
+- `@scriptorium/feature-quests`: `QUESTS_ROUTES` only, loaded lazily with `import()`. The app's
+  ESLint config forbids a static import of it, which would put the page in the main bundle.
+- `@scriptorium/feature-quests/data`: the quest model and `QuestsStore`, for what the app needs
+  eagerly (the quest counter in the navigation).
+
 It only has `test` and `lint` targets:
 
 ```bash

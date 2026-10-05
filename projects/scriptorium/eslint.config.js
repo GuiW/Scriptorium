@@ -23,6 +23,20 @@ module.exports = defineConfig([
           style: 'kebab-case',
         },
       ],
+      // A feature's routes are loaded lazily with import(); a static import would put the whole
+      // page in the main bundle. What the app needs eagerly lives in the feature's /data entry.
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: '@scriptorium/feature-quests',
+              message:
+                'Load QUESTS_ROUTES with import() only; import the model and the store from @scriptorium/feature-quests/data.',
+            },
+          ],
+        },
+      ],
     },
   },
   {

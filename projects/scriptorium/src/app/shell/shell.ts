@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { QuestsStore } from '@scriptorium/feature-quests';
+import { QuestsStore } from '@scriptorium/feature-quests/data';
 import {
   BookmarkNav,
   BookmarkTabs,

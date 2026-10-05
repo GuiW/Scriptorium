@@ -1,9 +1,8 @@
 /*
- * Public API Surface of feature-quests
+ * Public API Surface of feature-quests: the routes, loaded lazily by the app
+ * (`loadChildren: () => import('@scriptorium/feature-quests')`). Never import this entry point
+ * statically, or the whole page lands in the main bundle; the model and the store are in
+ * `@scriptorium/feature-quests/data`.
  */
 
-export * from './lib/data/quest';
-export * from './lib/data/quests.store';
 export * from './lib/quests.routes';
-// TEMPORARY: read by the theme-test page until it goes.
-export * from './lib/data/quests.mock';

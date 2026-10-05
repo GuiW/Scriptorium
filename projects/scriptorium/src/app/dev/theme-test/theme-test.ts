@@ -31,7 +31,7 @@ import {
   type Reward,
   type StatusFilterItem,
 } from '@scriptorium/ui-grimoire';
-import { QUESTS_MOCK } from '@scriptorium/feature-quests';
+import { QuestsStore } from '@scriptorium/feature-quests/data';
 
 /** TEMPORARY — checks the theme foundations and the base components in both themes. */
 @Component({
@@ -116,12 +116,13 @@ export class ThemeTest {
     { id: 'd1', divider: true },
     { id: 'settings', label: 'Réglages', link: '/theme-test/reglages', icon: 'reglages' },
   ];
-  protected readonly quests = QUESTS_MOCK;
+  /** The demo quests, read from the store like the real page (a snapshot is enough here). */
+  protected readonly quests = inject(QuestsStore).quests();
   /** The demo quests plus one with a long summary, to check the 3-line clamp. */
   protected readonly listQuests = [
-    ...QUESTS_MOCK,
+    ...this.quests,
     {
-      ...QUESTS_MOCK[4],
+      ...this.quests[4],
       id: 'q7',
       title: 'Les cloches de Roslar',
       summary:

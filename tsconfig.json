@@ -16,7 +16,8 @@
     "module": "preserve",
     "paths": {
       "@scriptorium/ui-grimoire": ["./projects/ui-grimoire/src/public-api.ts"],
-      "@scriptorium/feature-quests": ["./projects/feature-quests/src/public-api.ts"]
+      "@scriptorium/feature-quests": ["./projects/feature-quests/src/public-api.ts"],
+      "@scriptorium/feature-quests/data": ["./projects/feature-quests/src/lib/data/public-api.ts"]
     }
   },
   "angularCompilerOptions": {
