@@ -86,7 +86,7 @@ export class QuestDetailAction {}
     @if (quest().objectives.length) {
       <section class="detail__section" [attr.aria-labelledby]="objectivesId">
         <div
-          class="detail__label"
+          class="gr-label"
           role="heading"
           [attr.aria-level]="mode() === 'page' ? 2 : 3"
           [id]="objectivesId"
