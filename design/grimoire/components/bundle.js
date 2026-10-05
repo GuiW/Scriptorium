@@ -235,7 +235,7 @@
      Not for page navigation — see BookmarkNav/BookmarkTabs. ---- */
   function Tabs(p) {
     var items = p.items || [];
-    return h('div', { className: cx('gr-tabs', p.className), role: 'radiogroup', 'aria-label': p['aria-label'] }, items.map(function (it) {
+    return h('div', { className: cx('gr-tabs', p.compact && 'gr-tabs--compact', p.className), role: 'radiogroup', 'aria-label': p['aria-label'] }, items.map(function (it) {
       var on = it.id === p.value;
       return h('button', {
         key: it.id, type: 'button', role: 'radio', 'aria-checked': on,

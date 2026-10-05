@@ -17,18 +17,20 @@ const ITEMS: StatusFilterItem[] = [
       [(value)]="value"
       aria-label="Filtrer les quêtes"
       controls="quest-list"
+      [compact]="compact()"
     />
   </div>`,
 })
 class Host {
   readonly theme = input<string>();
+  readonly compact = input(false);
   readonly items = signal(ITEMS);
   readonly value = signal<string | undefined>('active');
 }
 
 const KEY_CODES: Record<string, number> = { ArrowLeft: 37, ArrowRight: 39, Home: 36, End: 35 };
 
-async function render(inputs: Partial<Record<'theme', unknown>> = {}, value?: string) {
+async function render(inputs: Partial<Record<'theme' | 'compact', unknown>> = {}, value?: string) {
   const fixture = TestBed.createComponent(Host);
   for (const [key, v] of Object.entries(inputs)) fixture.componentRef.setInput(key, v);
   if (value !== undefined) fixture.componentInstance.value.set(value);
@@ -157,6 +159,29 @@ describe('StatusFilter', () => {
     count(0).dispatchEvent(new Event('animationend'));
     await r.fixture.whenStable();
     expect(count(0).classList.contains('gr-bump')).toBe(false);
+  });
+
+  it('has a compact variant for narrow screens, same options and keyboard', async () => {
+    const regular = await render();
+    expect(regular.group.classList.contains('gr-tabs--compact')).toBe(false);
+
+    const { group, options, key, host } = await render({ compact: true });
+    expect(group.classList.contains('gr-tabs--compact')).toBe(true);
+    expect(group.classList.contains('gr-tabs')).toBe(true);
+    expect(options().map((o) => o.getAttribute('role'))).toEqual([
+      'radio',
+      'radio',
+      'radio',
+      'radio',
+    ]);
+    await key(options()[0], 'End');
+    expect(host.value()).toBe('rumor');
+  });
+
+  it('renders the same compact markup under the dungeon theme', async () => {
+    const light = await render({ compact: true });
+    const dark = await render({ compact: true, theme: 'dungeon' });
+    expect(dark.group.outerHTML).toBe(light.group.outerHTML);
   });
 
   it('renders the same markup under the dungeon theme', async () => {
