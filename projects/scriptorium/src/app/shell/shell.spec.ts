@@ -1,25 +1,11 @@
-import { BreakpointObserver, type BreakpointState } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { QuestsStore } from '@scriptorium/feature-quests/data';
-import { BehaviorSubject, map } from 'rxjs';
+import { provideTestViewport } from '@scriptorium/ui-grimoire/testing';
 import { PAGES } from '../pages';
 import { Shell } from './shell';
-
-/** A viewport of a fixed width; answers the `(min-width: Npx)` queries of injectLayout(). */
-class FakeViewport {
-  constructor(private readonly width: number) {}
-  isMatched(query: string | string[]): boolean {
-    return [query].flat().some((q) => this.width >= Number(/min-width: (\d+)px/.exec(q)![1]));
-  }
-  observe(query: string | string[]) {
-    return new BehaviorSubject(this.width).pipe(
-      map((): BreakpointState => ({ matches: this.isMatched(query), breakpoints: {} })),
-    );
-  }
-}
 
 @Component({ template: `<h1>Page</h1>` })
 class Page {}
@@ -27,7 +13,7 @@ class Page {}
 async function render(width: number, theme?: string) {
   TestBed.configureTestingModule({
     providers: [
-      { provide: BreakpointObserver, useValue: new FakeViewport(width) },
+      provideTestViewport(width),
       provideRouter([
         {
           path: '',
