@@ -29,6 +29,7 @@ The interface is in French; the rules below apply to French copy.
 ## Typography
 
 - **Cinzel** (`display`) for headings only — `display`, `title-lg`, `title-md`, `label-caps`. Never for a paragraph.
+- Section headers (« Objectifs », « Récompenses », « Thème ») use the `.gr-label` class (`label-caps`, `ink-muted`, capitals), whatever the element (`h2`, `h3` or a `role="heading"`).
 - **Alegreya** (`serif`) for everything that is read: `body-lg`, `body`, `quote` (italic, NPC speech).
 - **Alegreya Sans** (`sans`) for the interface: `ui`, `ui-sm`, `numeral` (tabular figures for po, XP, 3/5).
 - Fonts hosted by Google Fonts; `components/bundle.css` imports them.

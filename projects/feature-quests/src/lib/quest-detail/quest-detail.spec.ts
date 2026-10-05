@@ -50,7 +50,7 @@ describe('QuestDetail', () => {
 
   it('lists the objectives under a heading, the rewards and the GM note', async () => {
     const { el, text } = await render({ quest: byId('q1') });
-    const label = el.querySelector('.detail__label')!;
+    const label = el.querySelector('.gr-label')!;
     expect(label.getAttribute('role')).toBe('heading');
     expect(label.getAttribute('aria-level')).toBe('3');
     expect(el.querySelector('section')!.getAttribute('aria-labelledby')).toBe(label.id);
@@ -127,7 +127,7 @@ describe('QuestDetail', () => {
     expect(el.classList.contains('detail--page')).toBe(true);
     expect(el.querySelector('h1.detail__title')?.textContent).toBe('La crypte sous Otari');
     expect(el.querySelector('h2')).toBeNull();
-    expect(el.querySelector('.detail__label')!.getAttribute('aria-level')).toBe('2');
+    expect(el.querySelector('.gr-label')!.getAttribute('aria-level')).toBe('2');
   });
 
   it('emits the index of a toggled objective', async () => {
