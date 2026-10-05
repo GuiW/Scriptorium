@@ -5,6 +5,7 @@ import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { QuestsStore } from '@scriptorium/feature-quests/data';
 import { BehaviorSubject, map } from 'rxjs';
+import { PAGES } from '../pages';
 import { Shell } from './shell';
 
 /** A viewport of a fixed width; answers the `(min-width: Npx)` queries of injectLayout(). */
@@ -31,10 +32,7 @@ async function render(width: number, theme?: string) {
         {
           path: '',
           component: Shell,
-          children: ['quetes', 'journal', 'contacts', 'lieux', 'butin', 'reglages'].map((path) => ({
-            path,
-            component: Page,
-          })),
+          children: Object.values(PAGES).map(({ path }) => ({ path, component: Page })),
         },
       ]),
     ],

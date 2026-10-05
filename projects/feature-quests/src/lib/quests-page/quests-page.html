@@ -5,7 +5,12 @@
 @if (selected() && !inPanel()) {
   <div class="quests__page">
     <div>
-      <a grButton variant="ghost" routerLink="/quetes" queryParamsHandling="preserve"
+      <a
+        grButton
+        variant="ghost"
+        routerLink="."
+        [relativeTo]="listRoute"
+        queryParamsHandling="preserve"
         >‹ Retour aux quêtes</a
       >
     </div>

@@ -11,7 +11,7 @@ import {
   untracked,
   viewChild,
 } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {
   Button,
   ContactChip,
@@ -49,9 +49,9 @@ const FILTERS: readonly {
 ];
 
 /**
- * The Quêtes page: quests filtered by status (the filter lives in the URL) and, for
- * `/quetes/:questId`, the quest detail: in a side panel beside the list on desktop, as the
- * page itself on tablet and mobile.
+ * The Quêtes page: quests filtered by status (the filter lives in the URL) and, with a quest id
+ * under the feature's route, the quest detail: in a side panel beside the list on desktop, as
+ * the page itself on tablet and mobile.
  */
 @Component({
   selector: 'quests-page',
@@ -78,6 +78,11 @@ export class QuestsPage {
 
   private readonly store = inject(QuestsStore);
   private readonly router = inject(Router);
+  /**
+   * The route the app mounts the feature on (`/quetes` today): the list is that route (`.`), a
+   * quest is `[id]` under it. The feature never writes its own path.
+   */
+  protected readonly listRoute = inject(ActivatedRoute).parent;
   private readonly injector = inject(Injector);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   protected readonly layout = injectLayout();
@@ -112,7 +117,7 @@ export class QuestsPage {
     // An unknown quest: back to the list, without keeping the wrong address in the history.
     effect(() => {
       if (this.questId() && !this.selected()) {
-        untracked(() => this.navigate(['/quetes'], { replaceUrl: true }));
+        untracked(() => this.navigate(['.'], { replaceUrl: true }));
       }
     });
 
@@ -143,11 +148,11 @@ export class QuestsPage {
   }
 
   protected openQuest(id: string): void {
-    this.navigate(['/quetes', id]);
+    this.navigate([id]);
   }
 
   protected close(): void {
-    this.navigate(['/quetes']);
+    this.navigate(['.']);
   }
 
   protected toggleObjective(index: number): void {
@@ -155,8 +160,16 @@ export class QuestsPage {
     if (quest) this.store.toggleObjective(quest.id, index);
   }
 
+  /**
+   * Navigates within the feature: `['.']` is the list, `[id]` a quest; the filter is kept. Not
+   * `[]`: with no command the router keeps the current URL and ignores `relativeTo`.
+   */
   private navigate(commands: string[], extras: { replaceUrl?: boolean } = {}): void {
-    void this.router.navigate(commands, { queryParamsHandling: 'preserve', ...extras });
+    void this.router.navigate(commands, {
+      relativeTo: this.listRoute,
+      queryParamsHandling: 'preserve',
+      ...extras,
+    });
   }
 
   private cardButton(id: string): HTMLElement | null {

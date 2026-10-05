@@ -25,11 +25,12 @@ const DESKTOP = 1440;
 const TABLET = 1024;
 const MOBILE = 390;
 
-async function render(url: string, width = DESKTOP, providers: unknown[] = []) {
+/** `mount` is where the app mounts the feature; the app uses `quetes`. */
+async function render(url: string, width = DESKTOP, providers: unknown[] = [], mount = 'quetes') {
   TestBed.configureTestingModule({
     providers: [
       { provide: BreakpointObserver, useValue: new FakeViewport(width) },
-      provideRouter([{ path: 'quetes', children: QUESTS_ROUTES }], withComponentInputBinding()),
+      provideRouter([{ path: mount, children: QUESTS_ROUTES }], withComponentInputBinding()),
       ...(providers as []),
     ],
   });
@@ -158,6 +159,33 @@ describe('QuestsPage', () => {
     expect(
       ['q1', 'q2', 'q6'].map((id) => card(id).style.getPropertyValue('--quests-order')),
     ).toEqual(['0', '1', '2']);
+  });
+
+  it('works wherever the app mounts it, without knowing its own path', async () => {
+    const mount = 'campagne/:campagne/registre';
+    const { page, router, settle, card } = await render(
+      '/campagne/c1/registre?statut=echouees',
+      DESKTOP,
+      [],
+      mount,
+    );
+    card('q4').querySelector<HTMLButtonElement>('.gr-quest__open')!.click();
+    await settle();
+    expect(router.url).toBe('/campagne/c1/registre/q4?statut=echouees');
+
+    page().querySelector<HTMLButtonElement>('.quests__panel [questsDetailAction]')!.click();
+    await settle();
+    expect(router.url).toBe('/campagne/c1/registre?statut=echouees');
+
+    await router.navigateByUrl('/campagne/c1/registre/nope');
+    await settle();
+    expect(router.url).toBe('/campagne/c1/registre');
+
+    TestBed.resetTestingModule();
+    const tablet = await render('/campagne/c2/registre/q1', TABLET, [], mount);
+    expect(tablet.page().querySelector('a.gr-btn')?.getAttribute('href')).toBe(
+      '/campagne/c2/registre',
+    );
   });
 
   it('keeps the filter when a quest opens and closes', async () => {
