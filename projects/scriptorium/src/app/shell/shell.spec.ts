@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { QuestsStore } from '@scriptorium/feature-quests';
+import { QuestsStore } from '@scriptorium/feature-quests/data';
 import { BehaviorSubject, map } from 'rxjs';
 import { Shell } from './shell';
 
