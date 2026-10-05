@@ -1,6 +1,6 @@
 Card summarising a quest in the journal: title, giver, status, objective progress, reward.
 
-- Provide `title` and `status`; `giver`, `location` and `level` make up the metadata line. Pass a `<ContactChip>` as `giver` to link the NPC or faction.
+- Provide `title` and `status`; `giver`, `location` and `level` make up the metadata line. Pass a `<ContactChip>` as `giver` to link the NPC or faction. In Angular that line is its own component, `gr-quest-meta` (same `gr-quest__meta` markup), so a quest detail shows exactly the same line.
 - `objectives` feeds the progress track (`arcane` in progress, `forest` completed, `crimson` failed) and the 2/4 counter; `showObjectives` also lists them in the card (detailed view).
 - `rewards` (see `RewardList`): the foot shows a summary — coins and XP as gold values, items counted in the colour of the rarest one (« 2 objets »), the rest as « +1 ». Rewards more restricted than the quest (a Secret MJ item on a public quest) are left out of the summary: it has no room for their `Visibility` marker. `showRewards` shows the full list above the foot, every reward marked. The legacy `reward` prop (« 250 po ») is still accepted.
 - `onClick` makes the card selectable; `selected` adds the 2px `gold` rule. The card stays an `<article>`: the title holds a `button.gr-quest__open` (`aria-pressed`) stretched over the whole card, so a click anywhere selects it while the heading, the objective checkboxes and the giver link keep working; the focus ring goes around the card.
