@@ -7,15 +7,10 @@ import {
   injectLayout,
   type BookmarkNavItem,
 } from '@scriptorium/ui-grimoire';
+import { MOBILE_NAV, NAV_ORDER, PAGES, type PageId } from '../pages';
 
 /** The one campaign of the mock data (design/quetes). */
 export const CAMPAIGN = { title: "L'Âge des Cendres", session: 'Session XIV · 12 septembre' };
-
-/**
- * Entries of the mobile tab bar (five at most): those of the mobile mockup, with Réglages in
- * place of « Plus » until that menu exists (design/GAPS.md). Lieux is not in the bar.
- */
-const MOBILE_ENTRIES = ['quests', 'journal', 'contacts', 'loot', 'settings'];
 
 /**
  * Application frame: the page navigation for the current layout (BookmarkNav full on desktop,
@@ -48,22 +43,21 @@ export class Shell {
   protected readonly campaign = CAMPAIGN;
   private readonly quests = inject(QuestsStore);
 
-  protected readonly items = computed<BookmarkNavItem[]>(() => [
-    {
-      id: 'quests',
-      label: 'Quêtes',
-      link: '/quetes',
-      icon: 'quete',
-      count: this.quests.counts().active,
-    },
-    { id: 'journal', label: 'Journal', link: '/journal', icon: 'journal' },
-    { id: 'contacts', label: 'Contacts', link: '/contacts', icon: 'joueurs' },
-    { id: 'places', label: 'Lieux', link: '/lieux', icon: 'carte' },
-    { id: 'loot', label: 'Butin', link: '/butin', icon: 'butin' },
-    { id: 'd1', divider: true },
-    { id: 'settings', label: 'Réglages', link: '/reglages', icon: 'reglages' },
-  ]);
+  /** The bookmarks, from the PAGES table; Quêtes counts the quests in progress. */
+  protected readonly items = computed<BookmarkNavItem[]>(() =>
+    NAV_ORDER.map((entry, i) => {
+      if (entry === 'divider') return { id: `divider-${i}`, divider: true };
+      const { path, label, icon } = PAGES[entry];
+      return {
+        id: entry,
+        label,
+        icon,
+        link: `/${path}`,
+        count: entry === 'quests' ? this.quests.counts().active : undefined,
+      };
+    }),
+  );
   protected readonly mobileItems = computed(() =>
-    this.items().filter((item) => MOBILE_ENTRIES.includes(item.id)),
+    this.items().filter((item) => MOBILE_NAV.includes(item.id as PageId)),
   );
 }
