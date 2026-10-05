@@ -78,7 +78,7 @@ textarea.gr-field__input { resize: vertical; min-height: 96px; }
 .gr-quest {
   display: flex; flex-direction: column; gap: var(--space-3); text-align: left;
   background: var(--surface-raised); border: 1px solid var(--hairline); border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card); padding: var(--space-6); max-width: 440px; color: var(--ink);
+  box-shadow: var(--shadow-card); padding: var(--space-6); box-sizing: border-box; max-width: var(--size-card); color: var(--ink);
   transition: box-shadow .15s;
 }
 .gr-quest:hover { box-shadow: var(--shadow-lifted); }
