@@ -5,7 +5,7 @@ import {
   provideBrowserGlobalErrorListeners,
 } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { ThemeService } from '@scriptorium/ui-grimoire';
+import { LayoutService, ThemeService } from '@scriptorium/ui-grimoire';
 
 import { routes } from './app.routes';
 
@@ -17,9 +17,10 @@ export const appConfig: ApplicationConfig = {
       // Route params, query params and data reach the routed components as inputs.
       withComponentInputBinding(),
     ),
-    // Applies the remembered theme before the first render.
+    // Applies the remembered theme and the layout (data-theme, data-layout) before the first render.
     provideAppInitializer(() => {
       inject(ThemeService);
+      inject(LayoutService);
     }),
   ],
 };

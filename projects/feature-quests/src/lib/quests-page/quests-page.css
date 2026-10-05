@@ -3,13 +3,13 @@
   min-height: 100%;
 }
 
+/* The page frame (gutters, title) is the shared gr-page (ui-grimoire page.css). */
 .quests__main,
 .quests__page {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  padding: var(--space-12);
 }
 
 .quests__main {
@@ -32,12 +32,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
-}
-
-.quests__title {
-  margin: 0;
-  font: var(--type-title-lg);
-  color: var(--ink);
 }
 
 /* As many card columns as fit (two at 1024 and 1440px with the panel), one on a phone. */
@@ -82,7 +76,7 @@
   height: 100dvh;
   overflow-y: auto;
   /* Same top as the page, so the quest title shares the baseline of « Quêtes ». */
-  padding: var(--space-12) var(--space-8) var(--space-8);
+  padding: var(--gr-page-top) var(--space-8) var(--space-8);
   background: var(--surface-raised);
   border-left: 1px solid var(--hairline);
 }
@@ -107,45 +101,38 @@
   }
 }
 
-@media (max-width: 767px) {
-  .quests__main,
-  .quests__page {
-    padding: var(--space-6) var(--space-4);
-  }
+/* Mobile layout, from the data-layout attribute LayoutService keeps on <html>. */
 
-  /* The header carries the top and bottom spacing so it can stay pinned. */
-  .quests__main {
-    gap: 0;
-    padding-top: 0;
-  }
-
+/* The header carries the top and bottom spacing so it can stay pinned. */
+:host-context([data-layout='mobile']) .quests__main {
+  gap: 0;
+  padding-top: 0;
   /*
-   * The title and the filter stay pinned at the top while the cards scroll under them; the
-   * header spans the side gutters so nothing shows past its edges.
-   */
-  .quests__head {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    gap: var(--space-4);
-    margin-inline: calc(-1 * var(--space-4));
-    /* Its content lines up with the card column below. */
-    padding: var(--space-6)
-      max(var(--space-4), calc(50% + var(--space-4) - var(--quests-column) / 2)) var(--space-4);
-    background: var(--surface);
-  }
-
-  /*
-   * One column of cards, as in the mobile mockup, centred on a large phone (no lone card left
-   * over in a second column). As wide as a card can be: .gr-quest caps its content at 440px
+   * One column of cards, as wide as a card can be: .gr-quest caps its content at 440px
    * (bundle.css), plus its space-6 padding and 1px border.
    */
-  .quests__main {
-    --quests-column: calc(440px + 2 * var(--space-6) + 2px);
-  }
+  --quests-column: calc(440px + 2 * var(--space-6) + 2px);
+}
 
-  .quests__grid {
-    grid-template-columns: minmax(0, var(--quests-column));
-    justify-content: center;
-  }
+/*
+ * The title and the filter stay pinned at the top while the cards scroll under them; the header
+ * spans the page gutters so nothing shows past its edges, and its content lines up with the card
+ * column below.
+ */
+:host-context([data-layout='mobile']) .quests__head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  gap: var(--space-4);
+  margin-inline: calc(-1 * var(--gr-page-gutter));
+  padding: var(--gr-page-top)
+    max(var(--gr-page-gutter), calc(50% + var(--gr-page-gutter) - var(--quests-column) / 2))
+    var(--space-4);
+  background: var(--surface);
+}
+
+/* Centred on a large phone, with no lone card left over in a second column. */
+:host-context([data-layout='mobile']) .quests__grid {
+  grid-template-columns: minmax(0, var(--quests-column));
+  justify-content: center;
 }

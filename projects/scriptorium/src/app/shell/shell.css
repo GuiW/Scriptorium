@@ -14,11 +14,12 @@
 }
 
 /*
- * Desktop column: the campaign name sits on the baseline of the page title (title-lg, under a
- * space-12 page padding). 6px is below the token scale: see design/GAPS.md.
+ * Desktop column: the campaign name sits on the baseline of the page title (gr-page__title under
+ * the page's --gr-page-top). The 10px are the difference between the two text boxes, below the
+ * token scale: see design/GAPS.md.
  */
 .shell__nav:not(.gr-bnav--rail) {
-  padding-top: calc(var(--space-8) + 6px);
+  padding-top: calc(var(--gr-page-top) - 10px);
 }
 
 .shell__page {
