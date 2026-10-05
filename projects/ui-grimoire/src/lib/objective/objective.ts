@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { flagOnChange } from '../shared/motion';
 import type { VisibilityValue } from '../shared/types';
+import { restrictedVisibility } from '../visibility/restricted';
 import { Visibility } from '../visibility/visibility';
 
 /**
@@ -58,10 +59,7 @@ export class Objective {
   readonly doneChange = output<boolean>();
 
   protected readonly boxId = inject(_IdGenerator).getId('gr-obj-');
-  protected readonly restricted = computed(() => {
-    const vis = this.visibility();
-    return vis && vis.level !== 'table' ? vis : null;
-  });
+  protected readonly restricted = computed(() => restrictedVisibility(this.visibility()));
   /** Raised when the objective gets done (not on the first render): the diamond is stamped. */
   protected readonly stamp = flagOnChange(
     () => this.done(),

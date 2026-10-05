@@ -12,9 +12,12 @@ import {
   Badge,
   ContactChip,
   Objective,
+  QuestGiver,
+  QuestMeta,
   RewardList,
   SecretBlock,
   Visibility,
+  restrictedVisibility,
 } from '@scriptorium/ui-grimoire';
 import type { Quest } from '../data/quest';
 
@@ -30,7 +33,16 @@ export class QuestDetailAction {}
  */
 @Component({
   selector: 'quests-quest-detail',
-  imports: [Badge, ContactChip, Objective, RewardList, SecretBlock, Visibility],
+  imports: [
+    Badge,
+    ContactChip,
+    Objective,
+    QuestGiver,
+    QuestMeta,
+    RewardList,
+    SecretBlock,
+    Visibility,
+  ],
   host: { class: 'detail', '[class.detail--page]': "mode() === 'page'" },
   template: `<header class="detail__head">
       <div class="detail__top">
@@ -47,25 +59,20 @@ export class QuestDetailAction {}
         }
         <span class="detail__status"><gr-badge [tone]="quest().status" /></span>
       </div>
-      @if (hasMeta()) {
-        <div class="gr-quest__meta">
-          @if (quest().giver; as giver) {
-            <span class="gr-nowrap"
-              >Donnée par
-              <gr-contact-chip
-                [name]="giver.name"
-                [kind]="giver.kind"
-                [reputation]="giver.reputation"
-            /></span>
-          }
-          @for (part of metaParts(); track $index) {
-            @if ($index > 0 || quest().giver) {
-              ·
-            }
-            <span class="gr-nowrap">{{ part }}</span>
-          }
-        </div>
-      }
+      <gr-quest-meta
+        [giverSlot]="!!quest().giver"
+        [location]="quest().location"
+        [level]="quest().level"
+      >
+        @if (quest().giver; as giver) {
+          <gr-contact-chip
+            grQuestGiver
+            [name]="giver.name"
+            [kind]="giver.kind"
+            [reputation]="giver.reputation"
+          />
+        }
+      </gr-quest-meta>
     </header>
     @if (quest().summary) {
       <p class="detail__summary">{{ quest().summary }}</p>
@@ -116,15 +123,7 @@ export class QuestDetail {
   private readonly heading = viewChild.required<ElementRef<HTMLElement>>('heading');
   protected readonly objectivesId = `quest-objectives-${nextId++}`;
 
-  protected readonly restricted = computed(() => {
-    const vis = this.quest().visibility;
-    return vis && vis.level !== 'table' ? vis : null;
-  });
-  protected readonly metaParts = computed(() => {
-    const { location, level } = this.quest();
-    return [location, level != null ? `Niv. ${level}` : null].filter((p): p is string => !!p);
-  });
-  protected readonly hasMeta = computed(() => !!this.quest().giver || this.metaParts().length > 0);
+  protected readonly restricted = computed(() => restrictedVisibility(this.quest().visibility));
 
   /** Moves the focus to the title, when the detail opens. */
   focus(): void {

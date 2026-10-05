@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Directive,
   booleanAttribute,
   computed,
   contentChild,
@@ -10,16 +9,17 @@ import {
 } from '@angular/core';
 import { Badge, type QuestStatus } from '../badge/badge';
 import { Objective } from '../objective/objective';
+import { QuestGiver, QuestMeta } from '../quest-meta/quest-meta';
 import { RewardList } from '../reward-list/reward-list';
 import { RewardSummary } from '../reward-summary/reward-summary';
 import { flagOnChange } from '../shared/motion';
 import { rewardsWithin } from '../shared/rewards';
 import type { QuestObjective, Reward, VisibilityValue } from '../shared/types';
+import { restrictedVisibility } from '../visibility/restricted';
 import { Visibility } from '../visibility/visibility';
 
-/** Marks the projected giver of a QuestCard, usually a `gr-contact-chip`. */
-@Directive({ selector: '[grQuestGiver]' })
-export class QuestGiver {}
+// The giver marker belongs to the meta line; still importable from here, where QuestCard users look.
+export { QuestGiver };
 
 /**
  * Card summarising a quest: title, giver, place and level, status, objective progress
@@ -31,7 +31,7 @@ export class QuestGiver {}
   // On the native article element to keep its semantics; the gr prefix is still enforced by review.
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'article[grQuestCard]',
-  imports: [Badge, Objective, RewardList, RewardSummary, Visibility],
+  imports: [Badge, Objective, QuestMeta, RewardList, RewardSummary, Visibility],
   host: {
     '[class]': 'classes()',
     // `title` is an input: never leave it as a tooltip on the whole card.
@@ -59,23 +59,14 @@ export class QuestGiver {}
             {{ title() }}
           }
         </h3>
-        @if (hasMeta()) {
-          <div class="gr-quest__meta">
-            @if (hasGiver()) {
-              <span class="gr-nowrap"
-                >Donnée par <ng-content select="[grQuestGiver]" />{{
-                  giverSlot() ? '' : giver()
-                }}</span
-              >
-            }
-            @for (part of metaParts(); track $index) {
-              @if ($index > 0 || hasGiver()) {
-                ·
-              }
-              <span class="gr-nowrap">{{ part }}</span>
-            }
-          </div>
-        }
+        <gr-quest-meta
+          [giver]="giver()"
+          [giverSlot]="!!giverSlot()"
+          [location]="location()"
+          [level]="level()"
+          ><ng-container ngProjectAs="[grQuestGiver]"
+            ><ng-content select="[grQuestGiver]" /></ng-container
+        ></gr-quest-meta>
       </div>
       <gr-badge [tone]="status()" />
     </div>
@@ -152,18 +143,9 @@ export class QuestCard {
     () => this.selected(),
     (selected) => selected,
   );
+  /** A projected ContactChip, passed on to the meta line. */
   protected readonly giverSlot = contentChild(QuestGiver);
-  protected readonly hasGiver = computed(() => !!this.giverSlot() || !!this.giver());
-  protected readonly metaParts = computed(() =>
-    [this.location(), this.level() != null ? `Niv. ${this.level()}` : null].filter(
-      (part): part is string => !!part,
-    ),
-  );
-  protected readonly hasMeta = computed(() => this.hasGiver() || this.metaParts().length > 0);
-  protected readonly restricted = computed(() => {
-    const vis = this.visibility();
-    return vis && vis.level !== 'table' ? vis : null;
-  });
+  protected readonly restricted = computed(() => restrictedVisibility(this.visibility()));
   /** Rewards summarised in the foot: those more restricted than the quest are left out. */
   protected readonly footRewards = computed(() => rewardsWithin(this.rewards(), this.visibility()));
   protected readonly done = computed(() => this.objectives().filter((o) => o.done).length);
