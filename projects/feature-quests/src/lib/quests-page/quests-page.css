@@ -83,13 +83,13 @@
 
 /*
  * Entrance of the quest detail and of the cards of a status filter: a short rise with the
- * design system's slight bounce (bundle.css, .22s cubic-bezier(.3,.7,.4,1.15)); the cards
- * follow each other by 40ms. `translate`, not `transform`, which the card hover uses. Nothing
- * moves under prefers-reduced-motion.
+ * design system's slight bounce (motion-base, ease-bounce); the cards follow each other by
+ * 40ms. `translate`, not `transform`, which the card hover uses. Nothing moves under
+ * prefers-reduced-motion.
  */
 @media (prefers-reduced-motion: no-preference) {
   .quests-enter {
-    animation: quests-enter 0.22s cubic-bezier(0.3, 0.7, 0.4, 1.15) both;
+    animation: quests-enter var(--motion-base) var(--ease-bounce) both;
     animation-delay: calc(var(--quests-order, 0) * 40ms);
   }
 }

@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
  * Generates the Grimoire theme files from `design/grimoire/tokens.json`:
- *  - tokens.css: CSS variables (default theme in :root, other themes in [data-theme="…"]);
+ *  - tokens.css: CSS variables (default theme in :root, other themes in [data-theme="…"]),
+ *    durations and easings included;
  *  - color-tokens.generated.ts: themes and colour token names, for TypeScript code.
  *
  * No dependencies. Usage: node tools/grimoire/generate-tokens.mjs [--tokens f] [--css f] [--ts f]
@@ -145,6 +146,9 @@ export function buildTokens(json) {
       '',
       '  /* Sizes */',
       ...declare(flat(json.size?.tokens, 'size')),
+      '',
+      '  /* Motion */',
+      ...declare(flat(json.motion?.tokens, 'motion')),
       '}',
     ].join('\n'),
   );
