@@ -430,6 +430,17 @@ button.gr-contact:focus-visible { outline: 2px solid var(--focus); outline-offse
   content: ""; position: absolute; left: 0; bottom: -1px; height: 2px; background: var(--crimson);
   width: var(--gr-tabs-w); transform: translateX(var(--gr-tabs-x)); pointer-events: none;
 }
+/* StatusFilter compact (narrow screens): space-4 between the options; if they still do not fit, the row
+   scrolls sideways (no scrollbar) and the component brings the checked option into view. A scrolling box
+   clips what overflows it, so it keeps space-1 of padding all round (cancelled by a negative margin, same
+   place in the layout) for the 2px focus ring, and draws its bottom rule inside, where the active rule
+   and the sliding underline still cover it. */
+.gr-tabs--compact { gap: var(--space-4); overflow-x: auto; scrollbar-width: none;
+  padding: var(--space-1); margin: calc(-1 * var(--space-1)); border-bottom: 0;
+  background: linear-gradient(var(--hairline), var(--hairline)) left var(--space-1) bottom var(--space-1) / calc(100% - 2 * var(--space-1)) 1px no-repeat; }
+.gr-tabs--compact::-webkit-scrollbar { display: none; }
+.gr-tabs--compact .gr-tabs__tab { flex: none; margin-bottom: 0; }
+.gr-tabs--compact.gr-tabs--slide::after { bottom: var(--space-1); }
 @media (prefers-reduced-motion: no-preference) {
   /* Button: pressed in, released with the bounce; a « + » icon turns a quarter on hover */
   .gr-btn { transition: background-color var(--motion-quick), border-color var(--motion-quick), color var(--motion-quick), scale var(--motion-base) var(--ease-bounce); }

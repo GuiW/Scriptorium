@@ -28,7 +28,7 @@
   margin-inline: auto;
 }
 
-.quests__head {
+.quests__head-content {
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
@@ -117,16 +117,14 @@
   position: sticky;
   top: 0;
   z-index: 1;
-  gap: var(--space-4);
   margin-inline: calc(-1 * var(--gr-page-gutter));
   padding: var(--gr-page-top) var(--gr-page-gutter) var(--space-4);
   background: var(--surface);
 }
 
 /* Its content as wide and as centred as the cards below. */
-:host-context([data-layout='mobile']) .quests__head > * {
-  box-sizing: border-box;
-  width: 100%;
+:host-context([data-layout='mobile']) .quests__head-content {
+  gap: var(--space-4);
   max-width: var(--size-card);
   margin-inline: auto;
 }

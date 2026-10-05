@@ -201,6 +201,8 @@ export interface TabsProps {
   value?: string;
   onChange?: (id: string) => void;
   'aria-label'?: string;
+  /** Narrow screens: space-4 between options; the row scrolls sideways if they still do not fit. */
+  compact?: boolean;
   className?: string;
 }
 export declare function Tabs(props: TabsProps): JSX.Element;

@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   DestroyRef,
   Component,
+  booleanAttribute,
   Directive,
   ElementRef,
   Injector,
@@ -19,6 +20,16 @@ import {
   viewChildren,
 } from '@angular/core';
 import { Bump } from '../shared/motion';
+
+/** Scrolls the row sideways, and only sideways, so that the whole option is visible. */
+function revealInRow(row: HTMLElement, option: HTMLElement): void {
+  const start = option.offsetLeft;
+  const end = start + option.offsetWidth;
+  const padding = parseFloat(getComputedStyle(row).paddingInlineStart) || 0;
+  if (start - padding < row.scrollLeft) row.scrollLeft = start - padding;
+  else if (end + padding > row.scrollLeft + row.clientWidth)
+    row.scrollLeft = end + padding - row.clientWidth;
+}
 
 /** One option of the filter (TabItem in design/grimoire/components/index.d.ts). */
 export interface StatusFilterItem {
@@ -54,6 +65,7 @@ export class StatusFilterOption implements FocusableOption {
     '[attr.aria-label]': 'ariaLabel()',
     '[attr.aria-controls]': 'controls()',
     '(keydown)': 'onKeydown($event)',
+    '[class.gr-tabs--compact]': 'compact()',
     // Sliding underline (bundle.css): position and width of the checked option.
     '[class.gr-tabs--slide]': 'indicator() !== null',
     '[style.--gr-tabs-x]': 'indicator()?.x',
@@ -85,6 +97,11 @@ export class StatusFilter {
   readonly ariaLabel = input<string>(undefined, { alias: 'aria-label' });
   /** Id of the list this filter filters. */
   readonly controls = input<string>();
+  /**
+   * Narrow screens: tighter options, and a row that scrolls sideways if they still do not fit,
+   * the checked option kept in view.
+   */
+  readonly compact = input(false, { transform: booleanAttribute });
 
   private readonly options = viewChildren(StatusFilterOption);
   private readonly keyManager = new FocusKeyManager(this.options, inject(Injector))
@@ -114,6 +131,7 @@ export class StatusFilter {
 
     // Measure the checked option after each render that can move it; the first measure
     // adds gr-tabs--slide, so the underline appears in place without gliding in.
+    const host = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
     afterRenderEffect(() => {
       this.resized();
       const id = this.value();
@@ -123,9 +141,10 @@ export class StatusFilter {
           ? { x: `${option.element.offsetLeft}px`, w: `${option.element.offsetWidth}px` }
           : null,
       );
+      // A compact row may scroll: keep the checked option in view (keyboard focus already does).
+      if (option && this.compact()) revealInRow(host, option.element);
     });
 
-    const host = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
     const destroyRef = inject(DestroyRef);
     afterNextRender(() => {
       if (typeof ResizeObserver === 'undefined') return;

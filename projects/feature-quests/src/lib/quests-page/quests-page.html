@@ -28,14 +28,17 @@
 @if (!selected() || inPanel()) {
   <div class="quests__main gr-page">
     <header class="quests__head">
-      <h1 class="gr-page__title">Quêtes</h1>
-      <gr-status-filter
-        [items]="filters()"
-        [value]="status()"
-        (valueChange)="selectStatus($event)"
-        aria-label="Filtrer les quêtes"
-        controls="quests-list"
-      />
+      <div class="quests__head-content">
+        <h1 class="gr-page__title">Quêtes</h1>
+        <gr-status-filter
+          [items]="filters()"
+          [value]="status()"
+          (valueChange)="selectStatus($event)"
+          aria-label="Filtrer les quêtes"
+          controls="quests-list"
+          [compact]="layout() === 'mobile'"
+        />
+      </div>
     </header>
     <div id="quests-list" class="quests__grid">
       @for (q of quests(); track q.id; let i = $index) {
