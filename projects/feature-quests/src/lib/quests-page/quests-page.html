@@ -3,7 +3,7 @@
   ticking an objective of the same quest keeps it in place.
 -->
 @if (selected() && !inPanel()) {
-  <div class="quests__page">
+  <div class="quests__page gr-page">
     <div>
       <a
         grButton
@@ -26,9 +26,9 @@
 }
 
 @if (!selected() || inPanel()) {
-  <div class="quests__main">
+  <div class="quests__main gr-page">
     <header class="quests__head">
-      <h1 class="quests__title">Quêtes</h1>
+      <h1 class="gr-page__title">Quêtes</h1>
       <gr-status-filter
         [items]="filters()"
         [value]="status()"

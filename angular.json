@@ -85,6 +85,7 @@
             "styles": [
               "projects/ui-grimoire/src/styles/tokens.css",
               "design/grimoire/components/bundle.css",
+              "projects/ui-grimoire/src/styles/page.css",
               "projects/scriptorium/src/styles.css"
             ]
           },

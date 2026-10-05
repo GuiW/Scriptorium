@@ -8,7 +8,9 @@ const THEME_LABELS: Record<ThemeId, string> = { parchment: 'Parchemin', dungeon:
 @Component({
   selector: 'app-settings',
   imports: [Button],
-  template: `<h1 class="settings__title">Réglages</h1>
+  // The page frame (gutters, title) is the shared gr-page (ui-grimoire page.css).
+  host: { class: 'gr-page' },
+  template: `<h1 class="gr-page__title">Réglages</h1>
     <section class="settings__section" aria-labelledby="settings-theme">
       <h2 id="settings-theme" class="settings__label">Thème</h2>
       <p class="settings__text">
@@ -25,12 +27,10 @@ const THEME_LABELS: Record<ThemeId, string> = { parchment: 'Parchemin', dungeon:
       display: flex;
       flex-direction: column;
       gap: var(--space-8);
-      padding: var(--space-12);
       color: var(--ink);
     }
-    .settings__title {
-      margin: 0;
-      font: var(--type-title-lg);
+    :host-context([data-layout='mobile']) {
+      gap: var(--space-6);
     }
     .settings__section {
       display: flex;
@@ -47,12 +47,6 @@ const THEME_LABELS: Record<ThemeId, string> = { parchment: 'Parchemin', dungeon:
     .settings__text {
       margin: 0;
       font: var(--type-body);
-    }
-    @media (max-width: 767px) {
-      :host {
-        gap: var(--space-6);
-        padding: var(--space-6) var(--space-4);
-      }
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

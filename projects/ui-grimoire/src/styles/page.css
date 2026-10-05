@@ -1,0 +1,29 @@
+/*
+ * Page frame shared by every page of the app (Quêtes, Réglages…), from the mockups: space-12
+ * around the page on tablet and desktop, space-6 above and space-4 on the sides on a phone, and
+ * the page title in title-lg. The layout comes from the data-layout attribute LayoutService keeps
+ * on <html>: no media query, the breakpoints are only written in layout.ts.
+ *
+ * What lines up with the page (a side panel's title, the campaign name in the navigation, a
+ * pinned header spanning the gutters) reads --gr-page-top and --gr-page-gutter.
+ */
+:root {
+  --gr-page-top: var(--space-12);
+  --gr-page-gutter: var(--space-12);
+}
+
+:root[data-layout='mobile'] {
+  --gr-page-top: var(--space-6);
+  --gr-page-gutter: var(--space-4);
+}
+
+.gr-page {
+  box-sizing: border-box;
+  padding: var(--gr-page-top) var(--gr-page-gutter);
+}
+
+.gr-page__title {
+  margin: 0;
+  font: var(--type-title-lg);
+  color: var(--ink);
+}
